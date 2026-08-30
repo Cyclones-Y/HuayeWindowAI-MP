@@ -18,7 +18,16 @@
   "miniprogramRoot": "./",
   "simulatorPluginLibVersion": {},
   "packOptions": {
-    "ignore": [],
+    "ignore": [
+      { "type": "folder", "value": ".agents" },
+      { "type": "folder", "value": ".codex" },
+      { "type": "folder", "value": ".impeccable" },
+      { "type": "folder", "value": "tmp" },
+      { "type": "folder", "value": "assets/cases" },
+      { "type": "folder", "value": "assets/generated/prompts" },
+      { "type": "file", "value": "PRODUCT.md" },
+      { "type": "file", "value": "DESIGN.md" }
+    ],
     "include": []
   },
   "appid": "wxa459d26d66db2aa1",

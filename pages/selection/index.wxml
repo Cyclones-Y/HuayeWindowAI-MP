@@ -12,10 +12,10 @@
       <view class="selection-box__grid selection-box__grid--v2"></view>
       <view class="selection-box__grid selection-box__grid--h1"></view>
       <view class="selection-box__grid selection-box__grid--h2"></view>
-      <view class="selection-handle selection-handle--nw" data-mode="nw" catchtouchstart="onTouchStart" catchtouchmove="onTouchMove" catchtouchend="onTouchEnd"></view>
-      <view class="selection-handle selection-handle--ne" data-mode="ne" catchtouchstart="onTouchStart" catchtouchmove="onTouchMove" catchtouchend="onTouchEnd"></view>
-      <view class="selection-handle selection-handle--sw" data-mode="sw" catchtouchstart="onTouchStart" catchtouchmove="onTouchMove" catchtouchend="onTouchEnd"></view>
-      <view class="selection-handle selection-handle--se" data-mode="se" catchtouchstart="onTouchStart" catchtouchmove="onTouchMove" catchtouchend="onTouchEnd"></view>
+      <view class="selection-handle-hit selection-handle-hit--nw" data-mode="nw" catchtouchstart="onTouchStart" catchtouchmove="onTouchMove" catchtouchend="onTouchEnd"><view class="selection-handle"></view></view>
+      <view class="selection-handle-hit selection-handle-hit--ne" data-mode="ne" catchtouchstart="onTouchStart" catchtouchmove="onTouchMove" catchtouchend="onTouchEnd"><view class="selection-handle"></view></view>
+      <view class="selection-handle-hit selection-handle-hit--sw" data-mode="sw" catchtouchstart="onTouchStart" catchtouchmove="onTouchMove" catchtouchend="onTouchEnd"><view class="selection-handle"></view></view>
+      <view class="selection-handle-hit selection-handle-hit--se" data-mode="se" catchtouchstart="onTouchStart" catchtouchmove="onTouchMove" catchtouchend="onTouchEnd"><view class="selection-handle"></view></view>
     </view>
   </view>
 

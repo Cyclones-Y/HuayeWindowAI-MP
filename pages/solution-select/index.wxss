@@ -1,6 +1,6 @@
 .need-scroll {
   width: calc(100% + 32rpx);
-  margin-top: 38rpx;
+  margin-top: 40rpx;
 }
 
 .need-row {
@@ -11,36 +11,37 @@
 
 .need-chip {
   flex: none;
-  min-height: 66rpx;
-  padding: 0 22rpx;
-  border: 1rpx solid #d7d9d2;
-  border-radius: 6rpx;
-  background: #f8f8f5;
-  color: #626761;
-  font-size: 23rpx;
-  line-height: 66rpx;
+  min-height: 88rpx;
+  padding: 0 28rpx;
+  border: 1rpx solid #cfd2cb;
+  border-radius: 24rpx;
+  background: #fffefa;
+  color: #4f564f;
+  font-size: 24rpx;
+  line-height: 88rpx;
+  transition: transform 160ms ease, background-color 160ms ease;
 }
 
 .need-chip--active {
-  border-color: #1f5637;
-  background: #1f5637;
+  border-color: #244233;
+  background: #244233;
   color: #ffffff;
+  font-weight: 650;
 }
 
 .select-list {
   display: flex;
   flex-direction: column;
   gap: 24rpx;
-  margin-top: 32rpx;
+  margin-top: 34rpx;
 }
 
 .select-skeleton {
   height: 520rpx;
-  border-radius: 8rpx;
+  border-radius: 16rpx;
 }
 
 .retry-button {
-  width: 240rpx;
-  min-height: 76rpx;
+  width: 260rpx;
   margin-top: 28rpx;
 }

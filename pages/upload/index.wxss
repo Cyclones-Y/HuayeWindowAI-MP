@@ -1,27 +1,31 @@
 .selected-note {
   display: flex;
+  min-height: 88rpx;
   align-items: center;
   justify-content: space-between;
-  margin-top: 28rpx;
-  padding: 20rpx 22rpx;
-  border-left: 6rpx solid #1f5637;
-  background: #edf2ed;
-  color: #6d716c;
-  font-size: 22rpx;
+  gap: 24rpx;
+  margin-top: 30rpx;
+  padding: 0 24rpx;
+  border: 1rpx solid #cbd1ca;
+  border-radius: 24rpx;
+  background: #edf0eb;
+  color: #626961;
+  font-size: 23rpx;
 }
 
 .selected-note__value {
-  color: #1f5637;
-  font-weight: 700;
+  color: #244233;
+  font-weight: 650;
+  text-align: right;
 }
 
 .camera-guide {
   position: relative;
   height: 560rpx;
-  margin-top: 36rpx;
+  margin-top: 38rpx;
   overflow: hidden;
-  border-radius: 12rpx;
-  background: #dfe1dc;
+  border-radius: 16rpx;
+  background: #e4e4dc;
 }
 
 .camera-guide__image {
@@ -31,73 +35,76 @@
 
 .camera-guide__frame {
   position: absolute;
-  top: 82rpx;
-  right: 76rpx;
-  bottom: 82rpx;
-  left: 76rpx;
+  top: 76rpx;
+  right: 70rpx;
+  bottom: 76rpx;
+  left: 70rpx;
   border: 3rpx solid #ffffff;
-  border-radius: 6rpx;
-  box-shadow: 0 0 0 1000rpx rgba(24, 30, 26, 0.28);
+  border-radius: 16rpx;
+  box-shadow: 0 0 0 1000rpx rgba(24, 30, 26, 0.26);
 }
 
 .camera-guide__label {
   position: absolute;
-  right: 0;
+  right: 24rpx;
   bottom: 22rpx;
-  left: 0;
+  left: 24rpx;
   color: #ffffff;
-  font-size: 22rpx;
+  font-size: 23rpx;
   font-weight: 600;
   text-align: center;
 }
 
 .shoot-tips {
-  margin-top: 34rpx;
-  border-top: 1rpx solid #dcded7;
+  margin-top: 36rpx;
+  border-top: 1rpx solid #d8d5ce;
 }
 
 .shoot-tip {
-  display: grid;
-  grid-template-columns: 64rpx 1fr;
-  gap: 18rpx;
-  padding: 20rpx 0;
-  border-bottom: 1rpx solid #e2e3dd;
-  color: #555a55;
+  display: flex;
+  min-height: 88rpx;
+  align-items: center;
+  gap: 20rpx;
+  padding: 18rpx 0;
+  border-bottom: 1rpx solid #dedbd4;
+  color: #4d544d;
   font-size: 24rpx;
 }
 
 .shoot-tip__index {
-  color: #1f5637;
+  width: 58rpx;
+  flex: none;
+  color: #c07048;
   font-weight: 700;
 }
 
 .privacy-note {
-  margin-top: 32rpx;
-  padding: 24rpx 0;
-  border-top: 1rpx solid #d8dad4;
-  border-bottom: 1rpx solid #d8dad4;
+  margin-top: 34rpx;
+  padding: 26rpx 0;
+  border-top: 1rpx solid #d8d5ce;
+  border-bottom: 1rpx solid #d8d5ce;
 }
 
 .privacy-note__title {
-  font-size: 25rpx;
-  font-weight: 700;
+  font-size: 26rpx;
+  font-weight: 650;
 }
 
 .privacy-note__text {
   margin-top: 8rpx;
-  color: #747873;
-  font-size: 22rpx;
+  color: #656b64;
+  font-size: 23rpx;
   line-height: 1.55;
 }
 
 .upload-actions {
-  display: grid;
-  grid-template-columns: 1.2fr 1fr;
+  display: flex;
   gap: 16rpx;
-  margin-top: 32rpx;
+  margin-top: 34rpx;
 }
 
 .upload-actions button {
-  width: 100%;
+  width: auto;
   min-width: 0;
+  flex: 1;
 }

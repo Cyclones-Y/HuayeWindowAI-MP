@@ -9,9 +9,9 @@
   </view>
 
   <view class="camera-guide">
-    <image class="camera-guide__image" src="/assets/cases/living-before.jpg" mode="aspectFill" />
+    <image class="camera-guide__image" src="/assets/generated/home-hero-mobile.jpg" mode="aspectFill" />
     <view class="camera-guide__frame"></view>
-    <view class="camera-guide__label">完整窗框放在画面中央</view>
+    <view class="camera-guide__label">拍摄示意：完整窗框放在画面中央</view>
   </view>
 
   <view class="shoot-tips">

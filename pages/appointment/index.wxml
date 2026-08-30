@@ -1,5 +1,5 @@
 <view wx:if="{{!submitted}}" class="page-shell appointment-page">
-  <view class="eyebrow">华业门窗 · 本地服务</view>
+  <view class="page-context">上门量尺服务</view>
   <view class="page-title"><text>预约上门</text><text>测量尺寸</text></view>
   <view class="page-subtitle">留下方便联系的时间，当前版本仅保存为本机演示记录。</view>
 
@@ -49,7 +49,7 @@
 </view>
 
 <view wx:else class="appointment-success">
-  <view class="appointment-success__mark">✓</view>
+  <view class="appointment-success__mark"><view class="success-check"></view></view>
   <view class="appointment-success__title">预约信息已保存</view>
   <view class="appointment-success__text">当前仍是演示记录，数据只保存在这台设备。</view>
   <button class="primary-button" bindtap="viewRecords">查看预约记录</button>

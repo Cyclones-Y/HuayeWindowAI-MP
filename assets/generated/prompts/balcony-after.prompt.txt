@@ -1,0 +1,8 @@
+Use case: precise-object-edit
+Asset type: production after image for a draggable residential window comparison
+Input image: Image 1 is the edit target and the exact before state.
+Primary request: replace only the old balcony glazing above the existing parapet with a realistically producible panoramic sealing-window system.
+Subject change: use slim matte-charcoal thermally broken aluminum frames, three broad fixed view panes across the front, one narrow safe operable sash, and a properly reinforced matching corner return. Preserve the waist-high solid parapet and all structural boundaries.
+Invariants: preserve the exact balcony geometry, parapet, walls, ceiling, tiled floor, woven chair, plant, exterior towers and trees, camera position, lens, crop, perspective, daylight, shadows and color balance. Change only the old window frames, glazing and immediately necessary trim inside the existing openings.
+Style/medium: photorealistic residential architectural photography, clean producible installation, no conceptual glass box.
+Constraints: no text, no labels, no badge, no arrows, no logo, no watermark, no removed railing or parapet, no changed furniture, no changed outside view, no enlarged opening, no impossible cantilever or frameless corner.

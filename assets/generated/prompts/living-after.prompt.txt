@@ -1,0 +1,8 @@
+Use case: precise-object-edit
+Asset type: production after image for a draggable residential window comparison
+Input image: Image 1 is the edit target and the exact before state.
+Primary request: replace only the existing old living-room window assembly with a realistically producible premium aluminum window solution.
+Subject change: use slim matte-charcoal thermally broken aluminum frames, one large fixed panoramic central glazing field, two narrow operable side sashes with believable inward tilt-turn hardware, clean multiple seals and clear frame joints. Keep the overall wall opening exactly unchanged.
+Invariants: preserve the exact room geometry, wall opening, sill, curtains, sofa, table, floor, ceiling, exterior buildings and trees, camera position, lens, crop, perspective, daylight, shadows and color balance. Change only the window frames, glazing and immediately necessary trim inside the existing opening.
+Style/medium: photorealistic architectural interior photography, honest producible construction, no conceptual architecture.
+Constraints: no text, no labels, no badge, no arrows, no logo, no watermark, no changed furniture, no changed outside view, no enlarged opening, no impossible frameless span.

@@ -14,7 +14,7 @@
     <view class="compare-label compare-label--after">改造后</view>
     <view class="compare-handle" style="left: {{comparePercent}}%;">
       <view class="compare-handle__line"></view>
-      <view class="compare-handle__knob">‹ ›</view>
+      <view class="compare-handle__knob"><view class="compare-chevron compare-chevron--left"></view><view class="compare-chevron compare-chevron--right"></view></view>
     </view>
   </view>
 
@@ -27,7 +27,7 @@
   <view class="result-detail">
     <view class="section-heading">
       <view>
-        <view class="eyebrow">本次选择</view>
+        <view class="page-context">所选方案</view>
         <view class="section-heading__title">{{solution.name}}</view>
       </view>
     </view>

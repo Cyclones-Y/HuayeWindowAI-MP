@@ -12,16 +12,16 @@
     "pages/appointment/index"
   ],
   "window": {
-    "navigationBarBackgroundColor": "#F3F2EE",
+    "navigationBarBackgroundColor": "#F8F5F0",
     "navigationBarTextStyle": "black",
-    "navigationBarTitleText": "华业门窗",
-    "backgroundColor": "#F3F2EE",
+    "navigationBarTitleText": "门窗效果预览",
+    "backgroundColor": "#F8F5F0",
     "backgroundTextStyle": "dark"
   },
   "tabBar": {
-    "color": "#777A75",
-    "selectedColor": "#1F5637",
-    "backgroundColor": "#FCFBF8",
+    "color": "#595F59",
+    "selectedColor": "#244233",
+    "backgroundColor": "#FFFEFA",
     "borderStyle": "white",
     "list": [
       {

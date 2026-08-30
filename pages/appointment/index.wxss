@@ -1,72 +1,79 @@
 .appointment-notice {
-  margin-top: 34rpx;
-  padding: 24rpx;
-  border-left: 6rpx solid #1f5637;
-  background: #e8eee9;
+  margin-top: 36rpx;
+  padding: 26rpx;
+  border: 1rpx solid #cbd1ca;
+  border-radius: 24rpx;
+  background: #edf0eb;
 }
 
 .appointment-notice__title {
-  font-size: 25rpx;
-  font-weight: 700;
+  font-size: 26rpx;
+  font-weight: 650;
 }
 
 .appointment-notice__text {
   margin-top: 8rpx;
-  color: #687169;
-  font-size: 22rpx;
-  line-height: 1.55;
+  color: #5f6861;
+  font-size: 23rpx;
+  line-height: 1.6;
 }
 
 .appointment-form {
-  margin-top: 42rpx;
+  margin-top: 44rpx;
 }
 
 .form-picker--placeholder {
-  color: #a6a9a3;
+  color: #858a83;
 }
 
 .submit-button {
   width: 100%;
-  margin-top: 10rpx;
+  margin-top: 12rpx;
 }
 
 .privacy-copy {
-  margin-top: 18rpx;
-  color: #858881;
-  font-size: 20rpx;
-  line-height: 1.5;
+  margin-top: 20rpx;
+  color: #565d56;
+  font-size: 21rpx;
+  line-height: 1.55;
   text-align: center;
 }
 
 .appointment-success {
   min-height: 100vh;
-  padding: 140rpx 48rpx calc(64rpx + env(safe-area-inset-bottom));
-  background: #f3f2ee;
+  padding: 140rpx 48rpx calc(72rpx + env(safe-area-inset-bottom));
+  background: #f8f5f0;
 }
 
 .appointment-success__mark {
   display: flex;
-  width: 96rpx;
-  height: 96rpx;
+  width: 104rpx;
+  height: 104rpx;
   align-items: center;
   justify-content: center;
-  border-radius: 50%;
-  background: #1f5637;
+  border-radius: 32rpx;
+  background: #244233;
   color: #ffffff;
-  font-size: 48rpx;
-  font-weight: 800;
+}
+
+.success-check {
+  width: 40rpx;
+  height: 22rpx;
+  border-bottom: 5rpx solid #ffffff;
+  border-left: 5rpx solid #ffffff;
+  transform: rotate(-45deg) translate(2rpx, -3rpx);
 }
 
 .appointment-success__title {
-  margin-top: 38rpx;
-  font-size: 44rpx;
-  font-weight: 800;
+  margin-top: 40rpx;
+  font-size: 46rpx;
+  font-weight: 700;
 }
 
 .appointment-success__text {
   margin-top: 18rpx;
-  color: #747873;
-  font-size: 24rpx;
+  color: #626861;
+  font-size: 25rpx;
   line-height: 1.65;
 }
 

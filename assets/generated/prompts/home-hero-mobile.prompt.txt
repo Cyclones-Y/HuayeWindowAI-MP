@@ -1,0 +1,7 @@
+Use case: precise-object-edit
+Asset type: production mobile hero image for a WeChat mini program about residential window replacement
+Input image: Image 1 is the scene and visual reference. Preserve its architectural photography quality, room materials, black aluminum window product and daylight character.
+Primary request: recompose the same type of refined Chinese apartment living room into a square mobile hero crop. Keep a broad calm warm-white wall and sheer curtain area across the left 38 percent for overlaid Chinese headline, and place the complete slim charcoal aluminum window across the right 62 percent. Keep the sofa and dark round table low in the frame so they do not compete with the headline.
+Composition/framing: square 1024x1024, eye-level, straight verticals, window and left text-safe wall both fully readable, no people.
+Invariants: preserve realistic producible frame joints, natural urban residential view, warm-white interior, muted wood, forest-green foliage and soft late-morning daylight.
+Constraints: no text, no logo, no badges, no arrows, no watermark, no fisheye, no impossible glass span, no luxury mansion excess, no promotional styling.

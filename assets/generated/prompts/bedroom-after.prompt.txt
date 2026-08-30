@@ -1,0 +1,8 @@
+Use case: precise-object-edit
+Asset type: production after image for a draggable residential window comparison
+Input image: Image 1 is the edit target and the exact before state.
+Primary request: replace only the existing old bedroom window assembly with a realistically producible high-performance acoustic window.
+Subject change: use a deep coffee-gray thermally broken aluminum frame, fewer and slimmer mullions, a large quiet central fixed pane and two narrow operable side sashes, visibly substantial laminated insulated glazing and clean modern hardware. Keep the overall wall opening exactly unchanged.
+Invariants: preserve the exact bedroom geometry, wall opening, sill, curtains, bed, bedside lamp, exterior street and buildings, camera position, lens, crop, perspective, morning light, shadows and color balance. Change only the window frames, glazing and immediately necessary trim inside the existing opening.
+Style/medium: photorealistic ordinary residential interior photography, calm and trustworthy, no hotel restyling.
+Constraints: no text, no labels, no badge, no arrows, no logo, no watermark, no changed furniture, no changed outside view, no enlarged opening, no impossible frameless span.

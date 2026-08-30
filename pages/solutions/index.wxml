@@ -1,7 +1,7 @@
 <view class="page-shell solutions-page">
   <view class="solutions-head">
     <view>
-      <view class="eyebrow">华业标准方案</view>
+      <view class="page-context">可施工门窗方案</view>
       <view class="page-title"><text>选一套适合</text><text>你家的窗</text></view>
     </view>
     <view class="solutions-count"><text>{{filteredSolutions.length}}</text>套可选</view>

@@ -22,3 +22,9 @@ Thumbs.db
 coverage/
 test-results/
 *.log
+
+# Local agent and design-review artifacts
+.agents/
+.codex/
+.impeccable/
+tmp/

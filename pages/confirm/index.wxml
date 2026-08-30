@@ -5,7 +5,7 @@
 
   <view class="preview-band">
     <image class="preview-band__source" src="{{photoPath}}" mode="aspectFill" />
-    <view class="preview-band__arrow">→</view>
+    <view class="preview-band__arrow"><view class="flow-arrow__shaft"></view><view class="flow-arrow__head"></view></view>
     <image class="preview-band__solution" src="{{solution.thumbnail}}" mode="aspectFill" />
   </view>
 

@@ -1,5 +1,6 @@
 {
-  "navigationBarTitleText": "华业门窗",
+  "navigationStyle": "custom",
+  "navigationBarTitleText": "门窗效果预览",
   "usingComponents": {
     "solution-card": "/components/solution-card/index"
   }
