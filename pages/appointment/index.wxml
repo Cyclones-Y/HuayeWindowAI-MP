@@ -1,0 +1,57 @@
+<view wx:if="{{!submitted}}" class="page-shell appointment-page">
+  <view class="eyebrow">MEASURE AT HOME</view>
+  <view class="page-title">预约上门量尺</view>
+  <view class="page-subtitle">提交后仅保存为本机演示记录，不会发送到华业门窗后台。</view>
+
+  <view class="appointment-notice">
+    <view class="appointment-notice__title">先体验，满意再留联系方式</view>
+    <view class="appointment-notice__text">正式版本将由工作人员联系确认时间，不会直接形成订单或最终报价。</view>
+  </view>
+
+  <view class="appointment-form">
+    <view class="form-field">
+      <label class="form-label">联系人</label>
+      <input class="form-input" value="{{form.contactName}}" maxlength="20" placeholder="怎么称呼您" data-field="contactName" bindinput="onTextInput" />
+      <view wx:if="{{errors.contactName}}" class="form-error">{{errors.contactName}}</view>
+    </view>
+    <view class="form-field">
+      <label class="form-label">手机号</label>
+      <input class="form-input" value="{{form.phone}}" type="number" maxlength="11" placeholder="用于确认上门时间" data-field="phone" bindinput="onTextInput" />
+      <view wx:if="{{errors.phone}}" class="form-error">{{errors.phone}}</view>
+    </view>
+    <view class="form-field">
+      <label class="form-label">小区或所在区域</label>
+      <input class="form-input" value="{{form.community}}" maxlength="50" placeholder="例如：滨江区某小区" data-field="community" bindinput="onTextInput" />
+      <view wx:if="{{errors.community}}" class="form-error">{{errors.community}}</view>
+    </view>
+    <view class="form-field">
+      <label class="form-label">期望日期</label>
+      <picker mode="date" value="{{form.preferredDate}}" start="{{minDate}}" bindchange="onDateChange">
+        <view class="form-picker {{form.preferredDate ? '' : 'form-picker--placeholder'}}">{{form.preferredDate || '请选择日期'}}</view>
+      </picker>
+      <view wx:if="{{errors.preferredDate}}" class="form-error">{{errors.preferredDate}}</view>
+    </view>
+    <view class="form-field">
+      <label class="form-label">方便联系的时间</label>
+      <picker mode="selector" range="{{timeOptions}}" value="{{timeIndex}}" bindchange="onTimeChange">
+        <view class="form-picker {{form.preferredTime ? '' : 'form-picker--placeholder'}}">{{form.preferredTime || '请选择时间段'}}</view>
+      </picker>
+      <view wx:if="{{errors.preferredTime}}" class="form-error">{{errors.preferredTime}}</view>
+    </view>
+    <view class="form-field">
+      <label class="form-label">补充说明（选填）</label>
+      <textarea class="form-textarea" value="{{form.note}}" maxlength="200" auto-height="{{false}}" placeholder="例如：临街噪音较大，希望重点改善隔音" data-field="note" bindinput="onTextInput" />
+    </view>
+  </view>
+
+  <button class="primary-button submit-button" loading="{{submitting}}" bindtap="submitAppointment">保存演示预约</button>
+  <view class="privacy-copy">手机号只保存在当前设备的微信小程序本地缓存中，可在“我的”页面清除。</view>
+</view>
+
+<view wx:else class="appointment-success">
+  <view class="appointment-success__mark">✓</view>
+  <view class="appointment-success__title">演示预约已保存</view>
+  <view class="appointment-success__text">这不是正式预约，数据只保存在当前设备。后端接入后将替换为真实提交结果。</view>
+  <button class="primary-button" bindtap="viewRecords">查看预约记录</button>
+  <button class="secondary-button" bindtap="goHome">返回首页</button>
+</view>

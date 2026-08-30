@@ -1,0 +1,47 @@
+<view class="result-page">
+  <view class="result-head">
+    <view class="demo-badge">演示效果</view>
+    <view class="result-title">拖动查看改造前后</view>
+    <view class="result-subtitle">以下为同方案预制案例，不是对你上传照片的真实 AI 生成结果。</view>
+  </view>
+
+  <view class="compare-stage" catchtouchstart="onCompareTouch" catchtouchmove="onCompareTouch">
+    <image class="compare-image compare-image--after" src="{{result.afterImage}}" mode="aspectFill" />
+    <view class="compare-before" style="width: {{comparePercent}}%;">
+      <image class="compare-image compare-image--before" style="width: {{stageWidth}}px;" src="{{result.beforeImage}}" mode="aspectFill" />
+    </view>
+    <view class="compare-label compare-label--before">改造前</view>
+    <view class="compare-label compare-label--after">改造后</view>
+    <view class="compare-handle" style="left: {{comparePercent}}%;">
+      <view class="compare-handle__line"></view>
+      <view class="compare-handle__knob">‹ ›</view>
+    </view>
+  </view>
+
+  <view class="result-actions">
+    <button class="result-action pressable" bindtap="toggleFavorite">{{favorite ? '已收藏' : '收藏方案'}}</button>
+    <button class="result-action pressable" open-type="share">分享体验</button>
+    <button class="result-action pressable" bindtap="regenerate">换个方案</button>
+  </view>
+
+  <view class="result-detail">
+    <view class="section-heading">
+      <view>
+        <view class="eyebrow">SELECTED SOLUTION</view>
+        <view class="section-heading__title">{{solution.name}}</view>
+      </view>
+    </view>
+    <view class="result-detail__subtitle">{{solution.subtitle}}</view>
+    <view class="result-detail__features">
+      <view wx:for="{{solution.features}}" wx:key="*this" wx:for-item="feature" class="result-feature"><text class="result-feature__mark"></text>{{feature}}</view>
+    </view>
+    <view class="result-price"><text>报价说明</text><text>{{solution.priceHint}}</text></view>
+  </view>
+
+  <view class="result-notice">AI 效果仅供参考，实际以现场量尺、选材和施工结果为准。</view>
+
+  <view class="result-booking">
+    <view><view class="result-booking__title">效果方向满意？</view><view class="result-booking__text">提交预约后，再由专业人员上门量尺确认。</view></view>
+    <button class="primary-button" bindtap="bookMeasure">预约量尺</button>
+  </view>
+</view>

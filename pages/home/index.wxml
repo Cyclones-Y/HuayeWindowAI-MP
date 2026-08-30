@@ -1,0 +1,74 @@
+<view class="home-page">
+  <view class="home-header">
+    <view class="brand-line">
+      <view class="brand-mark">华</view>
+      <view>
+        <view class="brand-name">华业门窗</view>
+        <view class="brand-note">真实方案 · 到家预览</view>
+      </view>
+    </view>
+    <view class="demo-badge">前端演示版</view>
+  </view>
+
+  <view class="hero">
+    <image class="hero__image" src="/assets/cases/living-after.jpg" mode="aspectFill" />
+    <view class="hero__shade"></view>
+    <view class="hero__copy">
+      <view class="hero__kicker">拍一张，提前看看</view>
+      <view class="hero__title">你家换窗后的样子</view>
+      <view class="hero__text">选择华业真实可生产方案，生成效果满意后再预约量尺。</view>
+    </view>
+  </view>
+
+  <view class="hero-actions">
+    <button class="primary-button hero-actions__main" bindtap="goUpload">拍照看效果</button>
+    <button class="secondary-button hero-actions__secondary" bindtap="trySample">使用样例体验</button>
+  </view>
+
+  <view class="trust-strip">
+    <view><text class="trust-strip__strong">只改门窗</text><text>保留房间结构</text></view>
+    <view><text class="trust-strip__strong">真实方案</text><text>以量尺施工为准</text></view>
+  </view>
+
+  <view class="home-section">
+    <view class="section-heading">
+      <view>
+        <view class="eyebrow">HOW IT WORKS</view>
+        <view class="section-heading__title">三步看见改造效果</view>
+      </view>
+    </view>
+    <view class="steps">
+      <view class="step-row">
+        <view class="step-row__number">01</view>
+        <view><view class="step-row__title">拍摄家中门窗</view><view class="step-row__text">保持画面端正、清晰，尽量拍到完整窗框。</view></view>
+      </view>
+      <view class="step-row">
+        <view class="step-row__number">02</view>
+        <view><view class="step-row__title">框选并选择方案</view><view class="step-row__text">指定要改造的位置，再选择可生产的颜色与玻璃。</view></view>
+      </view>
+      <view class="step-row">
+        <view class="step-row__number">03</view>
+        <view><view class="step-row__title">查看并预约量尺</view><view class="step-row__text">对比改造前后，满意后预约专业人员上门。</view></view>
+      </view>
+    </view>
+  </view>
+
+  <view class="home-section home-section--solutions">
+    <view class="section-heading">
+      <view>
+        <view class="eyebrow">REAL SOLUTIONS</view>
+        <view class="section-heading__title">按家里情况选窗</view>
+      </view>
+      <text class="section-link" bindtap="goSolutions">查看全部</text>
+    </view>
+    <scroll-view class="solution-scroll" scroll-x enhanced show-scrollbar="{{false}}">
+      <view class="solution-scroll__track">
+        <view wx:for="{{featuredSolutions}}" wx:key="id" wx:for-item="solution" class="solution-scroll__item">
+          <solution-card solution="{{solution}}" compact bind:select="onSolutionSelect" />
+        </view>
+      </view>
+    </scroll-view>
+  </view>
+
+  <view class="disclaimer">AI 效果仅供参考，实际以现场量尺、选材和施工结果为准。</view>
+</view>

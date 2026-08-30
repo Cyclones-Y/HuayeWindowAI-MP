@@ -1,0 +1,32 @@
+<view class="page-shell upload-page">
+  <view class="eyebrow">STEP 01</view>
+  <view class="page-title">拍下完整、清晰的门窗</view>
+  <view class="page-subtitle">尽量正对窗户拍摄，避免强逆光、窗帘遮挡和过大的倾斜角度。</view>
+
+  <view wx:if="{{selectedSolutionName}}" class="selected-note">
+    <text>已选方案</text>
+    <text class="selected-note__value">{{selectedSolutionName}}</text>
+  </view>
+
+  <view class="camera-guide">
+    <image class="camera-guide__image" src="/assets/cases/living-before.jpg" mode="aspectFill" />
+    <view class="camera-guide__frame"></view>
+    <view class="camera-guide__label">让完整窗框位于画面中央</view>
+  </view>
+
+  <view class="shoot-tips">
+    <view class="shoot-tip"><text class="shoot-tip__index">01</text><text>正对窗户，减少透视变形</text></view>
+    <view class="shoot-tip"><text class="shoot-tip__index">02</text><text>打开窗帘，保持房间明亮</text></view>
+    <view class="shoot-tip"><text class="shoot-tip__index">03</text><text>不要拍到家人和隐私物品</text></view>
+  </view>
+
+  <view class="privacy-note">
+    <view class="privacy-note__title">照片隐私</view>
+    <view class="privacy-note__text">当前前端演示不会上传住宅照片，也不会写入历史缓存。后端接入后会在上传前另行告知保存期限。</view>
+  </view>
+
+  <view class="upload-actions">
+    <button class="primary-button" loading="{{choosing}}" bindtap="chooseFromCamera">打开相机</button>
+    <button class="secondary-button" disabled="{{choosing}}" bindtap="chooseFromAlbum">从相册选择</button>
+  </view>
+</view>

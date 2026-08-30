@@ -1,0 +1,4 @@
+{
+  "desc": "华业门窗小程序页面索引",
+  "rules": [{ "action": "allow", "page": "*" }]
+}

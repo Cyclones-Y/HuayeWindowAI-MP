@@ -1,0 +1,60 @@
+.solutions-page {
+  padding-top: 36rpx;
+}
+
+.filter-block {
+  margin-top: 52rpx;
+}
+
+.filter-block--compact {
+  margin-top: 26rpx;
+}
+
+.filter-label {
+  margin-bottom: 16rpx;
+  color: #555a55;
+  font-size: 23rpx;
+  font-weight: 650;
+}
+
+.filter-row {
+  display: flex;
+  gap: 12rpx;
+  padding-right: 20rpx;
+}
+
+.filter-chip {
+  flex: none;
+  min-height: 64rpx;
+  padding: 0 22rpx;
+  border: 1rpx solid #d7d9d2;
+  border-radius: 8rpx;
+  background: #ffffff;
+  color: #606560;
+  font-size: 23rpx;
+  line-height: 64rpx;
+}
+
+.filter-chip--active {
+  border-color: #285c3a;
+  background: #285c3a;
+  color: #ffffff;
+}
+
+.solution-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24rpx;
+  margin-top: 38rpx;
+}
+
+.solution-skeleton {
+  height: 520rpx;
+  border-radius: 8rpx;
+}
+
+.retry-button {
+  width: 240rpx;
+  min-height: 76rpx;
+  margin-top: 30rpx;
+}

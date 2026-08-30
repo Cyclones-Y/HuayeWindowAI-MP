@@ -1,0 +1,13 @@
+{
+  "name": "huaye-window-miniprogram",
+  "version": "0.1.0",
+  "private": true,
+  "description": "华业门窗 AI 效果预览微信小程序前端",
+  "scripts": {
+    "typecheck": "tsc --noEmit"
+  },
+  "devDependencies": {
+    "miniprogram-api-typings": "^4.0.8",
+    "typescript": "^5.9.2"
+  }
+}

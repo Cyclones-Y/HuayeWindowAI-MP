@@ -1,0 +1,49 @@
+{
+  "pages": [
+    "pages/home/index",
+    "pages/solutions/index",
+    "pages/profile/index",
+    "pages/upload/index",
+    "pages/selection/index",
+    "pages/solution-select/index",
+    "pages/confirm/index",
+    "pages/generating/index",
+    "pages/result/index",
+    "pages/appointment/index"
+  ],
+  "window": {
+    "navigationBarBackgroundColor": "#F7F6F2",
+    "navigationBarTextStyle": "black",
+    "navigationBarTitleText": "华业门窗",
+    "backgroundColor": "#F7F6F2",
+    "backgroundTextStyle": "dark"
+  },
+  "tabBar": {
+    "color": "#777A75",
+    "selectedColor": "#285C3A",
+    "backgroundColor": "#FCFBF8",
+    "borderStyle": "white",
+    "list": [
+      {
+        "pagePath": "pages/home/index",
+        "text": "首页",
+        "iconPath": "assets/icons/home.png",
+        "selectedIconPath": "assets/icons/home-active.png"
+      },
+      {
+        "pagePath": "pages/solutions/index",
+        "text": "方案",
+        "iconPath": "assets/icons/layout-grid.png",
+        "selectedIconPath": "assets/icons/layout-grid-active.png"
+      },
+      {
+        "pagePath": "pages/profile/index",
+        "text": "我的",
+        "iconPath": "assets/icons/user.png",
+        "selectedIconPath": "assets/icons/user-active.png"
+      }
+    ]
+  },
+  "style": "v2",
+  "sitemapLocation": "sitemap.json"
+}

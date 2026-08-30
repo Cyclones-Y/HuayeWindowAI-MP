@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "华业门窗",
+  "usingComponents": {
+    "solution-card": "/components/solution-card/index"
+  }
+}

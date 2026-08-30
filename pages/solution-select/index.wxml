@@ -1,0 +1,32 @@
+<view class="page-shell with-action-bar solution-select-page">
+  <view class="eyebrow">STEP 03</view>
+  <view class="page-title">选择真实可生产的方案</view>
+  <view class="page-subtitle">AI 只按所选标准方案制作演示效果，不会自由生成无法施工的窗型。</view>
+
+  <scroll-view class="need-scroll" scroll-x enhanced show-scrollbar="{{false}}">
+    <view class="need-row">
+      <view wx:for="{{needFilters}}" wx:key="value" wx:for-item="filter" class="need-chip pressable {{activeNeed === filter.value ? 'need-chip--active' : ''}}" data-value="{{filter.value}}" bindtap="selectNeed">{{filter.label}}</view>
+    </view>
+  </scroll-view>
+
+  <view wx:if="{{loading}}" class="select-list">
+    <view class="select-skeleton skeleton"></view>
+    <view class="select-skeleton skeleton"></view>
+  </view>
+  <view wx:elif="{{errorText}}" class="empty-state">
+    <view class="empty-state__title">暂时无法加载</view>
+    <view class="empty-state__text">{{errorText}}</view>
+    <button class="secondary-button retry-button" bindtap="loadSolutions">重新加载</button>
+  </view>
+  <view wx:elif="{{filteredSolutions.length === 0}}" class="empty-state">
+    <view class="empty-state__title">没有完全匹配的方案</view>
+    <view class="empty-state__text">换一个需求条件，再查看可生产方案。</view>
+  </view>
+  <view wx:else class="select-list">
+    <solution-card wx:for="{{filteredSolutions}}" wx:key="id" wx:for-item="solution" solution="{{solution}}" selected="{{selectedId === solution.id}}" bind:select="onSolutionSelect" />
+  </view>
+
+  <view class="action-bar">
+    <button class="primary-button" disabled="{{!selectedId}}" bindtap="continueFlow">继续配置</button>
+  </view>
+</view>

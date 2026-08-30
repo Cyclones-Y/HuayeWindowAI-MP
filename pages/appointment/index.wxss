@@ -1,0 +1,80 @@
+.appointment-notice {
+  margin-top: 34rpx;
+  padding: 24rpx;
+  border-left: 6rpx solid #285c3a;
+  background: #edf2ed;
+}
+
+.appointment-notice__title {
+  font-size: 25rpx;
+  font-weight: 700;
+}
+
+.appointment-notice__text {
+  margin-top: 8rpx;
+  color: #687169;
+  font-size: 22rpx;
+  line-height: 1.55;
+}
+
+.appointment-form {
+  margin-top: 42rpx;
+}
+
+.form-picker--placeholder {
+  color: #a6a9a3;
+}
+
+.submit-button {
+  width: 100%;
+  margin-top: 10rpx;
+}
+
+.privacy-copy {
+  margin-top: 18rpx;
+  color: #858881;
+  font-size: 20rpx;
+  line-height: 1.5;
+  text-align: center;
+}
+
+.appointment-success {
+  min-height: 100vh;
+  padding: 140rpx 48rpx calc(64rpx + env(safe-area-inset-bottom));
+  background: #f7f6f2;
+}
+
+.appointment-success__mark {
+  display: flex;
+  width: 96rpx;
+  height: 96rpx;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #285c3a;
+  color: #ffffff;
+  font-size: 48rpx;
+  font-weight: 800;
+}
+
+.appointment-success__title {
+  margin-top: 38rpx;
+  font-size: 44rpx;
+  font-weight: 760;
+}
+
+.appointment-success__text {
+  margin-top: 18rpx;
+  color: #747873;
+  font-size: 24rpx;
+  line-height: 1.65;
+}
+
+.appointment-success button {
+  width: 100%;
+  margin-top: 42rpx;
+}
+
+.appointment-success .secondary-button {
+  margin-top: 16rpx;
+}

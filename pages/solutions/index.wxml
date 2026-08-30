@@ -1,0 +1,43 @@
+<view class="page-shell solutions-page">
+  <view class="eyebrow">BUILDABLE OPTIONS</view>
+  <view class="page-title">真实可生产的门窗方案</view>
+  <view class="page-subtitle">先按空间和主要需求筛选，具体尺寸、配置与价格以现场量尺为准。</view>
+
+  <view class="filter-block">
+    <view class="filter-label">使用空间</view>
+    <scroll-view scroll-x enhanced show-scrollbar="{{false}}">
+      <view class="filter-row">
+        <view wx:for="{{roomFilters}}" wx:key="value" wx:for-item="filter" class="filter-chip pressable {{activeRoom === filter.value ? 'filter-chip--active' : ''}}" data-value="{{filter.value}}" bindtap="selectRoom">{{filter.label}}</view>
+      </view>
+    </scroll-view>
+  </view>
+
+  <view class="filter-block filter-block--compact">
+    <view class="filter-label">主要需求</view>
+    <scroll-view scroll-x enhanced show-scrollbar="{{false}}">
+      <view class="filter-row">
+        <view wx:for="{{needFilters}}" wx:key="value" wx:for-item="filter" class="filter-chip pressable {{activeNeed === filter.value ? 'filter-chip--active' : ''}}" data-value="{{filter.value}}" bindtap="selectNeed">{{filter.label}}</view>
+      </view>
+    </scroll-view>
+  </view>
+
+  <view wx:if="{{loading}}" class="solution-list">
+    <view class="solution-skeleton skeleton"></view>
+    <view class="solution-skeleton skeleton"></view>
+  </view>
+
+  <view wx:elif="{{errorText}}" class="empty-state">
+    <view class="empty-state__title">暂时无法加载</view>
+    <view class="empty-state__text">{{errorText}}</view>
+    <button class="secondary-button retry-button" bindtap="loadSolutions">重新加载</button>
+  </view>
+
+  <view wx:elif="{{filteredSolutions.length === 0}}" class="empty-state">
+    <view class="empty-state__title">没有完全匹配的方案</view>
+    <view class="empty-state__text">换一个空间或需求条件，查看其他可生产方案。</view>
+  </view>
+
+  <view wx:else class="solution-list">
+    <solution-card wx:for="{{filteredSolutions}}" wx:key="id" wx:for-item="solution" solution="{{solution}}" bind:select="onSolutionSelect" />
+  </view>
+</view>

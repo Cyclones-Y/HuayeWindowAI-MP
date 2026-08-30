@@ -1,0 +1,62 @@
+<view class="page-shell profile-page">
+  <view class="profile-head">
+    <view class="profile-avatar">华</view>
+    <view class="profile-head__copy">
+      <view class="profile-name">访客体验</view>
+      <view class="profile-note">登录将在真实后端接入后启用</view>
+    </view>
+    <view class="demo-badge">本地演示</view>
+  </view>
+
+  <view class="profile-tabs">
+    <view class="profile-tab pressable {{activeView === 'history' ? 'profile-tab--active' : ''}}" data-view="history" bindtap="switchView">效果记录</view>
+    <view class="profile-tab pressable {{activeView === 'favorites' ? 'profile-tab--active' : ''}}" data-view="favorites" bindtap="switchView">收藏方案</view>
+    <view class="profile-tab pressable {{activeView === 'appointments' ? 'profile-tab--active' : ''}}" data-view="appointments" bindtap="switchView">预约记录</view>
+  </view>
+
+  <view wx:if="{{activeView === 'history'}}" class="profile-content">
+    <view wx:if="{{history.length === 0}}" class="empty-state">
+      <view class="empty-state__title">还没有效果记录</view>
+      <view class="empty-state__text">完成一次样例体验后，结果会保存在当前设备。</view>
+      <button class="secondary-button empty-action" bindtap="startExperience">开始体验</button>
+    </view>
+    <view wx:else class="record-list">
+      <view wx:for="{{history}}" wx:key="id" wx:for-item="item" class="record-row">
+        <image class="record-row__image" src="{{item.thumbnail}}" mode="aspectFill" />
+        <view class="record-row__copy"><view class="record-row__title">{{item.solutionName}}</view><view class="record-row__meta">演示效果 · 已完成</view></view>
+      </view>
+    </view>
+  </view>
+
+  <view wx:elif="{{activeView === 'favorites'}}" class="profile-content">
+    <view wx:if="{{favorites.length === 0}}" class="empty-state">
+      <view class="empty-state__title">还没有收藏方案</view>
+      <view class="empty-state__text">在效果结果页收藏方案，方便量尺时沟通。</view>
+    </view>
+    <view wx:else class="record-list">
+      <view wx:for="{{favorites}}" wx:key="id" wx:for-item="item" class="record-row">
+        <image class="record-row__image" src="{{item.thumbnail}}" mode="aspectFill" />
+        <view class="record-row__copy"><view class="record-row__title">{{item.name}}</view><view class="record-row__meta">{{item.subtitle}}</view></view>
+      </view>
+    </view>
+  </view>
+
+  <view wx:else class="profile-content">
+    <view wx:if="{{leads.length === 0}}" class="empty-state">
+      <view class="empty-state__title">还没有预约记录</view>
+      <view class="empty-state__text">效果满意后再提交预约，不会在体验前索取手机号。</view>
+    </view>
+    <view wx:else class="record-list">
+      <view wx:for="{{leads}}" wx:key="id" wx:for-item="item" class="appointment-row">
+        <view class="appointment-row__top"><text class="record-row__title">{{item.community}}</text><text class="appointment-row__status">{{item.statusText}}</text></view>
+        <view class="record-row__meta">{{item.contactName}} · {{item.preferredDate}} {{item.preferredTime}}</view>
+      </view>
+    </view>
+  </view>
+
+  <view class="privacy-section">
+    <view class="privacy-section__title">隐私与数据</view>
+    <view class="privacy-section__text">当前版本只在本机保存演示历史、收藏和预约，不上传住宅照片。</view>
+    <button class="privacy-button" bindtap="clearData">清除我的演示数据</button>
+  </view>
+</view>

@@ -1,0 +1,133 @@
+.generating-page {
+  min-height: 100vh;
+  padding: 46rpx 32rpx calc(48rpx + env(safe-area-inset-bottom));
+  background: #f7f6f2;
+}
+
+.generating-top {
+  max-width: 650rpx;
+}
+
+.generating-title {
+  margin-top: 22rpx;
+  font-size: 46rpx;
+  font-weight: 780;
+  line-height: 1.2;
+}
+
+.generating-subtitle {
+  margin-top: 14rpx;
+  color: #747873;
+  font-size: 24rpx;
+  line-height: 1.55;
+}
+
+.generation-visual {
+  position: relative;
+  height: 660rpx;
+  margin-top: 44rpx;
+  overflow: hidden;
+  border-radius: 8rpx;
+  background: #dfe1dc;
+}
+
+.generation-visual__image,
+.generation-visual__mask,
+.generation-visual__scan {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.generation-visual__mask {
+  background: rgba(21, 28, 23, 0.22);
+}
+
+.generation-visual__scan {
+  z-index: 1;
+  width: 3rpx;
+  background: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 0 30rpx rgba(255, 255, 255, 0.7);
+  animation: scan 2.4s ease-in-out infinite alternate;
+}
+
+@keyframes scan {
+  from { transform: translateX(70rpx); }
+  to { transform: translateX(620rpx); }
+}
+
+.progress-block {
+  margin-top: 38rpx;
+}
+
+.progress-block__top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 24rpx;
+  font-weight: 650;
+}
+
+.progress-track {
+  height: 8rpx;
+  margin-top: 18rpx;
+  overflow: hidden;
+  background: #dfe1da;
+}
+
+.progress-value {
+  width: 100%;
+  height: 100%;
+  transform-origin: left center;
+  background: #285c3a;
+  transition: transform 420ms ease;
+}
+
+.progress-steps {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  margin-top: 16rpx;
+  color: #a0a39d;
+  font-size: 20rpx;
+}
+
+.progress-step:nth-child(2) { text-align: center; }
+.progress-step:nth-child(3) { text-align: right; }
+.progress-step--done { color: #285c3a; }
+
+.failure-panel {
+  margin-top: 48rpx;
+  padding: 64rpx 32rpx;
+  border-top: 1rpx solid #d9dad4;
+  border-bottom: 1rpx solid #d9dad4;
+}
+
+.failure-panel__mark {
+  display: flex;
+  width: 76rpx;
+  height: 76rpx;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #f3e6e3;
+  color: #a43f37;
+  font-size: 40rpx;
+  font-weight: 800;
+}
+
+.failure-panel__title {
+  margin-top: 28rpx;
+  font-size: 30rpx;
+  font-weight: 700;
+}
+
+.failure-panel__text {
+  margin-top: 10rpx;
+  color: #747873;
+  font-size: 23rpx;
+}
+
+.retry-generation {
+  width: 100%;
+  margin-top: 36rpx;
+}

@@ -1,0 +1,46 @@
+.need-scroll {
+  width: calc(100% + 32rpx);
+  margin-top: 38rpx;
+}
+
+.need-row {
+  display: flex;
+  gap: 12rpx;
+  padding-right: 32rpx;
+}
+
+.need-chip {
+  flex: none;
+  min-height: 66rpx;
+  padding: 0 22rpx;
+  border: 1rpx solid #d7d9d2;
+  border-radius: 8rpx;
+  background: #ffffff;
+  color: #626761;
+  font-size: 23rpx;
+  line-height: 66rpx;
+}
+
+.need-chip--active {
+  border-color: #285c3a;
+  background: #285c3a;
+  color: #ffffff;
+}
+
+.select-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24rpx;
+  margin-top: 32rpx;
+}
+
+.select-skeleton {
+  height: 520rpx;
+  border-radius: 8rpx;
+}
+
+.retry-button {
+  width: 240rpx;
+  min-height: 76rpx;
+  margin-top: 28rpx;
+}

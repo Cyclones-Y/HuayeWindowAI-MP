@@ -1,0 +1,28 @@
+<view class="selection-page with-action-bar">
+  <view class="selection-head">
+    <view class="eyebrow">STEP 02</view>
+    <view class="selection-title">框住需要更换的门窗</view>
+    <view class="selection-hint {{hintText.indexOf('太小') >= 0 ? 'selection-hint--error' : ''}}">{{hintText}}</view>
+  </view>
+
+  <view class="selection-stage">
+    <image class="selection-photo" src="{{photoPath}}" mode="widthFix" bindload="onImageLoad" />
+    <view wx:if="{{stageReady}}" class="selection-box" style="left: {{box.left}}px; top: {{box.top}}px; width: {{box.width}}px; height: {{box.height}}px;" data-mode="move" catchtouchstart="onTouchStart" catchtouchmove="onTouchMove" catchtouchend="onTouchEnd">
+      <view class="selection-box__grid selection-box__grid--v1"></view>
+      <view class="selection-box__grid selection-box__grid--v2"></view>
+      <view class="selection-box__grid selection-box__grid--h1"></view>
+      <view class="selection-box__grid selection-box__grid--h2"></view>
+      <view class="selection-handle selection-handle--nw" data-mode="nw" catchtouchstart="onTouchStart" catchtouchmove="onTouchMove" catchtouchend="onTouchEnd"></view>
+      <view class="selection-handle selection-handle--ne" data-mode="ne" catchtouchstart="onTouchStart" catchtouchmove="onTouchMove" catchtouchend="onTouchEnd"></view>
+      <view class="selection-handle selection-handle--sw" data-mode="sw" catchtouchstart="onTouchStart" catchtouchmove="onTouchMove" catchtouchend="onTouchEnd"></view>
+      <view class="selection-handle selection-handle--se" data-mode="se" catchtouchstart="onTouchStart" catchtouchmove="onTouchMove" catchtouchend="onTouchEnd"></view>
+    </view>
+  </view>
+
+  <view class="selection-footnote">选框之外的墙体、家具和视角应保持不变。真实生图服务接入后，系统还会检查照片质量。</view>
+
+  <view class="action-bar selection-actions">
+    <button class="quiet-button" bindtap="resetSelection">重置</button>
+    <button class="primary-button" bindtap="confirmSelection">选好了</button>
+  </view>
+</view>

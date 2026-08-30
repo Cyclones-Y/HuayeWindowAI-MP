@@ -1,0 +1,45 @@
+<view class="page-shell with-action-bar confirm-page">
+  <view class="eyebrow">STEP 04</view>
+  <view class="page-title">确认门窗配置</view>
+  <view class="page-subtitle">本次仅生成界面演示效果，不会上传照片，也不会消耗真实生成次数。</view>
+
+  <view class="preview-band">
+    <image class="preview-band__source" src="{{photoPath}}" mode="aspectFill" />
+    <view class="preview-band__arrow">→</view>
+    <image class="preview-band__solution" src="{{solution.thumbnail}}" mode="aspectFill" />
+  </view>
+
+  <view class="config-summary">
+    <view class="config-summary__name">{{solution.name}}</view>
+    <view class="config-summary__subtitle">{{solution.subtitle}}</view>
+    <view class="config-summary__features">
+      <text wx:for="{{solution.features}}" wx:key="*this" wx:for-item="feature">{{feature}}</text>
+    </view>
+  </view>
+
+  <view class="option-section">
+    <view class="option-title">边框颜色</view>
+    <view class="option-grid">
+      <view wx:for="{{frameColors}}" wx:key="code" wx:for-item="option" class="option-item pressable {{frameColorCode === option.code ? 'option-item--active' : ''}}" data-code="{{option.code}}" bindtap="selectFrameColor">
+        <view class="option-swatch" style="background: {{option.color}};"></view>
+        <text>{{option.name}}</text>
+      </view>
+    </view>
+  </view>
+
+  <view class="option-section">
+    <view class="option-title">玻璃配置</view>
+    <view class="option-grid option-grid--glass">
+      <view wx:for="{{glassOptions}}" wx:key="code" wx:for-item="option" class="option-item option-item--text pressable {{glassCode === option.code ? 'option-item--active' : ''}}" data-code="{{option.code}}" bindtap="selectGlass">{{option.name}}</view>
+    </view>
+  </view>
+
+  <view class="ai-notice">
+    <view class="ai-notice__title">生成前说明</view>
+    <view class="ai-notice__text">演示结果使用预制案例图，不代表已对你的照片完成 AI 改造。真实效果、价格和施工方案须以现场量尺确认。</view>
+  </view>
+
+  <view class="action-bar">
+    <button class="primary-button" bindtap="startGeneration">生成演示效果</button>
+  </view>
+</view>

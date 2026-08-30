@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "选择方案",
+  "usingComponents": {
+    "solution-card": "/components/solution-card/index"
+  }
+}

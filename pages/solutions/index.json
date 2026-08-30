@@ -1,0 +1,6 @@
+{
+  "navigationBarTitleText": "门窗方案",
+  "usingComponents": {
+    "solution-card": "/components/solution-card/index"
+  }
+}
