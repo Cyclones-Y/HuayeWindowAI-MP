@@ -1,7 +1,7 @@
 page {
   min-height: 100%;
-  background: #f7f6f2;
-  color: #202420;
+  background: #f3f2ee;
+  color: #171b18;
   font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
   font-size: 28rpx;
   letter-spacing: 0;
@@ -19,7 +19,7 @@ scroll-view {
 
 button {
   margin: 0;
-  border-radius: 8rpx;
+  border-radius: 12rpx;
   font-size: 28rpx;
   font-weight: 600;
   line-height: 1;
@@ -31,30 +31,52 @@ button::after {
 
 .page-shell {
   min-height: 100vh;
-  padding: 32rpx 32rpx calc(48rpx + env(safe-area-inset-bottom));
+  padding: 36rpx 32rpx calc(56rpx + env(safe-area-inset-bottom));
 }
 
 .with-action-bar {
   padding-bottom: calc(176rpx + env(safe-area-inset-bottom));
 }
 
+.flow-step {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24rpx;
+  padding-bottom: 18rpx;
+  border-bottom: 1rpx solid #d7d9d3;
+  color: #68706a;
+  font-size: 20rpx;
+  font-weight: 650;
+}
+
+.flow-step text:last-child {
+  color: #1f5637;
+  font-variant-numeric: tabular-nums;
+}
+
 .eyebrow {
-  color: #285c3a;
-  font-size: 22rpx;
-  font-weight: 700;
+  color: #647069;
+  font-size: 21rpx;
+  font-weight: 600;
   letter-spacing: 0;
 }
 
 .page-title {
-  margin-top: 12rpx;
-  font-size: 48rpx;
-  font-weight: 750;
-  line-height: 1.18;
+  margin-top: 10rpx;
+  font-size: 50rpx;
+  font-weight: 800;
+  line-height: 1.16;
+}
+
+.page-title text {
+  display: block;
 }
 
 .page-subtitle {
-  margin-top: 16rpx;
-  color: #6d716c;
+  max-width: 650rpx;
+  margin-top: 14rpx;
+  color: #686e69;
   font-size: 26rpx;
   line-height: 1.6;
 }
@@ -63,12 +85,12 @@ button::after {
   display: flex;
   align-items: flex-end;
   justify-content: space-between;
-  margin-bottom: 24rpx;
+  margin-bottom: 28rpx;
 }
 
 .section-heading__title {
-  font-size: 34rpx;
-  font-weight: 700;
+  font-size: 36rpx;
+  font-weight: 800;
   line-height: 1.25;
 }
 
@@ -81,7 +103,7 @@ button::after {
 .secondary-button,
 .quiet-button {
   display: flex;
-  min-height: 92rpx;
+  min-height: 96rpx;
   align-items: center;
   justify-content: center;
   padding: 0 32rpx;
@@ -89,18 +111,18 @@ button::after {
 }
 
 .primary-button {
-  background: #285c3a;
+  background: #1f5637;
   color: #ffffff;
 }
 
 .secondary-button {
-  border: 2rpx solid #285c3a;
-  background: transparent;
-  color: #285c3a;
+  border: 2rpx solid #1f5637;
+  background: #ffffff;
+  color: #1f5637;
 }
 
 .quiet-button {
-  background: #ebece7;
+  background: #e5e6e0;
   color: #3f443f;
 }
 
@@ -117,9 +139,10 @@ button::after {
   right: 0;
   bottom: 0;
   left: 0;
+  z-index: 10;
   padding: 20rpx 32rpx calc(20rpx + env(safe-area-inset-bottom));
-  border-top: 1rpx solid #e2e2dc;
-  background: rgba(252, 251, 248, 0.97);
+  border-top: 1rpx solid #dedfd9;
+  background: rgba(248, 248, 245, 0.98);
 }
 
 .demo-badge {
@@ -127,10 +150,10 @@ button::after {
   min-height: 44rpx;
   align-items: center;
   padding: 0 16rpx;
-  border: 1rpx solid #9cb2a1;
-  border-radius: 6rpx;
-  background: #edf3ee;
-  color: #285c3a;
+  border: 1rpx solid #aab4ad;
+  border-radius: 4rpx;
+  background: #e8eee9;
+  color: #1f5637;
   font-size: 20rpx;
   font-weight: 700;
 }
@@ -153,8 +176,8 @@ button::after {
   width: 100%;
   min-height: 88rpx;
   padding: 0 24rpx;
-  border: 1rpx solid #d8d9d3;
-  border-radius: 8rpx;
+  border: 1rpx solid #d5d7d1;
+  border-radius: 12rpx;
   background: #ffffff;
   color: #242824;
   font-size: 28rpx;
@@ -178,8 +201,8 @@ button::after {
 }
 
 .empty-state {
-  padding: 88rpx 28rpx;
-  border-top: 1rpx solid #dfe0da;
+  padding: 88rpx 0;
+  border-top: 1rpx solid #d9dbd5;
   text-align: left;
 }
 

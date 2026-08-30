@@ -1,7 +1,7 @@
 <view class="page-shell with-action-bar solution-select-page">
-  <view class="eyebrow">STEP 03</view>
-  <view class="page-title">选择真实可生产的方案</view>
-  <view class="page-subtitle">AI 只按所选标准方案制作演示效果，不会自由生成无法施工的窗型。</view>
+  <view class="flow-step"><text>效果预览</text><text>03 / 04</text></view>
+  <view class="page-title"><text>选一套准备</text><text>装进家里的窗</text></view>
+  <view class="page-subtitle">下面都是华业可生产方案，先按最关注的需求筛选。</view>
 
   <scroll-view class="need-scroll" scroll-x enhanced show-scrollbar="{{false}}">
     <view class="need-row">
@@ -27,6 +27,6 @@
   </view>
 
   <view class="action-bar">
-    <button class="primary-button" disabled="{{!selectedId}}" bindtap="continueFlow">继续配置</button>
+    <button class="primary-button" disabled="{{!selectedId}}" bindtap="continueFlow">下一步，选配置</button>
   </view>
 </view>

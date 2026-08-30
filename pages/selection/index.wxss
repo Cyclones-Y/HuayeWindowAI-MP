@@ -8,14 +8,25 @@
   padding: 28rpx 32rpx 26rpx;
 }
 
-.selection-head .eyebrow {
+.selection-progress {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 22rpx;
+  padding-bottom: 16rpx;
+  border-bottom: 1rpx solid #3d443f;
+  color: rgba(255, 255, 255, 0.58);
+  font-size: 20rpx;
+  font-weight: 650;
+}
+
+.selection-progress text:last-child {
   color: #9bc2a3;
 }
 
 .selection-title {
-  margin-top: 10rpx;
-  font-size: 36rpx;
-  font-weight: 750;
+  font-size: 38rpx;
+  font-weight: 800;
 }
 
 .selection-hint {
@@ -45,7 +56,7 @@
 
 .selection-box {
   position: absolute;
-  border: 4rpx solid #80b78d;
+  border: 4rpx solid #8fc49b;
   box-shadow: 0 0 0 1600rpx rgba(10, 13, 11, 0.56);
 }
 
@@ -80,7 +91,7 @@
   height: 34rpx;
   border: 4rpx solid #ffffff;
   border-radius: 50%;
-  background: #285c3a;
+  background: #1f5637;
 }
 
 .selection-handle--nw { top: -19rpx; left: -19rpx; }

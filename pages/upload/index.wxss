@@ -4,14 +4,14 @@
   justify-content: space-between;
   margin-top: 28rpx;
   padding: 20rpx 22rpx;
-  border-left: 6rpx solid #285c3a;
+  border-left: 6rpx solid #1f5637;
   background: #edf2ed;
   color: #6d716c;
   font-size: 22rpx;
 }
 
 .selected-note__value {
-  color: #285c3a;
+  color: #1f5637;
   font-weight: 700;
 }
 
@@ -20,7 +20,7 @@
   height: 560rpx;
   margin-top: 36rpx;
   overflow: hidden;
-  border-radius: 8rpx;
+  border-radius: 12rpx;
   background: #dfe1dc;
 }
 
@@ -67,16 +67,15 @@
 }
 
 .shoot-tip__index {
-  color: #285c3a;
+  color: #1f5637;
   font-weight: 700;
 }
 
 .privacy-note {
   margin-top: 32rpx;
-  padding: 24rpx;
-  border: 1rpx solid #dedfd9;
-  border-radius: 8rpx;
-  background: #ffffff;
+  padding: 24rpx 0;
+  border-top: 1rpx solid #d8dad4;
+  border-bottom: 1rpx solid #d8dad4;
 }
 
 .privacy-note__title {
@@ -95,7 +94,7 @@
   display: grid;
   grid-template-columns: 1.2fr 1fr;
   gap: 16rpx;
-  margin-top: 38rpx;
+  margin-top: 32rpx;
 }
 
 .upload-actions button {

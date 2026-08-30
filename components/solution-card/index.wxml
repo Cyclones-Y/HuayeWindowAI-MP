@@ -1,13 +1,12 @@
 <view class="solution-card pressable {{selected ? 'solution-card--selected' : ''}} {{compact ? 'solution-card--compact' : ''}}" bindtap="onSelect">
-  <image class="solution-card__image" src="{{solution.thumbnail}}" mode="aspectFill" />
+  <view class="solution-card__media">
+    <image class="solution-card__image" src="{{solution.thumbnail}}" mode="aspectFill" />
+    <view class="solution-card__type">可施工方案</view>
+    <view wx:if="{{selected}}" class="solution-card__check">已选择</view>
+  </view>
   <view class="solution-card__body">
-    <view class="solution-card__topline">
-      <view>
-        <view class="solution-card__name">{{solution.name}}</view>
-        <view class="solution-card__subtitle">{{solution.subtitle}}</view>
-      </view>
-      <view wx:if="{{selected}}" class="solution-card__check">已选</view>
-    </view>
+    <view class="solution-card__name">{{solution.name}}</view>
+    <view class="solution-card__subtitle">{{solution.subtitle}}</view>
     <view class="solution-card__features">
       <text wx:for="{{solution.features}}" wx:key="*this" wx:for-item="feature" class="solution-card__feature">{{feature}}</text>
     </view>

@@ -1,59 +1,71 @@
 .solution-card {
   overflow: hidden;
-  border: 1rpx solid #dedfd9;
-  border-radius: 8rpx;
+  border: 1rpx solid #d6d8d2;
+  border-radius: 12rpx;
   background: #ffffff;
-  transition: transform 180ms ease, border-color 180ms ease;
+  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
 }
 
 .solution-card--selected {
-  border: 3rpx solid #285c3a;
+  border: 3rpx solid #1f5637;
+  box-shadow: 0 12rpx 28rpx rgba(31, 86, 55, 0.12);
+}
+
+.solution-card__media {
+  position: relative;
+  overflow: hidden;
 }
 
 .solution-card__image {
   display: block;
   width: 100%;
-  height: 300rpx;
+  height: 340rpx;
   background: #e7e8e2;
 }
 
 .solution-card--compact .solution-card__image {
-  height: 260rpx;
+  height: 320rpx;
+}
+
+.solution-card__type,
+.solution-card__check {
+  position: absolute;
+  top: 18rpx;
+  min-height: 42rpx;
+  padding: 0 14rpx;
+  border-radius: 4rpx;
+  font-size: 19rpx;
+  font-weight: 700;
+  line-height: 42rpx;
+}
+
+.solution-card__type {
+  left: 18rpx;
+  background: rgba(247, 247, 243, 0.92);
+  color: #3f4741;
+}
+
+.solution-card__check {
+  right: 18rpx;
+  background: #1f5637;
+  color: #ffffff;
 }
 
 .solution-card__body {
-  padding: 24rpx;
-}
-
-.solution-card__topline,
-.solution-card__footer {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 20rpx;
+  padding: 26rpx;
 }
 
 .solution-card__name {
-  font-size: 30rpx;
-  font-weight: 700;
+  font-size: 31rpx;
+  font-weight: 800;
   line-height: 1.3;
 }
 
 .solution-card__subtitle {
   margin-top: 8rpx;
-  color: #70746e;
+  color: #707670;
   font-size: 23rpx;
   line-height: 1.45;
-}
-
-.solution-card__check {
-  flex: none;
-  padding: 8rpx 12rpx;
-  border-radius: 6rpx;
-  background: #285c3a;
-  color: #ffffff;
-  font-size: 20rpx;
-  font-weight: 700;
 }
 
 .solution-card__features {
@@ -65,17 +77,20 @@
 
 .solution-card__feature {
   padding: 8rpx 12rpx;
-  border-radius: 6rpx;
-  background: #f0f1ec;
-  color: #555a55;
-  font-size: 21rpx;
+  border-radius: 4rpx;
+  background: #edf0eb;
+  color: #515852;
+  font-size: 20rpx;
 }
 
 .solution-card__footer {
+  display: flex;
   align-items: center;
+  justify-content: space-between;
+  gap: 20rpx;
   margin-top: 24rpx;
   padding-top: 20rpx;
-  border-top: 1rpx solid #ecece7;
+  border-top: 1rpx solid #e7e8e3;
 }
 
 .solution-card__swatches {
@@ -87,13 +102,13 @@
   width: 24rpx;
   height: 24rpx;
   border: 2rpx solid #ffffff;
-  border-radius: 50%;
+  border-radius: 4rpx;
   box-shadow: 0 0 0 1rpx #c9cbc5;
 }
 
 .solution-card__price {
   max-width: 360rpx;
-  color: #7b7f79;
+  color: #747a75;
   font-size: 20rpx;
   line-height: 1.4;
   text-align: right;

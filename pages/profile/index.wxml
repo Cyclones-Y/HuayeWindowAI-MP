@@ -2,10 +2,16 @@
   <view class="profile-head">
     <view class="profile-avatar">华</view>
     <view class="profile-head__copy">
-      <view class="profile-name">访客体验</view>
-      <view class="profile-note">登录将在真实后端接入后启用</view>
+      <view class="profile-name">我的装修方案</view>
+      <view class="profile-note">当前为本地体验模式</view>
     </view>
-    <view class="demo-badge">本地演示</view>
+    <view class="profile-status"><text></text>数据仅存本机</view>
+  </view>
+
+  <view class="profile-overview">
+    <view><text>{{history.length}}</text><text>效果记录</text></view>
+    <view><text>{{favorites.length}}</text><text>收藏方案</text></view>
+    <view><text>{{leads.length}}</text><text>预约记录</text></view>
   </view>
 
   <view class="profile-tabs">
@@ -17,7 +23,7 @@
   <view wx:if="{{activeView === 'history'}}" class="profile-content">
     <view wx:if="{{history.length === 0}}" class="empty-state">
       <view class="empty-state__title">还没有效果记录</view>
-      <view class="empty-state__text">完成一次样例体验后，结果会保存在当前设备。</view>
+      <view class="empty-state__text">完成一次效果体验后，方案会保存在当前设备。</view>
       <button class="secondary-button empty-action" bindtap="startExperience">开始体验</button>
     </view>
     <view wx:else class="record-list">

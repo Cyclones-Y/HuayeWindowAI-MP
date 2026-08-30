@@ -1,6 +1,6 @@
 <view class="selection-page with-action-bar">
   <view class="selection-head">
-    <view class="eyebrow">STEP 02</view>
+    <view class="selection-progress"><text>效果预览</text><text>02 / 04</text></view>
     <view class="selection-title">框住需要更换的门窗</view>
     <view class="selection-hint {{hintText.indexOf('太小') >= 0 ? 'selection-hint--error' : ''}}">{{hintText}}</view>
   </view>
@@ -19,7 +19,7 @@
     </view>
   </view>
 
-  <view class="selection-footnote">选框之外的墙体、家具和视角应保持不变。真实生图服务接入后，系统还会检查照片质量。</view>
+  <view class="selection-footnote">选框外的墙体、家具和视角会保持不变。</view>
 
   <view class="action-bar selection-actions">
     <button class="quiet-button" bindtap="resetSelection">重置</button>

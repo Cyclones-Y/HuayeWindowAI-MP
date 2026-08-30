@@ -1,10 +1,15 @@
 <view class="page-shell solutions-page">
-  <view class="eyebrow">BUILDABLE OPTIONS</view>
-  <view class="page-title">真实可生产的门窗方案</view>
-  <view class="page-subtitle">先按空间和主要需求筛选，具体尺寸、配置与价格以现场量尺为准。</view>
+  <view class="solutions-head">
+    <view>
+      <view class="eyebrow">华业标准方案</view>
+      <view class="page-title"><text>选一套适合</text><text>你家的窗</text></view>
+    </view>
+    <view class="solutions-count"><text>{{filteredSolutions.length}}</text>套可选</view>
+  </view>
+  <view class="page-subtitle">每套方案都基于实际产品配置，尺寸与价格以上门量尺为准。</view>
 
   <view class="filter-block">
-    <view class="filter-label">使用空间</view>
+    <view class="filter-label"><text>使用空间</text><text class="filter-label__hint">先选安装位置</text></view>
     <scroll-view scroll-x enhanced show-scrollbar="{{false}}">
       <view class="filter-row">
         <view wx:for="{{roomFilters}}" wx:key="value" wx:for-item="filter" class="filter-chip pressable {{activeRoom === filter.value ? 'filter-chip--active' : ''}}" data-value="{{filter.value}}" bindtap="selectRoom">{{filter.label}}</view>
@@ -13,7 +18,7 @@
   </view>
 
   <view class="filter-block filter-block--compact">
-    <view class="filter-label">主要需求</view>
+    <view class="filter-label"><text>主要需求</text><text class="filter-label__hint">可组合筛选</text></view>
     <scroll-view scroll-x enhanced show-scrollbar="{{false}}">
       <view class="filter-row">
         <view wx:for="{{needFilters}}" wx:key="value" wx:for-item="filter" class="filter-chip pressable {{activeNeed === filter.value ? 'filter-chip--active' : ''}}" data-value="{{filter.value}}" bindtap="selectNeed">{{filter.label}}</view>

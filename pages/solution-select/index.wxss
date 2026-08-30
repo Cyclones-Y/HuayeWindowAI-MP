@@ -14,16 +14,16 @@
   min-height: 66rpx;
   padding: 0 22rpx;
   border: 1rpx solid #d7d9d2;
-  border-radius: 8rpx;
-  background: #ffffff;
+  border-radius: 6rpx;
+  background: #f8f8f5;
   color: #626761;
   font-size: 23rpx;
   line-height: 66rpx;
 }
 
 .need-chip--active {
-  border-color: #285c3a;
-  background: #285c3a;
+  border-color: #1f5637;
+  background: #1f5637;
   color: #ffffff;
 }
 

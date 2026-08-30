@@ -1,11 +1,11 @@
 <view wx:if="{{!submitted}}" class="page-shell appointment-page">
-  <view class="eyebrow">MEASURE AT HOME</view>
-  <view class="page-title">预约上门量尺</view>
-  <view class="page-subtitle">提交后仅保存为本机演示记录，不会发送到华业门窗后台。</view>
+  <view class="eyebrow">华业门窗 · 本地服务</view>
+  <view class="page-title"><text>预约上门</text><text>测量尺寸</text></view>
+  <view class="page-subtitle">留下方便联系的时间，当前版本仅保存为本机演示记录。</view>
 
   <view class="appointment-notice">
-    <view class="appointment-notice__title">先体验，满意再留联系方式</view>
-    <view class="appointment-notice__text">正式版本将由工作人员联系确认时间，不会直接形成订单或最终报价。</view>
+    <view class="appointment-notice__title">预约不等于下单</view>
+    <view class="appointment-notice__text">工作人员会先确认上门时间，最终方案和报价以现场沟通为准。</view>
   </view>
 
   <view class="appointment-form">
@@ -44,14 +44,14 @@
     </view>
   </view>
 
-  <button class="primary-button submit-button" loading="{{submitting}}" bindtap="submitAppointment">保存演示预约</button>
+  <button class="primary-button submit-button" loading="{{submitting}}" bindtap="submitAppointment">提交预约信息</button>
   <view class="privacy-copy">手机号只保存在当前设备的微信小程序本地缓存中，可在“我的”页面清除。</view>
 </view>
 
 <view wx:else class="appointment-success">
   <view class="appointment-success__mark">✓</view>
-  <view class="appointment-success__title">演示预约已保存</view>
-  <view class="appointment-success__text">这不是正式预约，数据只保存在当前设备。后端接入后将替换为真实提交结果。</view>
+  <view class="appointment-success__title">预约信息已保存</view>
+  <view class="appointment-success__text">当前仍是演示记录，数据只保存在这台设备。</view>
   <button class="primary-button" bindtap="viewRecords">查看预约记录</button>
   <button class="secondary-button" bindtap="goHome">返回首页</button>
 </view>

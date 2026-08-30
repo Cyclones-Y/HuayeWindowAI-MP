@@ -1,8 +1,8 @@
 .appointment-notice {
   margin-top: 34rpx;
   padding: 24rpx;
-  border-left: 6rpx solid #285c3a;
-  background: #edf2ed;
+  border-left: 6rpx solid #1f5637;
+  background: #e8eee9;
 }
 
 .appointment-notice__title {
@@ -41,7 +41,7 @@
 .appointment-success {
   min-height: 100vh;
   padding: 140rpx 48rpx calc(64rpx + env(safe-area-inset-bottom));
-  background: #f7f6f2;
+  background: #f3f2ee;
 }
 
 .appointment-success__mark {
@@ -51,7 +51,7 @@
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  background: #285c3a;
+  background: #1f5637;
   color: #ffffff;
   font-size: 48rpx;
   font-weight: 800;
@@ -60,7 +60,7 @@
 .appointment-success__title {
   margin-top: 38rpx;
   font-size: 44rpx;
-  font-weight: 760;
+  font-weight: 800;
 }
 
 .appointment-success__text {

@@ -6,10 +6,26 @@
   padding: 32rpx;
 }
 
+.result-state {
+  display: flex;
+  align-items: center;
+  gap: 10rpx;
+  color: #5f6861;
+  font-size: 21rpx;
+  font-weight: 650;
+}
+
+.result-state text {
+  width: 12rpx;
+  height: 12rpx;
+  border-radius: 50%;
+  background: #1f5637;
+}
+
 .result-title {
   margin-top: 18rpx;
   font-size: 42rpx;
-  font-weight: 760;
+  font-weight: 800;
 }
 
 .result-subtitle {
@@ -82,7 +98,7 @@
   justify-content: center;
   border: 4rpx solid #ffffff;
   border-radius: 50%;
-  background: #285c3a;
+  background: #1f5637;
   color: #ffffff;
   font-size: 27rpx;
   font-weight: 750;
@@ -135,7 +151,7 @@
   width: 12rpx;
   height: 12rpx;
   border-radius: 50%;
-  background: #285c3a;
+  background: #1f5637;
 }
 
 .result-price {
@@ -156,8 +172,8 @@
 .result-notice {
   margin: 28rpx 32rpx 0;
   padding: 22rpx;
-  border-left: 6rpx solid #285c3a;
-  background: #edf2ed;
+  border-left: 6rpx solid #1f5637;
+  background: #e8eee9;
   color: #647067;
   font-size: 21rpx;
   line-height: 1.55;

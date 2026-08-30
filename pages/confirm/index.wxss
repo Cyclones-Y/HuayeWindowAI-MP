@@ -10,12 +10,12 @@
 .preview-band__solution {
   width: 100%;
   height: 230rpx;
-  border-radius: 8rpx;
+  border-radius: 12rpx;
   background: #e3e4de;
 }
 
 .preview-band__arrow {
-  color: #285c3a;
+  color: #1f5637;
   font-size: 32rpx;
   text-align: center;
 }
@@ -42,7 +42,7 @@
   display: flex;
   gap: 12rpx;
   margin-top: 18rpx;
-  color: #285c3a;
+  color: #1f5637;
   font-size: 21rpx;
 }
 
@@ -69,7 +69,7 @@
   gap: 14rpx;
   padding: 0 18rpx;
   border: 1rpx solid #d8dad3;
-  border-radius: 8rpx;
+  border-radius: 10rpx;
   background: #ffffff;
   color: #5e635e;
   font-size: 23rpx;
@@ -81,8 +81,8 @@
 }
 
 .option-item--active {
-  border: 3rpx solid #285c3a;
-  color: #285c3a;
+  border: 3rpx solid #1f5637;
+  color: #1f5637;
   font-weight: 700;
 }
 
@@ -97,8 +97,8 @@
 .ai-notice {
   margin-top: 42rpx;
   padding: 24rpx;
-  border-left: 6rpx solid #285c3a;
-  background: #edf2ed;
+  border-left: 6rpx solid #1f5637;
+  background: #e8eee9;
 }
 
 .ai-notice__title {

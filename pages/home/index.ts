@@ -7,7 +7,7 @@ Page({
   },
 
   onShow() {
-    wx.setNavigationBarColor({ frontColor: '#000000', backgroundColor: '#F7F6F2' })
+    wx.setNavigationBarColor({ frontColor: '#000000', backgroundColor: '#F3F2EE' })
   },
 
   goUpload() {
