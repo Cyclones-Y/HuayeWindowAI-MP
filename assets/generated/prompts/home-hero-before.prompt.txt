@@ -1,0 +1,16 @@
+Model: gpt-image-2
+Mode: edit with mask
+Quality: high
+Size: 1024x1024, downscaled to 900x900 JPEG for Mini Program delivery
+Input: assets/generated/home-hero-mobile.jpg
+Output: assets/generated/home-hero-before.jpg
+
+Use case: precise-object-edit
+Asset type: WeChat Mini Program before/after comparison hero, BEFORE state
+Input image: Image 1 is the edit target and represents the renovated AFTER state. The transparent mask limits editing to the window area.
+Primary request: Within the masked area, change only the modern dark charcoal aluminum window assembly into a visibly older, dated residential window system. Use a light warm-gray aged aluminum frame with additional narrow mullions and segmented panes, slightly thicker legacy profiles, and a practical older-apartment appearance. Keep the exact same wall opening and boundary.
+Style/medium: photorealistic residential interior photography with realistic glass and aluminum details.
+Composition/framing: preserve the exact square crop, camera position, lens, perspective, geometry, scale, and placement of every unmasked element.
+Lighting/mood: preserve the exact sunlight direction, exposure, shadows, reflections, and warm calm atmosphere.
+Constraints: CHANGE ONLY THE WINDOW FRAME AND PANE DIVISIONS INSIDE THE MASK. Preserve every unmasked pixel as closely as possible. Inside the glass, keep the outdoor trees, buildings, and sky identical to Image 1. Keep the walls, wooden trim, sofa, cushions, plant, vase, fruit bowl, coffee table, book, cup, rug, floor, and all shadows unchanged. No construction mess. No people. No text. No labels. No watermark. No logo. The result must align with Image 1 for an interactive comparison slider.
+Avoid: changing furniture, decor, architecture, crop, perspective, lighting, color grading, outdoor scenery, or room layout.

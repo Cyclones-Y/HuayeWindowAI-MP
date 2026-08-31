@@ -1,19 +1,35 @@
 <view class="home-page">
-  <view class="hero">
+  <view class="hero {{compareAnimating ? 'hero--animating' : ''}}">
     <image class="hero__image" src="/assets/generated/home-hero-mobile.jpg" mode="aspectFill" />
-    <view class="hero__shade"></view>
-
-    <view class="viewfinder">
-      <view class="viewfinder__corner viewfinder__corner--tl"></view>
-      <view class="viewfinder__corner viewfinder__corner--tr"></view>
-      <view class="viewfinder__corner viewfinder__corner--bl"></view>
-      <view class="viewfinder__corner viewfinder__corner--br"></view>
+    <view class="hero__before" style="width: {{comparePosition}}%;">
+      <image class="hero__before-image" src="/assets/generated/home-hero-before.jpg" mode="aspectFill" />
     </view>
 
-    <view class="hero__copy">
-      <view class="hero__title">换窗之前，<text>先看清装进家里的样子</text></view>
-      <view class="hero__subtitle"><text class="hero__subtitle-line"></text><text>基于可施工门窗方案生成预览 · 当前为演示体验</text></view>
+    <view class="compare-label compare-label--before">改造前</view>
+    <view class="compare-label compare-label--after">改造后</view>
+
+    <view class="compare-divider" style="left: {{comparePosition}}%;">
+      <view
+        class="compare-handle {{compareDragging ? 'compare-handle--dragging' : ''}}"
+        aria-role="slider"
+        aria-label="拖动查看门窗改造前后效果"
+        aria-valuemin="8"
+        aria-valuemax="92"
+        aria-valuenow="{{comparePosition}}"
+        catchtouchstart="onCompareStart"
+        catchtouchmove="onCompareMove"
+        catchtouchend="onCompareEnd"
+        catchtouchcancel="onCompareEnd"
+      >
+        <view class="compare-handle__arrow compare-handle__arrow--left"></view>
+        <view class="compare-handle__arrow compare-handle__arrow--right"></view>
+      </view>
     </view>
+  </view>
+
+  <view class="hero-intro">
+    <view class="hero-intro__title">换窗前后，一眼看清</view>
+    <view class="hero-intro__subtitle"><text class="hero-intro__line"></text><text>上传你家的照片，生成可施工门窗预览 · 当前为演示体验</text></view>
   </view>
 
   <view class="action-zone">
