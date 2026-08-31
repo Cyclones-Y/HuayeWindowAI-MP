@@ -1,20 +1,30 @@
 <view class="solution-card pressable {{selected ? 'solution-card--selected' : ''}} {{compact ? 'solution-card--compact' : ''}}" bindtap="onSelect">
-  <view class="solution-card__media">
-    <image class="solution-card__image" src="{{solution.thumbnail}}" mode="aspectFill" />
-    <view class="solution-card__type">演示方案</view>
-    <view wx:if="{{selected}}" class="solution-card__check">已选择</view>
-  </view>
-  <view class="solution-card__body">
-    <view class="solution-card__name">{{solution.name}}</view>
-    <view class="solution-card__subtitle">{{solution.subtitle}}</view>
-    <view class="solution-card__features">
-      <text wx:for="{{solution.features}}" wx:key="*this" wx:for-item="feature" class="solution-card__feature">{{feature}}</text>
+  <block wx:if="{{compact}}">
+    <image class="solution-card__image solution-card__image--compact" src="{{solution.thumbnail}}" mode="aspectFill" />
+    <view class="solution-card__compact-shade"></view>
+    <view class="solution-card__compact-copy">
+      <view class="solution-card__name solution-card__name--compact">{{solution.name}}</view>
+      <view class="solution-card__subtitle solution-card__subtitle--compact">{{solution.subtitle}}</view>
     </view>
-    <view class="solution-card__footer">
-      <view class="solution-card__swatches">
-        <view wx:for="{{solution.frameColors}}" wx:key="code" wx:for-item="color" class="solution-card__swatch" style="background: {{color.color}};"></view>
+  </block>
+  <block wx:else>
+    <view class="solution-card__media">
+      <image class="solution-card__image" src="{{solution.thumbnail}}" mode="aspectFill" />
+      <view class="solution-card__type">演示方案</view>
+      <view wx:if="{{selected}}" class="solution-card__check">已选择</view>
+    </view>
+    <view class="solution-card__body">
+      <view class="solution-card__name">{{solution.name}}</view>
+      <view class="solution-card__subtitle">{{solution.subtitle}}</view>
+      <view class="solution-card__features">
+        <text wx:for="{{solution.features}}" wx:key="*this" wx:for-item="feature" class="solution-card__feature">{{feature}}</text>
       </view>
-      <text class="solution-card__price">{{solution.priceHint}}</text>
+      <view class="solution-card__footer">
+        <view class="solution-card__swatches">
+          <view wx:for="{{solution.frameColors}}" wx:key="code" wx:for-item="color" class="solution-card__swatch" style="background: {{color.color}};"></view>
+        </view>
+        <text class="solution-card__price">{{solution.priceHint}}</text>
+      </view>
     </view>
-  </view>
+  </block>
 </view>

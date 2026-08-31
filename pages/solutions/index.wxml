@@ -1,4 +1,4 @@
-<view class="page-shell solutions-page">
+<view class="page-shell tab-page solutions-page">
   <view class="solutions-head">
     <view>
       <view class="page-context">可施工门窗方案</view>

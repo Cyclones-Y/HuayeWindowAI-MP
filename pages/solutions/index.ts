@@ -31,6 +31,10 @@ Page({
     void this.loadSolutions()
   },
 
+  onShow() {
+    this.getTabBar?.()?.setData({ selected: 1 })
+  },
+
   async loadSolutions() {
     this.setData({ loading: true, errorText: '' })
     try {

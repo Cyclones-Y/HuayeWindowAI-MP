@@ -1,4 +1,4 @@
-<view class="page-shell profile-page">
+<view class="page-shell tab-page profile-page">
   <view class="profile-head">
     <view class="profile-avatar">华</view>
     <view class="profile-head__copy">

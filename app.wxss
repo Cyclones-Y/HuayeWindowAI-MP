@@ -39,6 +39,10 @@ button::after {
   padding-bottom: calc(176rpx + env(safe-area-inset-bottom));
 }
 
+.tab-page {
+  padding-bottom: calc(196rpx + env(safe-area-inset-bottom));
+}
+
 .flow-step {
   display: flex;
   align-items: center;

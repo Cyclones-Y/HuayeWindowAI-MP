@@ -8,6 +8,7 @@ Page({
 
   onShow() {
     wx.setNavigationBarColor({ frontColor: '#000000', backgroundColor: '#F3F2EE' })
+    this.getTabBar?.()?.setData({ selected: 0 })
   },
 
   goUpload() {

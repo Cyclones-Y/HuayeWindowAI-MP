@@ -1,67 +1,58 @@
-<!--
-THESIS: 住宅建筑样板册，让真实窗景先于界面出现，拒绝卡片堆叠的装修模板。
-OWN-WORLD: 冷白纸面、深绿触控、陶土橙标线、整版住宅摄影与材料色板。
-STORY: 用户先看清可施工改造，再上传照片、选择方案并预约量尺。
-FIRST VIEWPORT: 方幅窗景占主位，左侧三行标题，双入口贴住图片下沿，信任说明露出。
-FORM: 建筑杂志式首页，批准稿 .impeccable/mocks/home-composition/approved-user-reference.png。
-CONCEPT-SEED: 用户直接指定并批准 attached-reference 路径；无 concept-seed 脚本 key。
-FINISH: unreviewed and undocumented is unfinished; this build ends with the finish review, the verdict, DESIGN.md, and every shipping raster carrying its provenance
--->
 <view class="home-page">
-  <view class="home-header">
-    <view class="home-header__spacer"></view>
-    <view class="home-header__title">门窗效果预览</view>
-    <view class="home-header__service">支持上门量尺</view>
-  </view>
-
   <view class="hero">
     <image class="hero__image" src="/assets/generated/home-hero-mobile.jpg" mode="aspectFill" />
+    <view class="hero__shade"></view>
+
+    <view class="viewfinder">
+      <view class="viewfinder__corner viewfinder__corner--tl"></view>
+      <view class="viewfinder__corner viewfinder__corner--tr"></view>
+      <view class="viewfinder__corner viewfinder__corner--bl"></view>
+      <view class="viewfinder__corner viewfinder__corner--br"></view>
+    </view>
+
     <view class="hero__copy">
-      <view class="hero__title"><text>换窗之前，</text><text>先看清装进</text><text>家里的样子</text></view>
-      <view class="hero__accent"></view>
+      <view class="hero__title">换窗之前，<text>先看清装进家里的样子</text></view>
+      <view class="hero__subtitle"><text class="hero__subtitle-line"></text><text>基于可施工门窗方案生成预览 · 当前为演示体验</text></view>
     </view>
   </view>
 
-  <view class="experience-panel">
-    <button class="primary-button experience-panel__main" bindtap="goUpload">上传照片看效果</button>
-    <button class="secondary-button experience-panel__sample" bindtap="trySample"><text>没有照片？</text><text>先用客厅样例体验</text></button>
+  <view class="action-zone">
+    <button class="primary-action" hover-class="button-hover" bindtap="goUpload">
+      <view class="primary-action__label"><text>上传照片，体验</text><text class="ai-word">AI</text><text>效果</text></view>
+    </button>
+    <button class="sample-link" hover-class="sample-link--pressed" bindtap="trySample"><text>没有照片？先看样例效果</text><text class="sample-link__arrow"></text></button>
   </view>
 
   <view class="trust-strip">
-    <view class="trust-item"><text class="trust-item__value">只替换门窗</text><text class="trust-item__label">不改变墙体与结构</text></view>
-    <view class="trust-item"><text class="trust-item__value">方案可施工</text><text class="trust-item__label">基于真实产品配置</text></view>
-    <view class="trust-item"><text class="trust-item__value">满意再预约</text><text class="trust-item__label">预览满意后再推进</text></view>
+    <view class="trust-item"><view class="trust-icon trust-icon--window"></view><text>只换门窗</text></view>
+    <view class="trust-item"><view class="trust-icon trust-icon--check"><view></view></view><text>可施工方案</text></view>
+    <view class="trust-item"><view class="trust-icon trust-icon--heart"><view></view></view><text>满意再约</text></view>
   </view>
 
   <view class="home-section home-section--needs">
     <view class="section-heading">
       <view class="section-heading__title">你最想改善什么？</view>
-      <text class="section-link" bindtap="goSolutions">按需求选方案</text>
+      <text class="section-link" bindtap="goSolutions">查看全部方案</text>
     </view>
     <view class="need-grid">
-      <view class="need-item pressable" bindtap="goSolutions"><view class="need-item__mark need-icon need-icon--air"><view></view><view></view><view></view></view><text class="need-item__name">通风舒适</text><text class="need-item__detail">改善闷热与空气流通</text></view>
-      <view class="need-item pressable" bindtap="goSolutions"><view class="need-item__mark need-icon need-icon--sound"><view class="sound-core"></view><view class="sound-wave sound-wave--one"></view><view class="sound-wave sound-wave--two"></view></view><text class="need-item__name">隔音降噪</text><text class="need-item__detail">降低外界噪音干扰</text></view>
-      <view class="need-item pressable" bindtap="goSolutions"><view class="need-item__mark need-icon need-icon--light"><view class="light-core"></view><view class="light-ray light-ray--h"></view><view class="light-ray light-ray--v"></view></view><text class="need-item__name">采光明亮</text><text class="need-item__detail">提升室内自然光线</text></view>
-      <view class="need-item pressable" bindtap="goSolutions"><view class="need-item__mark need-icon need-icon--safe"><view class="safe-shield"><view class="safe-lock"></view></view></view><text class="need-item__name">安全安心</text><text class="need-item__detail">增强居家防护能力</text></view>
+      <view class="need-item pressable" bindtap="goSolutions"><view class="need-item__mark need-item__mark--air need-icon need-icon--air"><view></view><view></view><view></view></view><text class="need-item__name">通风舒适</text><text class="need-item__detail">闷热与空气流通</text></view>
+      <view class="need-item pressable" bindtap="goSolutions"><view class="need-item__mark need-item__mark--sound need-icon need-icon--sound"><view class="sound-core"></view><view class="sound-wave sound-wave--one"></view><view class="sound-wave sound-wave--two"></view></view><text class="need-item__name">隔音降噪</text><text class="need-item__detail">降低外界噪音</text></view>
+      <view class="need-item pressable" bindtap="goSolutions"><view class="need-item__mark need-item__mark--light need-icon need-icon--light"><view class="light-core"></view><view class="light-ray light-ray--h"></view><view class="light-ray light-ray--v"></view></view><text class="need-item__name">采光明亮</text><text class="need-item__detail">提升自然光线</text></view>
+      <view class="need-item pressable" bindtap="goSolutions"><view class="need-item__mark need-item__mark--safe need-icon need-icon--safe"><view class="safe-shield"><view class="safe-lock"></view></view></view><text class="need-item__name">安全安心</text><text class="need-item__detail">增强居家防护</text></view>
     </view>
   </view>
 
   <view class="home-section home-section--solutions">
-    <view class="section-heading">
-      <view class="section-heading__title">门窗方案演示</view>
+    <view class="section-heading section-heading--solutions">
+      <view><view class="section-heading__title">真实方案，先看效果</view><view class="section-heading__description">对应可量尺、可沟通的门窗配置</view></view>
       <text class="section-link" bindtap="goSolutions">查看全部</text>
     </view>
     <scroll-view class="solution-scroll" scroll-x enhanced show-scrollbar="{{false}}">
       <view class="solution-scroll__track">
-        <view wx:for="{{featuredSolutions}}" wx:key="id" wx:for-item="solution" class="solution-scroll__item">
-          <solution-card solution="{{solution}}" compact bind:select="onSolutionSelect" />
-        </view>
+        <view wx:for="{{featuredSolutions}}" wx:key="id" wx:for-item="solution" class="solution-scroll__item"><solution-card solution="{{solution}}" compact bind:select="onSolutionSelect" /></view>
       </view>
     </scroll-view>
   </view>
 
-  <view class="service-footer">
-    <view class="demo-badge">页面住宅图片均为生成的演示素材</view>
-    <view class="service-footer__text">效果仅供方案沟通参考，尺寸、价格与施工方式以上门量尺为准。</view>
-  </view>
+  <view class="service-footer"><view class="service-footer__text">页面住宅图片均为生成的演示素材。效果仅供方案沟通参考，尺寸、价格与施工方式以上门量尺为准。</view></view>
 </view>
