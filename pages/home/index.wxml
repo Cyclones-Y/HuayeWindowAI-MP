@@ -51,10 +51,10 @@
       <text class="section-link" bindtap="goSolutions">查看全部方案</text>
     </view>
     <view class="need-grid">
-      <view class="need-item pressable" bindtap="goSolutions"><view class="need-item__mark need-item__mark--air need-icon need-icon--air"><view></view><view></view><view></view></view><text class="need-item__name">通风舒适</text><text class="need-item__detail">闷热与空气流通</text></view>
-      <view class="need-item pressable" bindtap="goSolutions"><view class="need-item__mark need-item__mark--sound need-icon need-icon--sound"><view class="sound-core"></view><view class="sound-wave sound-wave--one"></view><view class="sound-wave sound-wave--two"></view></view><text class="need-item__name">隔音降噪</text><text class="need-item__detail">降低外界噪音</text></view>
-      <view class="need-item pressable" bindtap="goSolutions"><view class="need-item__mark need-item__mark--light need-icon need-icon--light"><view class="light-core"></view><view class="light-ray light-ray--h"></view><view class="light-ray light-ray--v"></view></view><text class="need-item__name">采光明亮</text><text class="need-item__detail">提升自然光线</text></view>
-      <view class="need-item pressable" bindtap="goSolutions"><view class="need-item__mark need-item__mark--safe need-icon need-icon--safe"><view class="safe-shield"><view class="safe-lock"></view></view></view><text class="need-item__name">安全安心</text><text class="need-item__detail">增强居家防护</text></view>
+      <view class="need-item pressable" bindtap="goSolutions"><image class="need-item__icon" src="/assets/icons/needs/airflow@3x.png" mode="aspectFit" /><text class="need-item__name">通风舒适</text><text class="need-item__detail">闷热与空气流通</text></view>
+      <view class="need-item pressable" bindtap="goSolutions"><image class="need-item__icon" src="/assets/icons/needs/soundproof@3x.png" mode="aspectFit" /><text class="need-item__name">隔音降噪</text><text class="need-item__detail">降低外界噪音</text></view>
+      <view class="need-item pressable" bindtap="goSolutions"><image class="need-item__icon" src="/assets/icons/needs/daylight@3x.png" mode="aspectFit" /><text class="need-item__name">采光明亮</text><text class="need-item__detail">提升自然光线</text></view>
+      <view class="need-item pressable" bindtap="goSolutions"><image class="need-item__icon" src="/assets/icons/needs/security@3x.png" mode="aspectFit" /><text class="need-item__name">安全安心</text><text class="need-item__detail">增强居家防护</text></view>
     </view>
   </view>
 

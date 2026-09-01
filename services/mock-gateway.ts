@@ -16,7 +16,6 @@ export class MockGateway implements FrontendGateway {
   }
 
   async listSolutions() {
-    await this.delay(320)
     return WINDOW_SOLUTIONS
   }
 

@@ -42,6 +42,10 @@ Page({
     this.getTabBar?.()?.setData({ selected: 0 })
   },
 
+  onHide() {
+    clearCompareIntroTimers()
+  },
+
   onUnload() {
     clearCompareIntroTimers()
   },

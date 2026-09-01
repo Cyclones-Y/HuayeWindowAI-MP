@@ -12,7 +12,8 @@
       "outputPath": ""
     },
     "useCompilerPlugins": ["typescript"],
-    "minifyWXML": true
+    "minifyWXML": true,
+    "minifyWXSS": true
   },
   "compileType": "miniprogram",
   "miniprogramRoot": "./",
@@ -26,7 +27,12 @@
       { "type": "folder", "value": "assets/cases" },
       { "type": "folder", "value": "assets/generated/prompts" },
       { "type": "file", "value": "PRODUCT.md" },
-      { "type": "file", "value": "DESIGN.md" }
+      { "type": "file", "value": "DESIGN.md" },
+      { "type": "file", "value": "menchuang-ai-preview-redesign.html" },
+      { "type": "file", "value": "README.md" },
+      { "type": "file", "value": "package.json" },
+      { "type": "file", "value": "package-lock.json" },
+      { "type": "file", "value": "tsconfig.json" }
     ],
     "include": []
   },

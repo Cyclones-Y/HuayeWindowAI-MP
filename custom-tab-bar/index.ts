@@ -1,6 +1,7 @@
 Component({
   data: {
     selected: 0,
+    switching: false,
     tabs: [
       {
         pagePath: '/pages/home/index',
@@ -26,8 +27,19 @@ Component({
   methods: {
     switchTab(event: WechatMiniprogram.TouchEvent) {
       const { index, path } = event.currentTarget.dataset as { index: number; path: string }
-      if (index === this.data.selected) return
-      wx.switchTab({ url: path })
+      if (index === this.data.selected || this.data.switching) return
+
+      const previousSelected = this.data.selected
+      this.setData({ selected: index, switching: true })
+      wx.switchTab({
+        url: path,
+        fail: () => {
+          this.setData({ selected: previousSelected })
+        },
+        complete: () => {
+          this.setData({ switching: false })
+        },
+      })
     },
   },
 })
