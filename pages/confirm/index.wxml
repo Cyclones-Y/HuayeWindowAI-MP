@@ -40,6 +40,6 @@
   </view>
 
   <view class="action-bar">
-    <button class="primary-button" bindtap="startGeneration">生成演示效果</button>
+    <button class="primary-button" bindtap="startGeneration">生成门窗预览</button>
   </view>
 </view>

@@ -1,6 +1,6 @@
 <view class="generating-page">
   <view class="generating-top">
-    <view class="generation-state"><text></text>{{status === 'FAILED' ? '任务已暂停' : '正在生成演示效果'}}</view>
+    <view class="generation-state"><text></text>{{status === 'FAILED' ? '任务已暂停' : '正在生成门窗预览'}}</view>
     <view class="generating-title">{{status === 'FAILED' ? '这次没有生成完成' : '正在准备门窗效果'}}</view>
     <view class="generating-subtitle">{{status === 'FAILED' ? errorMessage : '正在匹配所选窗型、颜色和玻璃配置。'}}</view>
   </view>

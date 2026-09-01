@@ -25,47 +25,33 @@
 }
 
 .solution-card--compact .solution-card__image {
-  height: 324rpx;
+  height: 252rpx;
 }
 
 .solution-card--compact {
-  border: 0;
-  border-radius: 26rpx;
-  background: #c9c6bb;
-  box-shadow: 0 16rpx 34rpx rgba(34, 50, 42, 0.14);
+  border: 1rpx solid rgba(48, 58, 51, 0.14);
+  border-radius: 16rpx;
+  background: #fffefa;
 }
 
 .solution-card__image--compact {
   display: block;
 }
 
-.solution-card__compact-shade {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  left: 0;
-  height: 150rpx;
-  background: linear-gradient(180deg, rgba(21, 33, 26, 0), rgba(21, 33, 26, 0.88));
-}
-
 .solution-card__compact-copy {
-  position: absolute;
-  right: 24rpx;
-  bottom: 22rpx;
-  left: 24rpx;
-  color: #ffffff;
+  padding: 22rpx 24rpx 24rpx;
+  color: #262c23;
 }
 
 .solution-card__name--compact {
-  font-size: 28rpx;
-  text-shadow: 0 3rpx 12rpx rgba(10, 16, 12, 0.32);
+  font-size: 27rpx;
 }
 
 .solution-card__subtitle--compact {
-  margin-top: 6rpx;
-  color: rgba(255, 255, 255, 0.78);
+  margin-top: 8rpx;
+  color: #666c65;
   font-size: 20rpx;
-  line-height: 1.4;
+  line-height: 1.5;
 }
 
 .solution-card__type,

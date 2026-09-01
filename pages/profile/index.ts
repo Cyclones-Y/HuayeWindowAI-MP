@@ -35,6 +35,10 @@ Page({
     wx.switchTab({ url: '/pages/home/index' })
   },
 
+  browseSolutions() {
+    wx.switchTab({ url: '/pages/solutions/index' })
+  },
+
   clearData() {
     wx.showModal({
       title: '清除演示数据',
