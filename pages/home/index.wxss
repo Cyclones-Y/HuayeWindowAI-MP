@@ -171,13 +171,14 @@
 .need-grid {
   display: flex;
   flex-wrap: wrap;
-  gap: 16rpx;
+  justify-content: space-between;
+  row-gap: 16rpx;
 }
 
 .need-item {
   display: flex;
   min-width: 0;
-  width: calc(50% - 8rpx);
+  width: 49%;
   min-height: 148rpx;
   align-items: center;
   gap: 16rpx;
