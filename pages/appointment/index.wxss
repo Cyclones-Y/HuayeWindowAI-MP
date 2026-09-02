@@ -1,48 +1,29 @@
 .appointment-notice {
-  margin-top: 36rpx;
-  padding: 26rpx;
-  border: 1rpx solid #cbd1ca;
-  border-radius: 24rpx;
-  background: #edf0eb;
-}
-
-.appointment-notice__title {
-  font-size: 26rpx;
-  font-weight: 650;
-}
-
-.appointment-notice__text {
-  margin-top: 8rpx;
-  color: #5f6861;
-  font-size: 23rpx;
-  line-height: 1.6;
+  margin-top: 32rpx;
 }
 
 .appointment-form {
-  margin-top: 44rpx;
-}
-
-.form-picker--placeholder {
-  color: #858a83;
+  margin-top: 40rpx;
 }
 
 .submit-button {
   width: 100%;
-  margin-top: 12rpx;
+  margin-top: 8rpx;
 }
 
 .privacy-copy {
   margin-top: 20rpx;
-  color: #565d56;
-  font-size: 21rpx;
+  color: var(--ink-2);
+  font-size: 22rpx;
   line-height: 1.55;
   text-align: center;
 }
 
+/* 成功页 */
 .appointment-success {
   min-height: 100vh;
   padding: 140rpx 48rpx calc(72rpx + env(safe-area-inset-bottom));
-  background: #f8f5f0;
+  background: var(--paper-ground);
 }
 
 .appointment-success__mark {
@@ -52,34 +33,32 @@
   align-items: center;
   justify-content: center;
   border-radius: 32rpx;
-  background: #244233;
-  color: #ffffff;
+  background: var(--green);
 }
 
-.success-check {
-  width: 40rpx;
-  height: 22rpx;
-  border-bottom: 5rpx solid #ffffff;
-  border-left: 5rpx solid #ffffff;
-  transform: rotate(-45deg) translate(2rpx, -3rpx);
+.appointment-success__mark .ic {
+  width: 56rpx;
+  height: 56rpx;
 }
 
 .appointment-success__title {
   margin-top: 40rpx;
-  font-size: 46rpx;
+  font-size: 50rpx;
   font-weight: 700;
+  line-height: 1.2;
 }
 
 .appointment-success__text {
-  margin-top: 18rpx;
-  color: #626861;
-  font-size: 25rpx;
+  max-width: 600rpx;
+  margin-top: 16rpx;
+  color: var(--ink-2);
+  font-size: 26rpx;
   line-height: 1.65;
 }
 
 .appointment-success button {
   width: 100%;
-  margin-top: 42rpx;
+  margin-top: 40rpx;
 }
 
 .appointment-success .secondary-button {

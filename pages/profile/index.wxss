@@ -1,111 +1,19 @@
-.profile-page {
-  padding-top: 30rpx;
-  background: #f8f5f0;
-}
-
 .profile-intro {
-  padding: 2rpx 0 30rpx;
+  padding-bottom: 32rpx;
 }
 
-.profile-title {
-  font-family: "Songti SC", STSong, serif;
-  color: #222820;
-  font-size: 46rpx;
-  font-weight: 760;
-  line-height: 1.25;
+.profile-intro .page-title {
+  margin-top: 0;
 }
 
-.profile-subtitle {
-  max-width: 620rpx;
-  margin-top: 12rpx;
-  color: #626861;
-  font-size: 23rpx;
-  line-height: 1.55;
-}
-
-.local-mode {
-  display: flex;
-  min-height: 124rpx;
-  align-items: center;
-  gap: 20rpx;
-  padding: 20rpx 0;
-  border-top: 1rpx solid #d8d5ce;
-  border-bottom: 1rpx solid #d8d5ce;
-}
-
-.local-mode__icon {
-  position: relative;
-  width: 66rpx;
-  height: 66rpx;
-  flex: none;
-  border-radius: 20rpx;
-  background: #e2e8e2;
-  color: #31503f;
-}
-
-.local-mode__icon::before {
-  position: absolute;
-  top: 17rpx;
-  left: 21rpx;
-  width: 22rpx;
-  height: 18rpx;
-  border: 3rpx solid currentColor;
-  border-bottom: 0;
-  border-radius: 13rpx 13rpx 0 0;
-  box-sizing: border-box;
-  content: "";
-}
-
-.local-mode__icon view {
-  position: absolute;
-  top: 32rpx;
-  left: 17rpx;
-  width: 32rpx;
-  height: 24rpx;
-  border: 3rpx solid currentColor;
-  border-radius: 8rpx;
-  box-sizing: border-box;
-}
-
-.local-mode__copy {
-  min-width: 0;
-  flex: 1;
-}
-
-.local-mode__title {
-  color: #293129;
-  font-size: 25rpx;
-  font-weight: 700;
-  line-height: 1.35;
-}
-
-.local-mode__detail {
-  margin-top: 7rpx;
-  color: #666c65;
-  font-size: 20rpx;
-  line-height: 1.45;
-}
-
-.local-mode__label {
-  display: flex;
-  min-height: 46rpx;
-  align-items: center;
-  padding: 0 14rpx;
-  flex: none;
-  border-radius: 14rpx;
-  background: #e8e5dc;
-  color: #5d655e;
-  font-size: 19rpx;
-  font-weight: 650;
-}
-
+/* 分段概览：纸面、字重与颜色共同表达选中态 */
 .profile-overview {
   display: flex;
   gap: 8rpx;
-  margin-top: 34rpx;
+  margin-top: 0;
   padding: 8rpx;
   border-radius: 24rpx;
-  background: #e8e5dc;
+  background: var(--paper-tint);
 }
 
 .profile-overview__item {
@@ -117,193 +25,114 @@
   flex: 1;
   flex-direction: column;
   border-radius: 18rpx;
-  color: #636963;
-  transition: transform 160ms ease, background-color 160ms ease, color 160ms ease;
+  color: var(--ink-2);
+  transition: transform 160ms var(--ease-out), background-color 160ms ease, color 160ms ease;
 }
 
 .profile-overview__item--active {
-  background: #fffefa;
-  color: #244233;
+  background: var(--paper-surface);
+  color: var(--green);
   box-shadow: 0 6rpx 18rpx rgba(38, 44, 35, 0.08);
 }
 
 .profile-overview__count {
   font-size: 34rpx;
-  font-weight: 760;
+  font-weight: 700;
   font-variant-numeric: tabular-nums;
   line-height: 1;
 }
 
 .profile-overview__label {
   margin-top: 12rpx;
-  font-size: 20rpx;
-  font-weight: 650;
+  font-size: 22rpx;
+  font-weight: 600;
   line-height: 1.3;
 }
 
 .profile-content {
   min-height: 480rpx;
-  padding-top: 54rpx;
+  padding-top: 48rpx;
 }
 
 .profile-section-heading {
-  padding-bottom: 22rpx;
-  border-bottom: 1rpx solid #d8d5ce;
+  padding-bottom: 20rpx;
+  border-bottom: 1px solid var(--line);
 }
 
 .profile-section-heading__title {
-  color: #262c23;
-  font-size: 31rpx;
+  font-size: 28rpx;
   font-weight: 700;
-  line-height: 1.35;
+  line-height: 1.4;
 }
 
 .profile-section-heading__detail {
-  margin-top: 8rpx;
-  color: #676d66;
-  font-size: 21rpx;
+  margin-top: 6rpx;
+  color: var(--ink-2);
+  font-size: 22rpx;
   line-height: 1.5;
 }
 
+/* 空状态：图标、标题、说明与下一步入口 */
 .profile-empty {
   display: flex;
   min-height: 386rpx;
   align-items: center;
   justify-content: center;
   flex-direction: column;
-  padding: 48rpx 44rpx 38rpx;
+  padding: 48rpx 44rpx 40rpx;
   text-align: center;
 }
 
-.profile-empty__visual {
-  position: relative;
-  width: 82rpx;
-  height: 82rpx;
-  margin-bottom: 26rpx;
-  color: #496353;
+.profile-empty .ic {
+  margin-bottom: 24rpx;
 }
-
-.profile-empty__visual--history {
-  border: 3rpx solid currentColor;
-  border-radius: 14rpx;
-  box-sizing: border-box;
-}
-
-.profile-empty__visual--history::before {
-  position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 50%;
-  width: 3rpx;
-  background: currentColor;
-  content: "";
-}
-
-.profile-empty__visual--history view {
-  position: absolute;
-  top: 35rpx;
-  left: 22rpx;
-  width: 32rpx;
-  height: 12rpx;
-  border-top: 3rpx solid currentColor;
-  border-right: 3rpx solid currentColor;
-  transform: rotate(45deg);
-}
-
-.profile-empty__visual--favorite {
-  width: 64rpx;
-  height: 76rpx;
-  border: 3rpx solid currentColor;
-  border-bottom: 0;
-  border-radius: 12rpx 12rpx 0 0;
-  box-sizing: border-box;
-}
-
-.profile-empty__visual--favorite::before,
-.profile-empty__visual--favorite::after {
-  position: absolute;
-  bottom: -11rpx;
-  width: 39rpx;
-  height: 3rpx;
-  background: currentColor;
-  content: "";
-}
-
-.profile-empty__visual--favorite::before { left: -5rpx; transform: rotate(33deg); }
-.profile-empty__visual--favorite::after { right: -5rpx; transform: rotate(-33deg); }
-
-.profile-empty__visual--appointment {
-  border: 3rpx solid currentColor;
-  border-radius: 14rpx;
-  box-sizing: border-box;
-}
-
-.profile-empty__visual--appointment::before {
-  position: absolute;
-  top: 18rpx;
-  right: 0;
-  left: 0;
-  height: 3rpx;
-  background: currentColor;
-  box-shadow: 0 14rpx 0 rgba(73, 99, 83, 0.28), 0 28rpx 0 rgba(73, 99, 83, 0.28);
-  content: "";
-}
-
-.profile-empty__visual--appointment view::before,
-.profile-empty__visual--appointment view::after {
-  position: absolute;
-  top: -9rpx;
-  width: 3rpx;
-  height: 18rpx;
-  border-radius: 2rpx;
-  background: currentColor;
-  content: "";
-}
-
-.profile-empty__visual--appointment view::before { left: 20rpx; }
-.profile-empty__visual--appointment view::after { right: 20rpx; }
 
 .profile-empty__title {
-  color: #293029;
   font-size: 28rpx;
   font-weight: 700;
-  line-height: 1.35;
+  line-height: 1.4;
 }
 
 .profile-empty__text {
   max-width: 520rpx;
   margin-top: 10rpx;
-  color: #676d66;
-  font-size: 22rpx;
-  line-height: 1.55;
+  color: var(--ink-2);
+  font-size: 24rpx;
+  line-height: 1.6;
 }
 
 .profile-empty__action {
-  width: 310rpx;
-  min-height: 92rpx;
-  margin-top: 30rpx;
-  font-size: 25rpx;
+  width: 320rpx;
+  min-width: 320rpx;
+  max-width: 320rpx;
+  min-height: 96rpx;
+  margin-top: 32rpx;
+  font-size: 26rpx;
 }
 
+/* 记录列表 */
 .record-list {
-  border-bottom: 1rpx solid #dedbd4;
+  border-bottom: 1px solid var(--line);
 }
 
 .record-row {
   display: flex;
   gap: 24rpx;
-  padding: 26rpx 0;
-  border-bottom: 1rpx solid #dedbd4;
+  padding: 24rpx 0;
+  border-bottom: 1px solid var(--line-soft);
 }
 
-.record-row:last-child { border-bottom: 0; }
+.record-row:last-child,
+.appointment-row:last-child {
+  border-bottom: 0;
+}
 
 .record-row__image {
   width: 176rpx;
   height: 126rpx;
   flex: none;
   border-radius: 16rpx;
-  background: #e4e4dc;
+  background: var(--paper-tint);
 }
 
 .record-row__copy {
@@ -315,8 +144,7 @@
 }
 
 .record-row__title {
-  color: #293029;
-  font-size: 27rpx;
+  font-size: 28rpx;
   font-weight: 700;
   line-height: 1.4;
 }
@@ -325,9 +153,9 @@
   display: flex;
   align-items: center;
   gap: 10rpx;
-  margin-top: 10rpx;
-  color: #676d66;
-  font-size: 21rpx;
+  margin-top: 8rpx;
+  color: var(--ink-2);
+  font-size: 22rpx;
   line-height: 1.5;
 }
 
@@ -336,15 +164,13 @@
   height: 10rpx;
   flex: none;
   border-radius: 50%;
-  background: #62806c;
+  background: var(--green-2);
 }
 
 .appointment-row {
-  padding: 30rpx 0;
-  border-bottom: 1rpx solid #dedbd4;
+  padding: 28rpx 0;
+  border-bottom: 1px solid var(--line-soft);
 }
-
-.appointment-row:last-child { border-bottom: 0; }
 
 .appointment-row__top {
   display: flex;
@@ -355,66 +181,44 @@
 
 .appointment-row__status {
   flex: none;
-  color: #244233;
-  font-size: 21rpx;
-  font-weight: 700;
+  color: var(--green);
+  font-size: 22rpx;
+  font-weight: 600;
 }
 
+/* 隐私与数据管理 */
 .privacy-section {
-  margin-top: 54rpx;
-  padding: 34rpx 30rpx 30rpx;
-  border: 1rpx solid #d8d5ce;
+  margin-top: 48rpx;
+  padding: 32rpx 28rpx 24rpx;
+  border: 1px solid var(--line);
   border-radius: 16rpx;
-  background: #fffefa;
+  background: var(--paper-surface);
 }
 
 .privacy-section__top {
   display: flex;
   align-items: flex-start;
-  gap: 22rpx;
-}
-
-.privacy-section__icon {
-  position: relative;
-  width: 52rpx;
-  height: 60rpx;
-  flex: none;
-  border: 3rpx solid #496353;
-  border-radius: 12rpx 12rpx 18rpx 18rpx;
-  box-sizing: border-box;
-}
-
-.privacy-section__icon::before {
-  position: absolute;
-  top: 20rpx;
-  left: 18rpx;
-  width: 10rpx;
-  height: 14rpx;
-  border-right: 3rpx solid #496353;
-  border-bottom: 3rpx solid #496353;
-  content: "";
-  transform: rotate(45deg);
+  gap: 20rpx;
 }
 
 .privacy-section__title {
-  color: #293029;
-  font-size: 27rpx;
+  font-size: 26rpx;
   font-weight: 700;
   line-height: 1.4;
 }
 
 .privacy-section__text {
-  margin-top: 8rpx;
-  color: #666c65;
-  font-size: 21rpx;
+  margin-top: 6rpx;
+  color: var(--ink-2);
+  font-size: 22rpx;
   line-height: 1.55;
 }
 
 .privacy-section__facts {
   margin-top: 24rpx;
-  padding: 18rpx 0;
-  border-top: 1rpx solid #e2dfd8;
-  border-bottom: 1rpx solid #e2dfd8;
+  padding: 16rpx 0;
+  border-top: 1px solid var(--line-soft);
+  border-bottom: 1px solid var(--line-soft);
 }
 
 .privacy-section__facts view {
@@ -422,8 +226,8 @@
   min-height: 48rpx;
   align-items: center;
   gap: 14rpx;
-  color: #596159;
-  font-size: 21rpx;
+  color: var(--ink-2);
+  font-size: 22rpx;
 }
 
 .privacy-section__facts text {
@@ -431,22 +235,25 @@
   height: 10rpx;
   flex: none;
   border-radius: 50%;
-  background: #6f8976;
+  background: var(--green-2);
 }
 
 .privacy-button {
   display: flex;
   width: 100%;
+  min-width: 100%;
   min-height: 88rpx;
   align-items: center;
   justify-content: flex-start;
-  margin-top: 10rpx;
+  margin-top: 8rpx;
   padding: 0;
   background: transparent;
-  color: #934139;
-  font-size: 23rpx;
-  font-weight: 650;
+  color: var(--error);
+  font-size: 24rpx;
+  font-weight: 600;
   transition: opacity 160ms ease;
 }
 
-.privacy-button--pressed { opacity: 0.55; }
+.privacy-button--pressed {
+  opacity: 0.55;
+}

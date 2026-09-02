@@ -20,6 +20,20 @@ Page({
     comparePosition: COMPARE_INITIAL_POSITION,
     compareAnimating: false,
     compareDragging: false,
+    labelTop: 96,
+  },
+
+  onLoad() {
+    // 首页使用自定义导航，对比标签需要避开状态栏与右上角胶囊按钮。
+    const { statusBarHeight } = wx.getWindowInfo()
+    let labelTop = statusBarHeight + 52
+    try {
+      const menu = wx.getMenuButtonBoundingClientRect()
+      if (menu && menu.bottom > 0) labelTop = menu.bottom + 12
+    } catch {
+      // 部分环境不支持胶囊测量，保留状态栏估算值。
+    }
+    this.setData({ labelTop })
   },
 
   onReady() {
@@ -38,7 +52,7 @@ Page({
   },
 
   onShow() {
-    wx.setNavigationBarColor({ frontColor: '#000000', backgroundColor: '#F3F2EE' })
+    wx.setNavigationBarColor({ frontColor: '#000000', backgroundColor: '#F8F5F0' })
     this.getTabBar?.()?.setData({ selected: 0 })
   },
 
@@ -84,8 +98,8 @@ Page({
     updateDraft({
       photo: {
         localPath: WINDOW_SOLUTIONS[0].beforeImage,
-        width: 720,
-        height: 900,
+        width: 810,
+        height: 1215,
         size: 0,
         isSample: true,
       },

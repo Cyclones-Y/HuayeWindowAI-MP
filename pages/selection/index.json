@@ -1,3 +1,6 @@
 {
-  "navigationBarTitleText": "框选门窗"
+  "navigationBarTitleText": "框选门窗",
+  "navigationBarBackgroundColor": "#1F2521",
+  "navigationBarTextStyle": "white",
+  "backgroundColor": "#1F2521"
 }

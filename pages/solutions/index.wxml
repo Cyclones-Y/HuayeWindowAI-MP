@@ -4,24 +4,24 @@
       <view class="page-context">可施工门窗方案</view>
       <view class="page-title"><text>选一套适合</text><text>你家的窗</text></view>
     </view>
-    <view class="solutions-count"><text>{{filteredSolutions.length}}</text>套可选</view>
+    <view class="solutions-count"><text class="solutions-count__number">{{filteredSolutions.length}}</text><text>套可选</text></view>
   </view>
   <view class="page-subtitle">每套方案都基于实际产品配置，尺寸与价格以上门量尺为准。</view>
 
   <view class="filter-block">
     <view class="filter-label"><text>使用空间</text><text class="filter-label__hint">先选安装位置</text></view>
-    <scroll-view scroll-x enhanced show-scrollbar="{{false}}">
-      <view class="filter-row">
-        <view wx:for="{{roomFilters}}" wx:key="value" wx:for-item="filter" class="filter-chip pressable {{activeRoom === filter.value ? 'filter-chip--active' : ''}}" data-value="{{filter.value}}" bindtap="selectRoom">{{filter.label}}</view>
+    <scroll-view class="filter-scroll" scroll-x enhanced show-scrollbar="{{false}}">
+      <view class="chip-row">
+        <view wx:for="{{roomFilters}}" wx:key="value" wx:for-item="filter" class="chip pressable {{activeRoom === filter.value ? 'chip--active' : ''}}" data-value="{{filter.value}}" bindtap="selectRoom">{{filter.label}}</view>
       </view>
     </scroll-view>
   </view>
 
   <view class="filter-block filter-block--compact">
     <view class="filter-label"><text>主要需求</text><text class="filter-label__hint">可组合筛选</text></view>
-    <scroll-view scroll-x enhanced show-scrollbar="{{false}}">
-      <view class="filter-row">
-        <view wx:for="{{needFilters}}" wx:key="value" wx:for-item="filter" class="filter-chip pressable {{activeNeed === filter.value ? 'filter-chip--active' : ''}}" data-value="{{filter.value}}" bindtap="selectNeed">{{filter.label}}</view>
+    <scroll-view class="filter-scroll" scroll-x enhanced show-scrollbar="{{false}}">
+      <view class="chip-row">
+        <view wx:for="{{needFilters}}" wx:key="value" wx:for-item="filter" class="chip pressable {{activeNeed === filter.value ? 'chip--active' : ''}}" data-value="{{filter.value}}" bindtap="selectNeed">{{filter.label}}</view>
       </view>
     </scroll-view>
   </view>
@@ -34,7 +34,7 @@
   <view wx:elif="{{errorText}}" class="empty-state">
     <view class="empty-state__title">暂时无法加载</view>
     <view class="empty-state__text">{{errorText}}</view>
-    <button class="secondary-button retry-button" bindtap="loadSolutions">重新加载</button>
+    <button class="secondary-button retry-button" hover-class="button-hover" bindtap="loadSolutions">重新加载</button>
   </view>
 
   <view wx:elif="{{filteredSolutions.length === 0}}" class="empty-state">

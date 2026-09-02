@@ -5,8 +5,8 @@
       <image class="hero__before-image" src="/assets/generated/home-hero-before.jpg" mode="aspectFill" />
     </view>
 
-    <view class="compare-label compare-label--before">改造前</view>
-    <view class="compare-label compare-label--after">改造后</view>
+    <view class="compare-label compare-label--before" style="top: {{labelTop}}px;">改造前</view>
+    <view class="compare-label compare-label--after" style="top: {{labelTop}}px;">改造后</view>
 
     <view class="compare-divider" style="left: {{comparePosition}}%;">
       <view
@@ -28,36 +28,46 @@
   </view>
 
   <view class="hero-intro">
-    <view class="hero-intro__title">换窗前，先看装进家里的样子</view>
-    <view class="hero-intro__subtitle"><text class="hero-intro__line"></text><text>上传现场照片，选择可施工方案，查看改造前后效果</text></view>
+    <view class="hero-intro__title t-display"><text>换窗前，</text><text>先看装进家里的样子</text></view>
+    <view class="hero-intro__subtitle"><text class="hero-intro__line"></text><text>上传现场照片，选择可施工方案，拖动查看改造前后</text></view>
   </view>
 
   <view class="action-zone">
-    <button class="primary-action" hover-class="button-hover" bindtap="goUpload">
-      <view class="primary-action__label"><view class="primary-action__photo-icon"><view></view></view><text>用我家照片预览</text></view>
+    <button class="primary-button primary-action" hover-class="button-hover" bindtap="goUpload">
+      <view class="ic ic--camera ic--white"></view>
+      <text>用我家照片预览</text>
     </button>
-    <view class="action-zone__hint">支持拍摄或相册选择 · 当前为演示体验</view>
-    <button class="sample-link" hover-class="sample-link--pressed" bindtap="trySample"><text>先用示例照片体验</text><text class="sample-link__arrow"></text></button>
+    <view class="action-zone__hint">支持现场拍摄或从相册选择</view>
+    <button class="text-button sample-link" hover-class="text-button--pressed" bindtap="trySample"><text>先用示例照片试试</text><text class="sample-link__arrow"></text></button>
   </view>
 
-  <view class="process-band">
-    <view class="process-band__heading">
-      <view class="process-band__title">三步完成门窗预览</view>
-      <view class="process-band__description">从现场照片开始，每一步都看得懂</view>
+  <view class="process-strip">
+    <view class="process-item">
+      <text class="process-item__index">01</text>
+      <view class="process-item__title">上传照片</view>
+      <view class="process-item__detail">拍摄或相册</view>
     </view>
-    <view class="process-list">
-      <view class="process-item"><text class="process-item__index">01</text><view><view class="process-item__title">上传照片</view><view class="process-item__detail">拍摄或从相册选择</view></view></view>
-      <view class="process-connector"></view>
-      <view class="process-item"><text class="process-item__index">02</text><view><view class="process-item__title">选择方案</view><view class="process-item__detail">框选门窗并选配置</view></view></view>
-      <view class="process-connector"></view>
-      <view class="process-item"><text class="process-item__index">03</text><view><view class="process-item__title">查看效果</view><view class="process-item__detail">拖动对比改造前后</view></view></view>
+    <view class="process-item">
+      <text class="process-item__index">02</text>
+      <view class="process-item__title">框选门窗</view>
+      <view class="process-item__detail">只改框内</view>
+    </view>
+    <view class="process-item">
+      <text class="process-item__index">03</text>
+      <view class="process-item__title">选择方案</view>
+      <view class="process-item__detail">颜色与玻璃</view>
+    </view>
+    <view class="process-item">
+      <text class="process-item__index">04</text>
+      <view class="process-item__title">对比效果</view>
+      <view class="process-item__detail">满意再约量尺</view>
     </view>
   </view>
 
   <view class="home-section home-section--needs">
     <view class="section-heading">
-      <view class="section-heading__title">你最想改善什么？</view>
-      <text class="section-link" bindtap="goSolutions">查看全部方案</text>
+      <view class="section-heading__title t-serif">你最想改善什么？</view>
+      <view class="section-link" bindtap="goSolutions">全部方案</view>
     </view>
     <view class="need-grid">
       <view class="need-item pressable" bindtap="goSolutions"><image class="need-item__icon" src="/assets/icons/needs/airflow@3x.png" mode="aspectFit" /><view class="need-item__copy"><text class="need-item__name">通风舒适</text><text class="need-item__detail">改善闷热与空气流通</text></view></view>
@@ -69,8 +79,11 @@
 
   <view class="home-section home-section--solutions">
     <view class="section-heading section-heading--solutions">
-      <view><view class="section-heading__title">适合这些换窗场景</view><view class="section-heading__description">从生活问题出发，找到更容易沟通的方案</view></view>
-      <text class="section-link" bindtap="goSolutions">查看全部</text>
+      <view>
+        <view class="section-heading__title t-serif">适合这些换窗场景</view>
+        <view class="section-heading__description">从生活问题出发，找到更容易沟通的方案</view>
+      </view>
+      <view class="section-link" bindtap="goSolutions">查看全部</view>
     </view>
     <scroll-view class="solution-scroll" scroll-x enhanced show-scrollbar="{{false}}">
       <view class="solution-scroll__track">
@@ -80,26 +93,17 @@
   </view>
 
   <view class="home-section home-section--proof">
-    <view class="section-heading section-heading--proof">
-      <view><view class="section-heading__title">为什么不是随便生成</view><view class="section-heading__description">效果预览始终围绕真实门窗方案展开</view></view>
+    <view class="section-heading">
+      <view>
+        <view class="section-heading__title t-serif">为什么不是随便生成</view>
+        <view class="section-heading__description">效果预览始终围绕真实门窗方案展开</view>
+      </view>
     </view>
     <view class="proof-list">
       <view class="proof-item"><view class="proof-item__title">方案来自产品库</view><view class="proof-item__detail">只展示已有门窗方案和可沟通的配置，不生成无法施工的造型。</view></view>
       <view class="proof-item"><view class="proof-item__title">围绕原空间预览</view><view class="proof-item__detail">以你上传的现场照片为起点，重点查看门窗区域的变化。</view></view>
       <view class="proof-item"><view class="proof-item__title">最终仍需现场确认</view><view class="proof-item__detail">尺寸、价格和施工方式，以上门量尺后的确认结果为准。</view></view>
     </view>
+    <view class="service-footer">效果图仅供方案沟通参考，尺寸、价格与施工方式以上门量尺为准。</view>
   </view>
-
-  <view class="home-section home-section--next">
-    <view class="section-heading section-heading--next">
-      <view><view class="section-heading__title">看完效果，下一步更清楚</view><view class="section-heading__description">预览不是终点，而是确认方向的开始</view></view>
-    </view>
-    <view class="next-list">
-      <view class="next-item"><view class="next-item__mark next-item__mark--compare"></view><view><view class="next-item__title">前后对比</view><view class="next-item__detail">拖动查看改造前后的门窗变化</view></view></view>
-      <view class="next-item"><view class="next-item__mark next-item__mark--save"></view><view><view class="next-item__title">收藏或重选</view><view class="next-item__detail">保留合适方案，也可以继续比较</view></view></view>
-      <view class="next-item"><view class="next-item__mark next-item__mark--measure"></view><view><view class="next-item__title">预约量尺</view><view class="next-item__detail">由专业人员现场确认尺寸与配置</view></view></view>
-    </view>
-  </view>
-
-  <view class="service-footer"><view class="service-footer__text">页面住宅图片均为生成的演示素材。效果仅供方案沟通参考，尺寸、价格与施工方式以上门量尺为准。</view></view>
 </view>

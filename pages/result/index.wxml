@@ -1,36 +1,34 @@
 <view class="result-page">
   <view class="result-head">
-    <view class="result-state"><text></text>效果已生成</view>
+    <view class="status-line"><text class="status-line__dot"></text><text>效果已生成</text></view>
     <view class="result-title">左右拖动，查看变化</view>
-    <view class="result-subtitle">当前展示同方案预制案例，并非对上传照片的真实 AI 结果。</view>
+    <view class="result-subtitle">拖动分隔线对比改造前后，重点看门窗区域的变化。</view>
   </view>
 
   <view class="compare-stage" catchtouchstart="onCompareTouch" catchtouchmove="onCompareTouch">
-    <image class="compare-image compare-image--after" src="{{result.afterImage}}" mode="aspectFill" />
+    <image class="compare-image" src="{{result.afterImage}}" mode="aspectFill" />
     <view class="compare-before" style="width: {{comparePercent}}%;">
-      <image class="compare-image compare-image--before" style="width: {{stageWidth}}px;" src="{{result.beforeImage}}" mode="aspectFill" />
+      <image class="compare-image" style="width: {{stageWidth}}px;" src="{{result.beforeImage}}" mode="aspectFill" />
     </view>
     <view class="compare-label compare-label--before">改造前</view>
     <view class="compare-label compare-label--after">改造后</view>
-    <view class="compare-handle" style="left: {{comparePercent}}%;">
-      <view class="compare-handle__line"></view>
-      <view class="compare-handle__knob"><view class="compare-chevron compare-chevron--left"></view><view class="compare-chevron compare-chevron--right"></view></view>
+    <view class="compare-divider" style="left: {{comparePercent}}%;">
+      <view class="compare-handle">
+        <view class="compare-handle__arrow compare-handle__arrow--left"></view>
+        <view class="compare-handle__arrow compare-handle__arrow--right"></view>
+      </view>
     </view>
   </view>
 
   <view class="result-actions">
-    <button class="result-action pressable" bindtap="toggleFavorite">{{favorite ? '已收藏' : '收藏方案'}}</button>
-    <button class="result-action pressable" open-type="share">分享体验</button>
-    <button class="result-action pressable" bindtap="regenerate">换个方案</button>
+    <button class="result-action pressable {{favorite ? 'result-action--active' : ''}}" bindtap="toggleFavorite"><view class="ic ic--sm {{favorite ? 'ic--bookmark-filled' : 'ic--bookmark'}}"></view><text>{{favorite ? '已收藏' : '收藏方案'}}</text></button>
+    <button class="result-action pressable" open-type="share"><view class="ic ic--sm ic--share"></view><text>分享效果</text></button>
+    <button class="result-action pressable" bindtap="regenerate"><view class="ic ic--sm ic--refresh"></view><text>换个方案</text></button>
   </view>
 
   <view class="result-detail">
-    <view class="section-heading">
-      <view>
-        <view class="page-context">所选方案</view>
-        <view class="section-heading__title">{{solution.name}}</view>
-      </view>
-    </view>
+    <view class="page-context">所选方案</view>
+    <view class="result-detail__name">{{solution.name}}</view>
     <view class="result-detail__subtitle">{{solution.subtitle}}</view>
     <view class="result-detail__features">
       <view wx:for="{{solution.features}}" wx:key="*this" wx:for-item="feature" class="result-feature"><text class="result-feature__mark"></text>{{feature}}</view>
@@ -38,10 +36,15 @@
     <view class="result-price"><text>报价说明</text><text>{{solution.priceHint}}</text></view>
   </view>
 
-  <view class="result-notice">AI 效果仅供参考，实际以现场量尺、选材和施工结果为准。</view>
+  <view class="notice result-notice">
+    <view class="notice__text">效果图仅供参考，实际以现场量尺、选材和施工结果为准。</view>
+  </view>
 
   <view class="result-booking">
-    <view><view class="result-booking__title">这个方向合适吗？</view><view class="result-booking__text">预约后由专业人员上门量尺确认。</view></view>
-    <button class="primary-button" bindtap="bookMeasure">预约量尺</button>
+    <view class="result-booking__copy">
+      <view class="result-booking__title">这个方向合适吗？</view>
+      <view class="result-booking__text">预约后由专业人员上门量尺，确认尺寸与配置。</view>
+    </view>
+    <button class="primary-button result-booking__button" hover-class="button-hover" bindtap="bookMeasure"><view class="ic ic--sm ic--ruler"></view><text>预约量尺</text></button>
   </view>
 </view>

@@ -1,16 +1,7 @@
 <view class="page-shell tab-page profile-page">
   <view class="profile-intro">
-    <view class="profile-title">我的方案</view>
-    <view class="profile-subtitle">预览记录、收藏方案和量尺预约，都整理在这里。</view>
-  </view>
-
-  <view class="local-mode">
-    <view class="local-mode__icon"><view></view></view>
-    <view class="local-mode__copy">
-      <view class="local-mode__title">当前为本地体验模式</view>
-      <view class="local-mode__detail">记录只保存在当前设备，住宅照片不会上传。</view>
-    </view>
-    <text class="local-mode__label">仅本机</text>
+    <view class="page-title">我的方案</view>
+    <view class="page-subtitle">预览记录、收藏方案和量尺预约，都整理在这里。</view>
   </view>
 
   <view class="profile-overview" aria-role="tablist" aria-label="我的方案记录">
@@ -34,7 +25,7 @@
       <view class="profile-section-heading__detail">完成的门窗预览会保存在当前设备</view>
     </view>
     <view wx:if="{{history.length === 0}}" class="profile-empty">
-      <view class="profile-empty__visual profile-empty__visual--history"><view></view></view>
+      <view class="ic ic--lg ic--compare"></view>
       <view class="profile-empty__title">还没有效果记录</view>
       <view class="profile-empty__text">从一张现场照片开始，看看门窗改造前后的变化。</view>
       <button class="primary-button profile-empty__action" hover-class="button-hover" bindtap="startExperience">开始一次预览</button>
@@ -44,7 +35,7 @@
         <image class="record-row__image" src="{{item.thumbnail}}" mode="aspectFill" />
         <view class="record-row__copy">
           <view class="record-row__title">{{item.solutionName}}</view>
-          <view class="record-row__meta"><text class="record-row__dot"></text><text>演示效果已完成</text></view>
+          <view class="record-row__meta"><text class="record-row__dot"></text><text>效果已生成</text></view>
         </view>
       </view>
     </view>
@@ -56,7 +47,7 @@
       <view class="profile-section-heading__detail">把想继续比较的门窗方案留在这里</view>
     </view>
     <view wx:if="{{favorites.length === 0}}" class="profile-empty">
-      <view class="profile-empty__visual profile-empty__visual--favorite"><view></view></view>
+      <view class="ic ic--lg ic--bookmark"></view>
       <view class="profile-empty__title">还没有收藏方案</view>
       <view class="profile-empty__text">浏览可施工方案，收藏后方便量尺时继续沟通。</view>
       <button class="secondary-button profile-empty__action" hover-class="button-hover" bindtap="browseSolutions">浏览门窗方案</button>
@@ -78,10 +69,10 @@
       <view class="profile-section-heading__detail">提交过的上门量尺需求会显示在这里</view>
     </view>
     <view wx:if="{{leads.length === 0}}" class="profile-empty">
-      <view class="profile-empty__visual profile-empty__visual--appointment"><view></view></view>
+      <view class="ic ic--lg ic--calendar"></view>
       <view class="profile-empty__title">还没有预约记录</view>
       <view class="profile-empty__text">先看门窗效果，方向满意后再预约上门量尺。</view>
-      <button class="secondary-button profile-empty__action" hover-class="button-hover" bindtap="startExperience">先去体验效果</button>
+      <button class="secondary-button profile-empty__action" hover-class="button-hover" bindtap="startExperience">先去看看效果</button>
     </view>
     <view wx:else class="record-list">
       <view wx:for="{{leads}}" wx:key="id" wx:for-item="item" class="appointment-row">
@@ -93,16 +84,16 @@
 
   <view class="privacy-section">
     <view class="privacy-section__top">
-      <view class="privacy-section__icon"><view></view></view>
+      <view class="ic ic--shield"></view>
       <view>
-        <view class="privacy-section__title">数据保存在当前设备</view>
-        <view class="privacy-section__text">演示历史、收藏和预约记录不会在其他设备同步。</view>
+        <view class="privacy-section__title">隐私与数据管理</view>
+        <view class="privacy-section__text">照片仅用于生成门窗效果图，预约信息仅用于联系确认上门时间。</view>
       </view>
     </view>
     <view class="privacy-section__facts">
-      <view><text></text>住宅照片不上传</view>
-      <view><text></text>可随时清除演示记录</view>
+      <view><text></text>效果记录与收藏可随时清除</view>
+      <view><text></text>清除后无法恢复</view>
     </view>
-    <button class="privacy-button" hover-class="privacy-button--pressed" bindtap="clearData">清除本机演示数据</button>
+    <button class="privacy-button" hover-class="privacy-button--pressed" bindtap="clearData">清除全部记录</button>
   </view>
 </view>

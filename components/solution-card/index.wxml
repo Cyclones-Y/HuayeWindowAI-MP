@@ -9,8 +9,7 @@
   <block wx:else>
     <view class="solution-card__media">
       <image class="solution-card__image" src="{{solution.thumbnail}}" mode="aspectFill" />
-      <view class="solution-card__type">演示方案</view>
-      <view wx:if="{{selected}}" class="solution-card__check">已选择</view>
+      <view wx:if="{{selected}}" class="solution-card__check"><view class="ic ic--sm ic--check ic--white"></view><text>已选择</text></view>
     </view>
     <view class="solution-card__body">
       <view class="solution-card__name">{{solution.name}}</view>

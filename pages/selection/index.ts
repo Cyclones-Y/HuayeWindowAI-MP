@@ -22,6 +22,7 @@ Page({
     stageReady: false,
     box: { left: 0, top: 0, width: 0, height: 0 } as Box,
     hintText: '拖动绿色边框，尽量只框住需要更换的门窗。',
+    hintError: false,
   },
 
   stageRect: null as WechatMiniprogram.BoundingClientRectCallbackResult | null,
@@ -64,6 +65,7 @@ Page({
         height: height * 0.7,
       },
       hintText: '拖动绿色边框，尽量只框住需要更换的门窗。',
+      hintError: false,
     })
   },
 
@@ -130,7 +132,7 @@ Page({
     const { box } = this.data
     const areaRatio = (box.width * box.height) / (this.stageRect.width * this.stageRect.height)
     if (areaRatio < 0.08) {
-      this.setData({ hintText: '选区太小，请框住完整门窗后再继续。' })
+      this.setData({ hintText: '选区太小，请框住完整门窗后再继续。', hintError: true })
       wx.showToast({ title: '请扩大选区', icon: 'none' })
       return
     }

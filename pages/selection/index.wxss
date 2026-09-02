@@ -1,38 +1,33 @@
+/* 暗房：从框选开始进入深色工作台，生成页延续，结果页再回到纸面。 */
 .selection-page {
   min-height: 100vh;
-  background: #1f2521;
+  background: var(--stage);
   color: #ffffff;
 }
 
 .selection-head {
-  padding: 32rpx 32rpx 28rpx;
+  padding: 32rpx 32rpx 24rpx;
 }
 
 .selection-progress {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 24rpx;
-  padding-bottom: 18rpx;
-  border-bottom: 1rpx solid #424a44;
-  color: rgba(255, 255, 255, 0.64);
-  font-size: 22rpx;
-  font-weight: 600;
+  border-bottom-color: var(--stage-line);
+  color: var(--stage-ink);
 }
 
 .selection-progress text:last-child {
-  color: #b9d1c1;
+  color: var(--stage-accent);
 }
 
 .selection-title {
-  font-size: 42rpx;
+  font-size: 50rpx;
   font-weight: 700;
+  line-height: 1.2;
 }
 
 .selection-hint {
   min-height: 70rpx;
   margin-top: 12rpx;
-  color: rgba(255, 255, 255, 0.72);
+  color: var(--stage-ink);
   font-size: 24rpx;
   line-height: 1.55;
 }
@@ -56,8 +51,8 @@
 
 .selection-box {
   position: absolute;
-  border: 4rpx solid #b7d7c0;
-  border-radius: 12rpx;
+  border: 4rpx solid var(--stage-accent);
+  border-radius: 8rpx;
   box-shadow: 0 0 0 1600rpx rgba(10, 13, 11, 0.56);
 }
 
@@ -70,7 +65,7 @@
 .selection-box__grid--v2 {
   top: 0;
   bottom: 0;
-  width: 1rpx;
+  width: 1px;
 }
 
 .selection-box__grid--v1 { left: 33.333%; }
@@ -80,7 +75,7 @@
 .selection-box__grid--h2 {
   right: 0;
   left: 0;
-  height: 1rpx;
+  height: 1px;
 }
 
 .selection-box__grid--h1 { top: 33.333%; }
@@ -100,7 +95,8 @@
   height: 40rpx;
   border: 4rpx solid #ffffff;
   border-radius: 50%;
-  background: #244233;
+  background: var(--green);
+  box-shadow: 0 4rpx 12rpx rgba(0, 0, 0, 0.35);
 }
 
 .selection-handle-hit--nw { top: -50rpx; left: -50rpx; }
@@ -109,31 +105,23 @@
 .selection-handle-hit--se { right: -50rpx; bottom: -50rpx; }
 
 .selection-footnote {
-  padding: 30rpx 32rpx;
-  color: rgba(255, 255, 255, 0.64);
+  padding: 28rpx 32rpx;
+  color: var(--stage-ink);
   font-size: 22rpx;
   line-height: 1.55;
 }
 
 .selection-actions {
-  display: flex;
-  gap: 16rpx;
-  border-color: #424842;
-  background: #1f2521;
-}
-
-.selection-actions button {
-  width: auto;
+  border-top-color: var(--stage-line);
+  background: var(--stage);
 }
 
 .selection-actions .quiet-button {
-  flex: 0.72;
-  background: #384039;
+  background: var(--stage-2);
   color: #ffffff;
 }
 
 .selection-actions .primary-button {
-  flex: 1.28;
   background: #e5eee7;
-  color: #183124;
+  color: var(--green);
 }

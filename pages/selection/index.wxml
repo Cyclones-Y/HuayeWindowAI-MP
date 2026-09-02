@@ -1,8 +1,8 @@
 <view class="selection-page with-action-bar">
   <view class="selection-head">
-    <view class="selection-progress"><text>效果预览</text><text>02 / 04</text></view>
+    <view class="flow-step selection-progress"><text>效果预览</text><text>02 / 04</text></view>
     <view class="selection-title">框住需要更换的门窗</view>
-    <view class="selection-hint {{hintText.indexOf('太小') >= 0 ? 'selection-hint--error' : ''}}">{{hintText}}</view>
+    <view class="selection-hint {{hintError ? 'selection-hint--error' : ''}}">{{hintText}}</view>
   </view>
 
   <view class="selection-stage">
@@ -22,7 +22,7 @@
   <view class="selection-footnote">选框外的墙体、家具和视角会保持不变。</view>
 
   <view class="action-bar selection-actions">
-    <button class="quiet-button" bindtap="resetSelection">重置</button>
-    <button class="primary-button" bindtap="confirmSelection">选好了</button>
+    <button class="quiet-button" hover-class="button-hover" bindtap="resetSelection">重置</button>
+    <button class="primary-button" hover-class="button-hover" bindtap="confirmSelection">选好了</button>
   </view>
 </view>

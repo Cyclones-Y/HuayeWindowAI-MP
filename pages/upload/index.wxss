@@ -4,28 +4,29 @@
   align-items: center;
   justify-content: space-between;
   gap: 24rpx;
-  margin-top: 30rpx;
+  margin-top: 28rpx;
   padding: 0 24rpx;
-  border: 1rpx solid #cbd1ca;
+  border: 1px solid rgba(36, 66, 51, 0.16);
   border-radius: 24rpx;
-  background: #edf0eb;
-  color: #626961;
-  font-size: 23rpx;
+  background: var(--green-soft);
+  color: var(--ink-2);
+  font-size: 24rpx;
 }
 
 .selected-note__value {
-  color: #244233;
-  font-weight: 650;
+  color: var(--green);
+  font-weight: 600;
   text-align: right;
 }
 
+/* 拍摄示意：图片加取景四角 */
 .camera-guide {
   position: relative;
-  height: 560rpx;
-  margin-top: 38rpx;
+  height: 520rpx;
+  margin-top: 32rpx;
   overflow: hidden;
   border-radius: 16rpx;
-  background: #e4e4dc;
+  background: var(--paper-tint);
 }
 
 .camera-guide__image {
@@ -35,29 +36,43 @@
 
 .camera-guide__frame {
   position: absolute;
-  top: 76rpx;
-  right: 70rpx;
-  bottom: 76rpx;
-  left: 70rpx;
-  border: 3rpx solid #ffffff;
-  border-radius: 16rpx;
-  box-shadow: 0 0 0 1000rpx rgba(24, 30, 26, 0.26);
+  top: 64rpx;
+  right: 64rpx;
+  bottom: 96rpx;
+  left: 64rpx;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: 8rpx;
+  box-shadow: 0 0 0 1000rpx rgba(24, 30, 26, 0.28);
 }
+
+.camera-guide__corner {
+  position: absolute;
+  width: 40rpx;
+  height: 40rpx;
+  border: 4rpx solid #ffffff;
+}
+
+.camera-guide__corner--nw { top: -2rpx; left: -2rpx; border-right: 0; border-bottom: 0; border-top-left-radius: 8rpx; }
+.camera-guide__corner--ne { top: -2rpx; right: -2rpx; border-left: 0; border-bottom: 0; border-top-right-radius: 8rpx; }
+.camera-guide__corner--sw { bottom: -2rpx; left: -2rpx; border-right: 0; border-top: 0; border-bottom-left-radius: 8rpx; }
+.camera-guide__corner--se { right: -2rpx; bottom: -2rpx; border-left: 0; border-top: 0; border-bottom-right-radius: 8rpx; }
 
 .camera-guide__label {
   position: absolute;
   right: 24rpx;
-  bottom: 22rpx;
+  bottom: 24rpx;
   left: 24rpx;
   color: #ffffff;
-  font-size: 23rpx;
+  font-size: 24rpx;
   font-weight: 600;
+  line-height: 1.4;
   text-align: center;
 }
 
+/* 拍摄提示 */
 .shoot-tips {
-  margin-top: 36rpx;
-  border-top: 1rpx solid #d8d5ce;
+  margin-top: 32rpx;
+  border-top: 1px solid var(--line);
 }
 
 .shoot-tip {
@@ -65,46 +80,24 @@
   min-height: 88rpx;
   align-items: center;
   gap: 20rpx;
-  padding: 18rpx 0;
-  border-bottom: 1rpx solid #dedbd4;
-  color: #4d544d;
+  padding: 16rpx 0;
+  border-bottom: 1px solid var(--line-soft);
   font-size: 24rpx;
+  line-height: 1.5;
 }
 
 .shoot-tip__index {
-  width: 58rpx;
+  width: 56rpx;
   flex: none;
-  color: #c07048;
+  color: var(--clay);
+  font-size: 22rpx;
   font-weight: 700;
+  font-variant-numeric: tabular-nums;
 }
 
-.privacy-note {
-  margin-top: 34rpx;
-  padding: 26rpx 0;
-  border-top: 1rpx solid #d8d5ce;
-  border-bottom: 1rpx solid #d8d5ce;
-}
-
-.privacy-note__title {
-  font-size: 26rpx;
-  font-weight: 650;
-}
-
-.privacy-note__text {
-  margin-top: 8rpx;
-  color: #656b64;
-  font-size: 23rpx;
-  line-height: 1.55;
-}
-
-.upload-actions {
+.upload-privacy {
   display: flex;
-  gap: 16rpx;
-  margin-top: 34rpx;
-}
-
-.upload-actions button {
-  width: auto;
-  min-width: 0;
-  flex: 1;
+  align-items: flex-start;
+  gap: 18rpx;
+  margin-top: 32rpx;
 }

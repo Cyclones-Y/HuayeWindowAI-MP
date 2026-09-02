@@ -61,7 +61,7 @@ Page({
       await gateway.submitLead(this.data.form)
       this.setData({ submitted: true })
     } catch {
-      wx.showToast({ title: '演示预约保存失败，请重试', icon: 'none' })
+      wx.showToast({ title: '预约信息保存失败，请重试', icon: 'none' })
     } finally {
       this.setData({ submitting: false })
     }

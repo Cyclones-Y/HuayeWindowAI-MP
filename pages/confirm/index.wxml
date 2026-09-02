@@ -3,17 +3,20 @@
   <view class="page-title"><text>最后确认颜色</text><text>和玻璃配置</text></view>
   <view class="page-subtitle">这些选择会用于生成效果，最终配置以上门量尺沟通为准。</view>
 
-  <view class="preview-band">
-    <image class="preview-band__source" src="{{photoPath}}" mode="aspectFill" />
-    <view class="preview-band__arrow"><view class="flow-arrow__shaft"></view><view class="flow-arrow__head"></view></view>
-    <image class="preview-band__solution" src="{{solution.thumbnail}}" mode="aspectFill" />
+  <view class="preview-stage" style="{{stageStyle}}">
+    <image class="preview-stage__photo" src="{{photoPath}}" mode="aspectFit" />
+    <view wx:if="{{overlayStyle}}" class="preview-stage__box" style="{{overlayStyle}}"></view>
+    <view class="preview-stage__tag">将替换框内门窗</view>
   </view>
 
   <view class="config-summary">
-    <view class="config-summary__name">{{solution.name}}</view>
-    <view class="config-summary__subtitle">{{solution.subtitle}}</view>
-    <view class="config-summary__features">
-      <text wx:for="{{solution.features}}" wx:key="*this" wx:for-item="feature">{{feature}}</text>
+    <image class="config-summary__thumb" src="{{solution.thumbnail}}" mode="aspectFill" />
+    <view class="config-summary__copy">
+      <view class="config-summary__name">{{solution.name}}</view>
+      <view class="config-summary__subtitle">{{solution.subtitle}}</view>
+      <view class="config-summary__features">
+        <text wx:for="{{solution.features}}" wx:key="*this" wx:for-item="feature">{{feature}}</text>
+      </view>
     </view>
   </view>
 
@@ -29,17 +32,16 @@
 
   <view class="option-section">
     <view class="option-title">玻璃配置</view>
-    <view class="option-grid option-grid--glass">
+    <view class="option-grid">
       <view wx:for="{{glassOptions}}" wx:key="code" wx:for-item="option" class="option-item option-item--text pressable {{glassCode === option.code ? 'option-item--active' : ''}}" data-code="{{option.code}}" bindtap="selectGlass">{{option.name}}</view>
     </view>
   </view>
 
-  <view class="ai-notice">
-    <view class="ai-notice__title">当前为演示结果</view>
-    <view class="ai-notice__text">本版使用预制案例图，不代表已对你的照片完成真实 AI 改造。</view>
+  <view class="notice confirm-notice">
+    <view class="notice__text">效果图用于帮助你理解方案和沟通需求，最终尺寸、配置与价格以上门量尺为准。</view>
   </view>
 
   <view class="action-bar">
-    <button class="primary-button" bindtap="startGeneration">生成门窗预览</button>
+    <button class="primary-button" hover-class="button-hover" bindtap="startGeneration">生成门窗预览</button>
   </view>
 </view>

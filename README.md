@@ -22,7 +22,7 @@ npm run typecheck
 使用微信开发者工具打开本目录：
 
 ```powershell
-E:\微信web开发者工具\cli.bat open --project D:\HuayeWindowAI\code\frontend
+D:\微信web开发者工具\cli.bat open --project D:\Projects\HuayeWindowAI\code\HuayeWindowAI-MP
 ```
 
 正常流程约 4 秒进入结果页。需要检查失败状态时，可在微信开发者工具中直接编译页面：

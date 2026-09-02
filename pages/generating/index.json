@@ -1,4 +1,7 @@
 {
   "navigationBarTitleText": "生成效果",
+  "navigationBarBackgroundColor": "#1F2521",
+  "navigationBarTextStyle": "white",
+  "backgroundColor": "#1F2521",
   "disableScroll": true
 }

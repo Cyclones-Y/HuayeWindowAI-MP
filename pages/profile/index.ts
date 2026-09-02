@@ -41,15 +41,15 @@ Page({
 
   clearData() {
     wx.showModal({
-      title: '清除演示数据',
-      content: '将删除本机保存的历史、收藏和预约演示记录。此操作无法撤销。',
+      title: '清除全部记录',
+      content: '将删除效果记录、收藏方案和预约信息。此操作无法撤销。',
       confirmText: '确认清除',
       confirmColor: '#A43F37',
       success: (result) => {
         if (!result.confirm) return
         void gateway.clearUserData().then(() => {
           this.refreshData()
-          wx.showToast({ title: '演示数据已清除', icon: 'success' })
+          wx.showToast({ title: '记录已清除', icon: 'success' })
         })
       },
     })

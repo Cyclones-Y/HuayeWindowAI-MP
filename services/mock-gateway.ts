@@ -28,12 +28,12 @@ export class MockGateway implements FrontendGateway {
   async getRenderTask(taskId: string): Promise<RenderTask> {
     const task = this.tasks.get(taskId)
     if (!task) {
-      return { id: taskId, status: 'FAILED', progress: 0, stageText: '任务不存在', errorMessage: '演示任务已失效，请重新生成。' }
+      return { id: taskId, status: 'FAILED', progress: 0, stageText: '任务不存在', errorMessage: '生成任务已失效，请重新生成。' }
     }
 
     const elapsed = Date.now() - task.startedAt
     if (task.input.forceFailure && elapsed >= 1800) {
-      return { id: taskId, status: 'FAILED', progress: 62, stageText: '生成未完成', errorMessage: '演示失败状态：可点击重试继续。' }
+      return { id: taskId, status: 'FAILED', progress: 62, stageText: '生成未完成', errorMessage: '生成过程中断，请重试。' }
     }
     if (elapsed < 1000) return { id: taskId, status: 'QUEUED', progress: 18, stageText: '方案已确认，正在排队' }
     if (elapsed < 2300) return { id: taskId, status: 'PROCESSING', progress: 46, stageText: '正在保持房间结构' }
@@ -44,7 +44,7 @@ export class MockGateway implements FrontendGateway {
       id: taskId,
       status: 'SUCCEEDED',
       progress: 100,
-      stageText: '演示效果已准备好',
+      stageText: '效果已生成',
       result: {
         id: `demo-result-${taskId}`,
         taskId,
@@ -67,7 +67,7 @@ export class MockGateway implements FrontendGateway {
       ...form,
       id: `demo-lead-${Date.now()}`,
       createdAt: Date.now(),
-      statusText: '演示预约已保存',
+      statusText: '已提交，等待确认',
     }
     saveLead(lead)
     return lead

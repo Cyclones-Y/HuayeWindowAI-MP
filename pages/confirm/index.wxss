@@ -1,102 +1,122 @@
-.preview-band {
-  display: flex;
-  align-items: center;
-  gap: 12rpx;
-  margin-top: 38rpx;
+/* 用户照片与选框：明确告诉用户将替换哪一块 */
+.preview-stage {
+  position: relative;
+  width: 100%;
+  height: 420rpx;
+  margin: 32rpx auto 0;
+  overflow: hidden;
+  border-radius: 16rpx;
+  background: var(--stage);
 }
 
-.preview-band__source,
-.preview-band__solution {
-  width: auto;
-  height: 232rpx;
+.preview-stage__photo {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.preview-stage__box {
+  position: absolute;
+  border: 3rpx solid var(--stage-accent);
+  border-radius: 6rpx;
+  box-shadow: 0 0 0 1000rpx rgba(10, 13, 11, 0.42);
+}
+
+.preview-stage__tag {
+  position: absolute;
+  bottom: 16rpx;
+  left: 16rpx;
+  display: flex;
+  min-height: 44rpx;
+  align-items: center;
+  padding: 0 14rpx;
+  border-radius: 14rpx;
+  background: rgba(38, 44, 35, 0.78);
+  color: #ffffff;
+  font-size: 22rpx;
+  font-weight: 600;
+  line-height: 1;
+}
+
+/* 所选方案摘要 */
+.config-summary {
+  display: flex;
+  gap: 24rpx;
+  margin-top: 28rpx;
+  padding: 24rpx 0;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+
+.config-summary__thumb {
+  width: 176rpx;
+  height: 132rpx;
+  flex: none;
+  border-radius: 16rpx;
+  background: var(--paper-tint);
+}
+
+.config-summary__copy {
   min-width: 0;
   flex: 1;
-  border-radius: 16rpx;
-  background: #e4e4dc;
-}
-
-.preview-band__arrow {
-  position: relative;
-  display: flex;
-  width: 48rpx;
-  height: 48rpx;
-  align-items: center;
-  justify-content: center;
-  flex: none;
-}
-
-.flow-arrow__shaft {
-  width: 28rpx;
-  height: 2rpx;
-  background: #244233;
-}
-
-.flow-arrow__head {
-  position: absolute;
-  right: 9rpx;
-  width: 12rpx;
-  height: 12rpx;
-  border-top: 2rpx solid #244233;
-  border-right: 2rpx solid #244233;
-  transform: rotate(45deg);
-}
-
-.config-summary {
-  margin-top: 28rpx;
-  padding: 28rpx 0;
-  border-top: 1rpx solid #d8d5ce;
-  border-bottom: 1rpx solid #d8d5ce;
 }
 
 .config-summary__name {
-  font-size: 34rpx;
+  font-size: 28rpx;
   font-weight: 700;
+  line-height: 1.4;
 }
 
 .config-summary__subtitle {
-  margin-top: 8rpx;
-  color: #626861;
-  font-size: 24rpx;
+  margin-top: 4rpx;
+  color: var(--ink-2);
+  font-size: 22rpx;
+  line-height: 1.5;
 }
 
 .config-summary__features {
   display: flex;
   flex-wrap: wrap;
-  gap: 12rpx 24rpx;
-  margin-top: 18rpx;
-  color: #244233;
+  gap: 8rpx 20rpx;
+  margin-top: 12rpx;
+  color: var(--green);
   font-size: 22rpx;
+  font-weight: 600;
+  line-height: 1.5;
 }
 
+/* 配置选项 */
 .option-section {
-  margin-top: 44rpx;
+  margin-top: 40rpx;
 }
 
 .option-title {
-  margin-bottom: 18rpx;
+  margin-bottom: 16rpx;
   font-size: 28rpx;
-  font-weight: 650;
+  font-weight: 700;
+  line-height: 1.4;
 }
 
 .option-grid {
   display: flex;
   flex-wrap: wrap;
-  gap: 14rpx;
+  gap: 16rpx;
 }
 
 .option-item {
   display: flex;
-  width: calc(50% - 7rpx);
+  width: calc(50% - 8rpx);
   min-height: 96rpx;
   align-items: center;
   gap: 14rpx;
   padding: 0 22rpx;
-  border: 1rpx solid #cfd2cb;
+  border: 1px solid var(--line);
   border-radius: 24rpx;
-  background: #fffefa;
-  color: #4f564f;
+  background: var(--paper-surface);
+  color: var(--ink);
   font-size: 24rpx;
-  transition: transform 160ms ease, background-color 160ms ease, border-color 160ms ease;
+  line-height: 1.4;
+  transition: transform 160ms var(--ease-out), background-color 160ms ease, border-color 160ms ease, box-shadow 160ms ease;
 }
 
 .option-item--text {
@@ -105,36 +125,22 @@
 }
 
 .option-item--active {
-  border: 3rpx solid #244233;
-  background: #eef1ec;
-  color: #244233;
-  font-weight: 650;
+  border-color: var(--green);
+  background: var(--green-soft);
+  color: var(--green);
+  box-shadow: 0 0 0 2rpx var(--green);
+  font-weight: 600;
 }
 
 .option-swatch {
   width: 36rpx;
   height: 36rpx;
+  flex: none;
   border: 2rpx solid #ffffff;
   border-radius: 50%;
-  box-shadow: 0 0 0 1rpx #bfc4be;
+  box-shadow: 0 0 0 1px var(--line);
 }
 
-.ai-notice {
-  margin-top: 44rpx;
-  padding: 26rpx;
-  border: 1rpx solid #cbd1ca;
-  border-radius: 24rpx;
-  background: #edf0eb;
-}
-
-.ai-notice__title {
-  font-size: 26rpx;
-  font-weight: 650;
-}
-
-.ai-notice__text {
-  margin-top: 8rpx;
-  color: #5f6861;
-  font-size: 23rpx;
-  line-height: 1.6;
+.confirm-notice {
+  margin-top: 40rpx;
 }

@@ -17,7 +17,7 @@ Page({
     const draft = getDraft()
     const result = getHistory().find((item) => item.taskId === draft.taskId)
     if (!draft.solution || !result) {
-      wx.showToast({ title: '演示结果已失效', icon: 'none' })
+      wx.showToast({ title: '效果记录已失效，请重新生成', icon: 'none' })
       wx.navigateBack()
       return
     }

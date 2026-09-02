@@ -1,11 +1,11 @@
 <view class="page-shell with-action-bar solution-select-page">
   <view class="flow-step"><text>效果预览</text><text>03 / 04</text></view>
   <view class="page-title"><text>选一套准备</text><text>装进家里的窗</text></view>
-  <view class="page-subtitle">下面都是华业可生产方案，先按最关注的需求筛选。</view>
+  <view class="page-subtitle">下面都是可生产方案，先按最关注的需求筛选。</view>
 
   <scroll-view class="need-scroll" scroll-x enhanced show-scrollbar="{{false}}">
-    <view class="need-row">
-      <view wx:for="{{needFilters}}" wx:key="value" wx:for-item="filter" class="need-chip pressable {{activeNeed === filter.value ? 'need-chip--active' : ''}}" data-value="{{filter.value}}" bindtap="selectNeed">{{filter.label}}</view>
+    <view class="chip-row">
+      <view wx:for="{{needFilters}}" wx:key="value" wx:for-item="filter" class="chip pressable {{activeNeed === filter.value ? 'chip--active' : ''}}" data-value="{{filter.value}}" bindtap="selectNeed">{{filter.label}}</view>
     </view>
   </scroll-view>
 
@@ -16,7 +16,7 @@
   <view wx:elif="{{errorText}}" class="empty-state">
     <view class="empty-state__title">暂时无法加载</view>
     <view class="empty-state__text">{{errorText}}</view>
-    <button class="secondary-button retry-button" bindtap="loadSolutions">重新加载</button>
+    <button class="secondary-button retry-button" hover-class="button-hover" bindtap="loadSolutions">重新加载</button>
   </view>
   <view wx:elif="{{filteredSolutions.length === 0}}" class="empty-state">
     <view class="empty-state__title">没有完全匹配的方案</view>
@@ -27,6 +27,6 @@
   </view>
 
   <view class="action-bar">
-    <button class="primary-button" disabled="{{!selectedId}}" bindtap="continueFlow">下一步，选配置</button>
+    <button class="primary-button" hover-class="button-hover" disabled="{{!selectedId}}" bindtap="continueFlow">{{selectedId ? '下一步，选配置' : '先选一套方案'}}</button>
   </view>
 </view>

@@ -1,39 +1,13 @@
 .need-scroll {
   width: calc(100% + 32rpx);
-  margin-top: 40rpx;
-}
-
-.need-row {
-  display: flex;
-  gap: 12rpx;
-  padding-right: 32rpx;
-}
-
-.need-chip {
-  flex: none;
-  min-height: 88rpx;
-  padding: 0 28rpx;
-  border: 1rpx solid #cfd2cb;
-  border-radius: 24rpx;
-  background: #fffefa;
-  color: #4f564f;
-  font-size: 24rpx;
-  line-height: 88rpx;
-  transition: transform 160ms ease, background-color 160ms ease;
-}
-
-.need-chip--active {
-  border-color: #244233;
-  background: #244233;
-  color: #ffffff;
-  font-weight: 650;
+  margin-top: 36rpx;
 }
 
 .select-list {
   display: flex;
   flex-direction: column;
   gap: 24rpx;
-  margin-top: 34rpx;
+  margin-top: 32rpx;
 }
 
 .select-skeleton {
@@ -43,5 +17,7 @@
 
 .retry-button {
   width: 260rpx;
+  min-width: 260rpx;
+  max-width: 260rpx;
   margin-top: 28rpx;
 }

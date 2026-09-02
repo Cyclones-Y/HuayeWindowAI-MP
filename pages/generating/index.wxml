@@ -1,28 +1,36 @@
 <view class="generating-page">
   <view class="generating-top">
-    <view class="generation-state"><text></text>{{status === 'FAILED' ? '任务已暂停' : '正在生成门窗预览'}}</view>
-    <view class="generating-title">{{status === 'FAILED' ? '这次没有生成完成' : '正在准备门窗效果'}}</view>
-    <view class="generating-subtitle">{{status === 'FAILED' ? errorMessage : '正在匹配所选窗型、颜色和玻璃配置。'}}</view>
+    <view class="status-line generating-state {{status === 'FAILED' ? 'generating-state--failed' : ''}}"><text class="status-line__dot"></text><text>{{status === 'FAILED' ? '任务已暂停' : '正在生成门窗预览'}}</text></view>
+    <view class="generating-title">{{status === 'FAILED' ? '这次没有生成完成' : '正在替换你框选的门窗'}}</view>
+    <view class="generating-subtitle">{{status === 'FAILED' ? errorMessage : '保持墙面、家具和视角不变，只更换框内区域。'}}</view>
   </view>
 
-  <view wx:if="{{status !== 'FAILED'}}" class="generation-visual">
-    <image class="generation-visual__image" src="{{solution.thumbnail}}" mode="aspectFill" />
-    <view class="generation-visual__scan"></view>
-    <view class="generation-visual__mask"></view>
+  <view wx:if="{{status !== 'FAILED'}}" class="generation-stage" style="{{stageStyle}}">
+    <image class="generation-stage__photo" src="{{photoPath}}" mode="aspectFit" />
+    <view wx:if="{{overlayStyle}}" class="generation-stage__box" style="{{overlayStyle}}">
+      <view class="generation-stage__scan"></view>
+    </view>
+    <view class="generation-stage__solution">
+      <image class="generation-stage__thumb" src="{{solution.thumbnail}}" mode="aspectFill" />
+      <view class="generation-stage__solution-copy">
+        <text class="generation-stage__solution-label">替换为</text>
+        <text class="generation-stage__solution-name">{{solution.name}}</text>
+      </view>
+    </view>
   </view>
 
   <view wx:else class="failure-panel">
-    <view class="failure-panel__mark">!</view>
+    <view class="failure-panel__mark"><view class="ic ic--alert ic--white"></view></view>
     <view class="failure-panel__title">可以重新生成</view>
-    <view class="failure-panel__text">本次失败不会产生预约记录。</view>
+    <view class="failure-panel__text">本次失败不会产生预约记录，照片和已选配置都还在。</view>
   </view>
 
   <view class="progress-block">
     <view class="progress-block__top">
       <text>{{stageText}}</text>
-      <text>{{progress}}%</text>
+      <text class="progress-block__percent">{{progress}}%</text>
     </view>
-    <view class="progress-track"><view class="progress-value" style="transform: scaleX({{progress / 100}});"></view></view>
+    <view class="progress-track"><view class="progress-value {{status === 'FAILED' ? 'progress-value--failed' : ''}}" style="transform: scaleX({{progress / 100}});"></view></view>
     <view class="progress-steps">
       <view class="progress-step {{progress >= 18 ? 'progress-step--done' : ''}}">校验方案</view>
       <view class="progress-step {{progress >= 46 ? 'progress-step--done' : ''}}">保持结构</view>
@@ -30,5 +38,8 @@
     </view>
   </view>
 
-  <button wx:if="{{status === 'FAILED'}}" class="primary-button retry-generation" bindtap="retryTask">再试一次</button>
+  <view wx:if="{{status === 'FAILED'}}" class="failure-actions">
+    <button class="quiet-button" hover-class="button-hover" bindtap="goBack">返回修改</button>
+    <button class="primary-button" hover-class="button-hover" bindtap="retryTask">再试一次</button>
+  </view>
 </view>

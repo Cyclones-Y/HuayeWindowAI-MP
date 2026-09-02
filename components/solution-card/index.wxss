@@ -1,15 +1,15 @@
 .solution-card {
   position: relative;
   overflow: hidden;
-  border: 1rpx solid #d8d5ce;
+  border: 1px solid var(--line);
   border-radius: 16rpx;
-  background: #fffefa;
-  transition: transform 180ms ease, border-color 180ms ease, box-shadow 180ms ease;
+  background: var(--paper-surface);
+  transition: transform 160ms var(--ease-out), border-color 160ms ease, box-shadow 160ms ease;
 }
 
 .solution-card--selected {
-  border: 3rpx solid #244233;
-  box-shadow: 0 12rpx 28rpx rgba(36, 66, 51, 0.1);
+  border-color: var(--green);
+  box-shadow: 0 0 0 2rpx var(--green), 0 12rpx 28rpx rgba(36, 66, 51, 0.12);
 }
 
 .solution-card__media {
@@ -21,17 +21,11 @@
   display: block;
   width: 100%;
   height: 340rpx;
-  background: #e4e4dc;
+  background: var(--paper-tint);
 }
 
 .solution-card--compact .solution-card__image {
   height: 252rpx;
-}
-
-.solution-card--compact {
-  border: 1rpx solid rgba(48, 58, 51, 0.14);
-  border-radius: 16rpx;
-  background: #fffefa;
 }
 
 .solution-card__image--compact {
@@ -40,42 +34,37 @@
 
 .solution-card__compact-copy {
   padding: 22rpx 24rpx 24rpx;
-  color: #262c23;
 }
 
 .solution-card__name--compact {
-  font-size: 27rpx;
+  font-size: 28rpx;
 }
 
 .solution-card__subtitle--compact {
-  margin-top: 8rpx;
-  color: #666c65;
-  font-size: 20rpx;
-  line-height: 1.5;
+  margin-top: 6rpx;
+  font-size: 22rpx;
 }
 
-.solution-card__type,
 .solution-card__check {
   position: absolute;
-  top: 18rpx;
-  min-height: 46rpx;
-  padding: 0 16rpx;
+  top: 16rpx;
+  right: 16rpx;
+  display: flex;
+  min-height: 44rpx;
+  align-items: center;
+  gap: 6rpx;
+  padding: 0 14rpx 0 8rpx;
   border-radius: 14rpx;
-  font-size: 20rpx;
-  font-weight: 650;
-  line-height: 46rpx;
-}
-
-.solution-card__type {
-  left: 18rpx;
-  background: rgba(248, 245, 240, 0.94);
-  color: #39413b;
-}
-
-.solution-card__check {
-  right: 18rpx;
-  background: #244233;
+  font-size: 22rpx;
+  font-weight: 600;
+  line-height: 1;
+  background: var(--green);
   color: #ffffff;
+}
+
+.solution-card__check .ic {
+  width: 32rpx;
+  height: 32rpx;
 }
 
 .solution-card__body {
@@ -83,14 +72,14 @@
 }
 
 .solution-card__name {
-  font-size: 32rpx;
+  font-size: 34rpx;
   font-weight: 700;
   line-height: 1.3;
 }
 
 .solution-card__subtitle {
   margin-top: 8rpx;
-  color: #626861;
+  color: var(--ink-2);
   font-size: 24rpx;
   line-height: 1.5;
 }
@@ -98,15 +87,27 @@
 .solution-card__features {
   display: flex;
   flex-wrap: wrap;
-  gap: 10rpx 22rpx;
+  gap: 10rpx 24rpx;
   margin-top: 22rpx;
   padding-top: 18rpx;
-  border-top: 1rpx solid #e2dfd8;
+  border-top: 1px solid var(--line-soft);
 }
 
 .solution-card__feature {
-  color: #485048;
-  font-size: 21rpx;
+  display: flex;
+  align-items: center;
+  gap: 10rpx;
+  color: var(--ink);
+  font-size: 22rpx;
+  line-height: 1.5;
+}
+
+.solution-card__feature::before {
+  width: 8rpx;
+  height: 8rpx;
+  border-radius: 50%;
+  background: var(--clay);
+  content: "";
 }
 
 .solution-card__footer {
@@ -127,13 +128,13 @@
   height: 28rpx;
   border: 2rpx solid #ffffff;
   border-radius: 50%;
-  box-shadow: 0 0 0 1rpx #bfc4be;
+  box-shadow: 0 0 0 1px var(--line);
 }
 
 .solution-card__price {
   max-width: 360rpx;
-  color: #697069;
-  font-size: 21rpx;
+  color: var(--ink-2);
+  font-size: 22rpx;
   line-height: 1.45;
   text-align: right;
 }

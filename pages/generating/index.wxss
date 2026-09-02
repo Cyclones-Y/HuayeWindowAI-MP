@@ -1,114 +1,178 @@
+/* 暗房第二幕：延续框选页的深色工作台，结果页才回到纸面。 */
 .generating-page {
   min-height: 100vh;
-  padding: 48rpx 32rpx calc(56rpx + env(safe-area-inset-bottom));
-  background: #f8f5f0;
-}
-
-.generation-state {
-  display: flex;
-  align-items: center;
-  gap: 12rpx;
-  color: #596159;
-  font-size: 23rpx;
-  font-weight: 600;
-}
-
-.generation-state text {
-  width: 12rpx;
-  height: 12rpx;
-  border-radius: 50%;
-  background: #244233;
+  padding: 40rpx 32rpx calc(56rpx + env(safe-area-inset-bottom));
+  background: var(--stage);
+  color: #ffffff;
 }
 
 .generating-top {
   max-width: 650rpx;
 }
 
+.generating-state {
+  color: var(--stage-ink);
+}
+
+.generating-state .status-line__dot {
+  background: var(--stage-accent);
+  animation: state-pulse 1.6s ease-in-out infinite;
+}
+
+.generating-state--failed .status-line__dot {
+  background: #e08a80;
+  animation: none;
+}
+
+@keyframes state-pulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.45; transform: scale(0.8); }
+}
+
 .generating-title {
-  margin-top: 22rpx;
-  font-size: 48rpx;
+  margin-top: 20rpx;
+  font-size: 50rpx;
   font-weight: 700;
   line-height: 1.2;
 }
 
 .generating-subtitle {
-  margin-top: 14rpx;
-  color: #626861;
-  font-size: 25rpx;
+  margin-top: 12rpx;
+  color: var(--stage-ink);
+  font-size: 24rpx;
   line-height: 1.6;
 }
 
-.generation-visual {
+/* 用户照片与选框 */
+.generation-stage {
   position: relative;
-  height: 660rpx;
-  margin-top: 44rpx;
+  width: 100%;
+  height: 720rpx;
+  margin: 36rpx auto 0;
   overflow: hidden;
   border-radius: 16rpx;
-  background: #e4e4dc;
+  background: #101310;
 }
 
-.generation-visual__image,
-.generation-visual__mask,
-.generation-visual__scan {
-  position: absolute;
-  top: 0;
-  left: 0;
+.generation-stage__photo {
+  display: block;
   width: 100%;
   height: 100%;
 }
 
-.generation-visual__mask {
-  background: rgba(21, 28, 23, 0.18);
+.generation-stage__box {
+  position: absolute;
+  overflow: hidden;
+  border: 3rpx solid var(--stage-accent);
+  border-radius: 6rpx;
+  box-shadow: 0 0 0 1000rpx rgba(10, 13, 11, 0.5), 0 0 28rpx rgba(183, 215, 192, 0.35);
 }
 
-.generation-visual__scan {
-  z-index: 1;
+.generation-stage__scan {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
   width: 3rpx;
   background: rgba(255, 255, 255, 0.92);
-  box-shadow: 0 0 26rpx rgba(255, 255, 255, 0.72);
-  animation: scan 2.4s ease-in-out infinite alternate;
+  box-shadow: 0 0 24rpx rgba(255, 255, 255, 0.7), 0 0 60rpx rgba(183, 215, 192, 0.5);
+  animation: scan 2.2s ease-in-out infinite alternate;
 }
 
 @keyframes scan {
-  from { transform: translateX(70rpx); }
-  to { transform: translateX(620rpx); }
+  from { left: 2%; }
+  to { left: 98%; }
 }
 
+.generation-stage__solution {
+  position: absolute;
+  bottom: 16rpx;
+  left: 16rpx;
+  display: flex;
+  max-width: calc(100% - 32rpx);
+  align-items: center;
+  gap: 14rpx;
+  padding: 10rpx 18rpx 10rpx 10rpx;
+  border-radius: 14rpx;
+  background: rgba(31, 37, 33, 0.86);
+}
+
+.generation-stage__thumb {
+  width: 72rpx;
+  height: 54rpx;
+  flex: none;
+  border-radius: 8rpx;
+  background: var(--stage-2);
+}
+
+.generation-stage__solution-copy {
+  display: flex;
+  min-width: 0;
+  flex-direction: column;
+  gap: 2rpx;
+}
+
+.generation-stage__solution-label {
+  color: var(--stage-ink);
+  font-size: 22rpx;
+  line-height: 1.3;
+}
+
+.generation-stage__solution-name {
+  overflow: hidden;
+  font-size: 24rpx;
+  font-weight: 600;
+  line-height: 1.35;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* 进度 */
 .progress-block {
-  margin-top: 40rpx;
+  margin-top: 36rpx;
 }
 
 .progress-block__top {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-size: 25rpx;
-  font-weight: 650;
+  font-size: 24rpx;
+  font-weight: 600;
+  line-height: 1.45;
+}
+
+.progress-block__percent {
+  font-variant-numeric: tabular-nums;
 }
 
 .progress-track {
-  height: 12rpx;
-  margin-top: 18rpx;
+  height: 10rpx;
+  margin-top: 16rpx;
   overflow: hidden;
-  border-radius: 6rpx;
-  background: #dfe1da;
+  border-radius: 5rpx;
+  background: var(--stage-line);
 }
 
 .progress-value {
   width: 100%;
   height: 100%;
   transform-origin: left center;
-  border-radius: 6rpx;
-  background: #244233;
-  transition: transform 420ms ease;
+  border-radius: 5rpx;
+  background: var(--stage-accent);
+  transition: transform 420ms var(--ease-out);
+}
+
+.progress-value--failed {
+  background: #e08a80;
 }
 
 .progress-steps {
   display: flex;
   justify-content: space-between;
-  margin-top: 16rpx;
-  color: #5f665f;
-  font-size: 21rpx;
+  margin-top: 14rpx;
+  color: var(--stage-ink);
+  font-size: 22rpx;
+  line-height: 1.45;
 }
 
 .progress-step {
@@ -117,14 +181,15 @@
 
 .progress-step:nth-child(2) { text-align: center; }
 .progress-step:nth-child(3) { text-align: right; }
-.progress-step--done { color: #244233; }
+.progress-step--done { color: #ffffff; font-weight: 600; }
 
+/* 失败面板 */
 .failure-panel {
-  margin-top: 48rpx;
-  padding: 48rpx 32rpx;
-  border: 1rpx solid #d7c5c1;
+  margin-top: 36rpx;
+  padding: 44rpx 32rpx;
+  border: 1px solid var(--stage-line);
   border-radius: 24rpx;
-  background: #f6ece9;
+  background: var(--stage-2);
 }
 
 .failure-panel__mark {
@@ -134,33 +199,53 @@
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  background: #a6433b;
-  color: #ffffff;
-  font-size: 40rpx;
-  font-weight: 750;
+  background: var(--error);
 }
 
 .failure-panel__title {
-  margin-top: 28rpx;
-  font-size: 32rpx;
+  margin-top: 24rpx;
+  font-size: 34rpx;
   font-weight: 700;
+  line-height: 1.25;
 }
 
 .failure-panel__text {
   margin-top: 10rpx;
-  color: #6d615e;
+  color: var(--stage-ink);
   font-size: 24rpx;
+  line-height: 1.6;
 }
 
-.retry-generation {
-  width: 100%;
+.failure-actions {
+  display: flex;
+  gap: 16rpx;
   margin-top: 36rpx;
 }
 
+.failure-actions button {
+  width: auto;
+  min-width: 0;
+}
+
+.failure-actions .quiet-button {
+  flex: 0.72;
+  background: var(--stage-2);
+  color: #ffffff;
+}
+
+.failure-actions .primary-button {
+  flex: 1.28;
+  background: #e5eee7;
+  color: var(--green);
+}
+
 @media (prefers-reduced-motion: reduce) {
-  .generation-visual__scan {
-    right: 24rpx;
-    left: auto;
+  .generation-stage__scan {
+    left: 50%;
+    animation: none;
+  }
+
+  .generating-state .status-line__dot {
     animation: none;
   }
 

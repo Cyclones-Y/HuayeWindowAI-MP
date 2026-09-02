@@ -1,7 +1,3 @@
-.solutions-page {
-  padding-top: 40rpx;
-}
-
 .solutions-head {
   display: flex;
   align-items: flex-end;
@@ -10,27 +6,31 @@
 }
 
 .solutions-count {
+  display: flex;
+  align-items: baseline;
+  gap: 6rpx;
   flex: none;
   padding-bottom: 8rpx;
-  color: #687069;
+  color: var(--ink-2);
   font-size: 22rpx;
 }
 
-.solutions-count text {
-  margin-right: 6rpx;
-  color: #244233;
-  font-size: 38rpx;
-  font-weight: 750;
+.solutions-count__number {
+  color: var(--green);
+  font-size: 34rpx;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  line-height: 1;
 }
 
 .filter-block {
-  margin-top: 48rpx;
+  margin-top: 40rpx;
   padding-top: 28rpx;
-  border-top: 1rpx solid #d8d5ce;
+  border-top: 1px solid var(--line);
 }
 
 .filter-block--compact {
-  margin-top: 30rpx;
+  margin-top: 24rpx;
   padding-top: 0;
   border-top: 0;
 }
@@ -40,48 +40,26 @@
   align-items: center;
   justify-content: space-between;
   margin-bottom: 16rpx;
-  color: #343a35;
-  font-size: 25rpx;
-  font-weight: 650;
+  font-size: 24rpx;
+  font-weight: 600;
+  line-height: 1.45;
 }
 
 .filter-label__hint {
-  color: #565d56;
-  font-size: 21rpx;
+  color: var(--ink-2);
+  font-size: 22rpx;
   font-weight: 400;
 }
 
-.filter-row {
-  display: flex;
-  gap: 12rpx;
-  padding-right: 20rpx;
-}
-
-.filter-chip {
-  flex: none;
-  min-height: 88rpx;
-  padding: 0 28rpx;
-  border: 1rpx solid #cfd2cb;
-  border-radius: 24rpx;
-  background: #fffefa;
-  color: #4f564f;
-  font-size: 24rpx;
-  line-height: 88rpx;
-  transition: transform 160ms ease, background-color 160ms ease, border-color 160ms ease;
-}
-
-.filter-chip--active {
-  border-color: #244233;
-  background: #244233;
-  color: #ffffff;
-  font-weight: 650;
+.filter-scroll {
+  width: calc(100% + 32rpx);
 }
 
 .solution-list {
   display: flex;
   flex-direction: column;
   gap: 24rpx;
-  margin-top: 42rpx;
+  margin-top: 40rpx;
 }
 
 .solution-skeleton {
@@ -91,5 +69,7 @@
 
 .retry-button {
   width: 260rpx;
-  margin-top: 30rpx;
+  min-width: 260rpx;
+  max-width: 260rpx;
+  margin-top: 28rpx;
 }

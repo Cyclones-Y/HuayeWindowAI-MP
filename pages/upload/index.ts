@@ -53,7 +53,7 @@ Page({
       if (!message.includes('cancel')) {
         wx.showModal({
           title: '暂时无法读取照片',
-          content: '请检查微信相机或相册权限后重试。照片只用于当前演示流程。',
+          content: '请检查微信相机或相册权限后重试。照片仅用于生成门窗效果图。',
           showCancel: false,
         })
       }

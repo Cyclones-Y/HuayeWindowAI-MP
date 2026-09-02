@@ -1,4 +1,4 @@
-<view class="page-shell upload-page">
+<view class="page-shell with-action-bar upload-page">
   <view class="flow-step"><text>效果预览</text><text>01 / 04</text></view>
   <view class="page-title"><text>先拍下你家</text><text>现在的门窗</text></view>
   <view class="page-subtitle">正对窗户拍摄，保留完整窗框和周边墙面。</view>
@@ -10,7 +10,12 @@
 
   <view class="camera-guide">
     <image class="camera-guide__image" src="/assets/generated/home-hero-mobile.jpg" mode="aspectFill" />
-    <view class="camera-guide__frame"></view>
+    <view class="camera-guide__frame">
+      <view class="camera-guide__corner camera-guide__corner--nw"></view>
+      <view class="camera-guide__corner camera-guide__corner--ne"></view>
+      <view class="camera-guide__corner camera-guide__corner--sw"></view>
+      <view class="camera-guide__corner camera-guide__corner--se"></view>
+    </view>
     <view class="camera-guide__label">拍摄示意：完整窗框放在画面中央</view>
   </view>
 
@@ -20,10 +25,16 @@
     <view class="shoot-tip"><text class="shoot-tip__index">03</text><text>不要拍到家人和隐私物品</text></view>
   </view>
 
-  <view class="privacy-note"><view class="privacy-note__title">照片仅用于本次体验</view><view class="privacy-note__text">当前版本不会上传住宅照片，也不会写入历史缓存。</view></view>
+  <view class="notice upload-privacy">
+    <view class="ic ic--shield"></view>
+    <view>
+      <view class="notice__title">照片仅用于生成门窗效果图</view>
+      <view class="notice__text">上传前请确认画面中没有家人和隐私物品。</view>
+    </view>
+  </view>
 
-  <view class="upload-actions">
-    <button class="primary-button" loading="{{choosing}}" bindtap="chooseFromCamera">拍一张</button>
-    <button class="secondary-button" disabled="{{choosing}}" bindtap="chooseFromAlbum">从相册选择</button>
+  <view class="action-bar">
+    <button class="secondary-button" hover-class="button-hover" disabled="{{choosing}}" bindtap="chooseFromAlbum">从相册选择</button>
+    <button class="primary-button" hover-class="button-hover" loading="{{choosing}}" bindtap="chooseFromCamera"><view class="ic ic--sm ic--camera ic--white"></view><text>拍一张</text></button>
   </view>
 </view>

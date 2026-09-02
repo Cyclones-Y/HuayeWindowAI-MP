@@ -1,9 +1,12 @@
 import { getDraft, updateDraft } from '../../store/session'
 import type { ProductOption, WindowSolution } from '../../types/index'
+import { computeOverlayRect, fitStageSize, overlayStyle } from '../../utils/selection-overlay'
 
 Page({
   data: {
     photoPath: '',
+    overlayStyle: '',
+    stageStyle: '',
     solution: null as WindowSolution | null,
     frameColors: [] as ProductOption[],
     glassOptions: [] as ProductOption[],
@@ -26,6 +29,25 @@ Page({
       frameColorCode: draft.frameColorCode || draft.solution.frameColors[0].code,
       glassCode: draft.glassCode || draft.solution.glassOptions[0].code,
     })
+  },
+
+  onReady() {
+    this.measureOverlay()
+  },
+
+  measureOverlay() {
+    const { photo, selection } = getDraft()
+    if (!photo) return
+    this.createSelectorQuery()
+      .select('.preview-stage')
+      .boundingClientRect((rect) => {
+        if (!rect || Array.isArray(rect)) return
+        const rpx = rect.width / 686
+        const stage = fitStageSize(photo, rect.width, 320 * rpx, 560 * rpx)
+        const overlay = selection ? overlayStyle(computeOverlayRect(photo, selection, stage.width, stage.height)) : ''
+        this.setData({ stageStyle: `width: ${stage.width}px; height: ${stage.height}px;`, overlayStyle: overlay })
+      })
+      .exec()
   },
 
   selectFrameColor(event: WechatMiniprogram.TouchEvent) {
