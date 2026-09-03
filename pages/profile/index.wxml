@@ -94,6 +94,9 @@
       <view><text></text>效果记录与收藏可随时清除</view>
       <view><text></text>清除后无法恢复</view>
     </view>
+    <button class="privacy-link-button" hover-class="privacy-link-button--pressed" bindtap="openPrivacyGuide">
+      <text>查看《隐私保护指引》</text><text class="privacy-link-button__arrow">›</text>
+    </button>
     <button class="privacy-button" hover-class="privacy-button--pressed" bindtap="clearData">清除全部记录</button>
   </view>
 </view>

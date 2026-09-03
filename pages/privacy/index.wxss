@@ -1,0 +1,231 @@
+.privacy-page {
+  min-height: 100vh;
+  background: var(--paper-ground);
+}
+
+.privacy-hero {
+  padding: 64rpx 36rpx 44rpx;
+  background: var(--green);
+  color: #fffefa;
+}
+
+.privacy-hero__eyebrow {
+  color: rgba(255, 254, 250, 0.62);
+  font-size: 20rpx;
+  font-weight: 600;
+  letter-spacing: 5rpx;
+}
+
+.privacy-hero__title {
+  margin-top: 18rpx;
+  font-family: var(--font-serif);
+  font-size: 52rpx;
+  font-weight: 700;
+  line-height: 1.25;
+}
+
+.privacy-hero__intro {
+  margin-top: 22rpx;
+  color: rgba(255, 254, 250, 0.76);
+  font-size: 25rpx;
+  line-height: 1.75;
+}
+
+.privacy-meta {
+  display: flex;
+  gap: 48rpx;
+  margin-top: 38rpx;
+  padding-top: 26rpx;
+  border-top: 1px solid rgba(255, 255, 255, 0.16);
+}
+
+.privacy-meta view {
+  display: flex;
+  flex-direction: column;
+  gap: 4rpx;
+}
+
+.privacy-meta text:first-child {
+  color: rgba(255, 254, 250, 0.52);
+  font-size: 20rpx;
+}
+
+.privacy-meta text:last-child {
+  font-size: 23rpx;
+  font-weight: 600;
+}
+
+.privacy-summary {
+  margin: 28rpx 28rpx 0;
+  padding: 30rpx;
+  border: 1px solid var(--line);
+  border-radius: 24rpx;
+  background: var(--paper-surface);
+  box-shadow: 0 14rpx 36rpx rgba(38, 44, 35, 0.06);
+}
+
+.privacy-summary__label {
+  color: var(--green);
+  font-size: 23rpx;
+  font-weight: 700;
+}
+
+.privacy-summary__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24rpx 20rpx;
+  margin-top: 24rpx;
+}
+
+.privacy-summary__item {
+  display: flex;
+  min-width: 0;
+  align-items: flex-start;
+  gap: 12rpx;
+  color: var(--ink-2);
+  font-size: 22rpx;
+  line-height: 1.5;
+}
+
+.privacy-summary__number {
+  flex: none;
+  color: var(--clay);
+  font-size: 19rpx;
+  font-weight: 700;
+}
+
+.privacy-body {
+  padding: 12rpx 28rpx calc(80rpx + env(safe-area-inset-bottom));
+}
+
+.privacy-section-card {
+  padding: 38rpx 0 36rpx;
+  border-bottom: 1px solid var(--line);
+}
+
+.privacy-section-card__heading {
+  display: flex;
+  align-items: baseline;
+  gap: 18rpx;
+}
+
+.privacy-section-card__number {
+  color: var(--clay);
+  font-size: 21rpx;
+  font-weight: 700;
+  letter-spacing: 1rpx;
+}
+
+.privacy-section-card__title {
+  color: var(--ink);
+  font-family: var(--font-serif);
+  font-size: 32rpx;
+  font-weight: 700;
+  line-height: 1.35;
+}
+
+.privacy-section-card__content {
+  margin-top: 22rpx;
+}
+
+.privacy-paragraph {
+  margin-top: 18rpx;
+  color: var(--ink-2);
+  font-size: 25rpx;
+  line-height: 1.85;
+  text-align: justify;
+}
+
+.privacy-paragraph:first-child {
+  margin-top: 0;
+}
+
+.privacy-entry-list {
+  margin-top: 24rpx;
+  overflow: hidden;
+  border: 1px solid var(--line-soft);
+  border-radius: 18rpx;
+  background: var(--paper-surface);
+}
+
+.privacy-entry {
+  padding: 22rpx 24rpx;
+  border-bottom: 1px solid var(--line-soft);
+}
+
+.privacy-entry:last-child {
+  border-bottom: 0;
+}
+
+.privacy-entry__title {
+  color: var(--ink);
+  font-size: 23rpx;
+  font-weight: 700;
+  line-height: 1.45;
+}
+
+.privacy-entry__detail {
+  margin-top: 7rpx;
+  color: var(--ink-2);
+  font-size: 22rpx;
+  line-height: 1.65;
+}
+
+.privacy-note {
+  margin-top: 22rpx;
+  padding: 22rpx 24rpx;
+  border-left: 5rpx solid var(--clay);
+  border-radius: 0 14rpx 14rpx 0;
+  background: var(--clay-tint);
+  color: #695247;
+  font-size: 22rpx;
+  line-height: 1.7;
+}
+
+.privacy-note text {
+  margin-right: 12rpx;
+  color: var(--error);
+  font-weight: 700;
+}
+
+.privacy-platform {
+  margin-top: 40rpx;
+  padding: 32rpx 28rpx;
+  border-radius: 20rpx;
+  background: var(--green-soft);
+}
+
+.privacy-platform__title {
+  color: var(--green);
+  font-size: 27rpx;
+  font-weight: 700;
+}
+
+.privacy-platform__text {
+  margin-top: 10rpx;
+  color: var(--ink-2);
+  font-size: 22rpx;
+  line-height: 1.65;
+}
+
+.privacy-platform__button {
+  width: 100%;
+  min-width: 100%;
+  min-height: 84rpx;
+  margin-top: 24rpx;
+  background: var(--green);
+  color: #fffefa;
+  font-size: 24rpx;
+}
+
+.privacy-platform__button--pressed {
+  opacity: 0.82;
+}
+
+.privacy-footer {
+  margin-top: 48rpx;
+  color: var(--ink-2);
+  font-size: 21rpx;
+  line-height: 1.8;
+  text-align: center;
+}

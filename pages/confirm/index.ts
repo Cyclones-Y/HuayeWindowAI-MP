@@ -1,4 +1,5 @@
 import { getDraft, updateDraft } from '../../store/session'
+import { ensureSession } from '../../services/auth'
 import type { ProductOption, WindowSolution } from '../../types/index'
 import { computeOverlayRect, fitStageSize, overlayStyle } from '../../utils/selection-overlay'
 
@@ -58,7 +59,9 @@ Page({
     this.setData({ glassCode: String(event.currentTarget.dataset.code) })
   },
 
-  startGeneration() {
+  async startGeneration() {
+    // 公开样例保留免登录体验，只有用户真实照片生成需要建立账号。
+    if (!getDraft().photo?.isSample && !(await ensureSession())) return
     updateDraft({
       frameColorCode: this.data.frameColorCode,
       glassCode: this.data.glassCode,

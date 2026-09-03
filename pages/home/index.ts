@@ -1,4 +1,5 @@
 import { WINDOW_SOLUTIONS } from '../../data/solutions'
+import { ensureSession } from '../../services/auth'
 import { resetDraft, updateDraft } from '../../store/session'
 
 const COMPARE_MIN_POSITION = 8
@@ -88,7 +89,8 @@ Page({
     this.setData({ comparePosition })
   },
 
-  goUpload() {
+  async goUpload() {
+    if (!(await ensureSession())) return
     resetDraft()
     wx.navigateTo({ url: '/pages/upload/index' })
   },
@@ -112,9 +114,10 @@ Page({
     wx.switchTab({ url: '/pages/solutions/index' })
   },
 
-  onSolutionSelect(event: WechatMiniprogram.CustomEvent<{ id: string }>) {
+  async onSolutionSelect(event: WechatMiniprogram.CustomEvent<{ id: string }>) {
     const solution = WINDOW_SOLUTIONS.find((item) => item.id === event.detail.id)
     if (!solution) return
+    if (!(await ensureSession())) return
     resetDraft()
     updateDraft({ solution })
     wx.navigateTo({ url: '/pages/upload/index' })

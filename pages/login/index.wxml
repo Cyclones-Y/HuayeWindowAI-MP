@@ -1,0 +1,125 @@
+<scroll-view class="login-page" scroll-y enhanced show-scrollbar="{{false}}">
+  <view class="login-shell">
+    <view class="brand-line">
+      <view class="brand-symbol" aria-hidden="true">
+        <view class="brand-symbol__vertical"></view>
+        <view class="brand-symbol__horizontal"></view>
+      </view>
+      <view class="brand-copy">
+        <view class="brand-name">华业门窗</view>
+        <view class="brand-note">专注门窗方案与上门服务</view>
+      </view>
+      <view class="secure-copy"><view class="secure-dot"></view><text>微信安全验证</text></view>
+    </view>
+
+    <view class="scene">
+      <image class="scene__image" src="/assets/generated/home-hero-mobile.jpg" mode="aspectFill" />
+      <view class="scene__caption">
+        <view class="scene__caption-title">家的每一扇窗，都值得认真选择</view>
+        <view class="scene__caption-note">方案预览 · 预约量尺 · 售后记录</view>
+      </view>
+    </view>
+
+    <view class="intro">
+      <view class="intro__title"><text>登录后，</text><text>服务进度随时可查</text></view>
+      <view class="intro__description">首次授权将自动建立账户，无需注册或设置密码；再次使用时可通过微信身份快捷登录。</view>
+    </view>
+
+    <view class="service-list" aria-label="登录后可用服务">
+      <view class="service-item">
+        <view class="service-item__icon"><view class="ic ic--calendar"></view></view>
+        <view class="service-item__copy">
+          <view class="service-item__title">预约进度</view>
+          <view class="service-item__note">上门量尺安排及时掌握</view>
+        </view>
+        <view class="service-item__index">01</view>
+      </view>
+      <view class="service-item">
+        <view class="service-item__icon"><view class="ic ic--compare"></view></view>
+        <view class="service-item__copy">
+          <view class="service-item__title">方案留存</view>
+          <view class="service-item__note">预览效果与选择记录集中查看</view>
+        </view>
+        <view class="service-item__index">02</view>
+      </view>
+      <view class="service-item">
+        <view class="service-item__icon"><view class="ic ic--shield"></view></view>
+        <view class="service-item__copy">
+          <view class="service-item__title">隐私保护</view>
+          <view class="service-item__note">手机号仅用于账户识别与服务联系</view>
+        </view>
+        <view class="service-item__index">03</view>
+      </view>
+    </view>
+
+    <view class="auth-section">
+      <view class="auth-section__heading">
+        <view class="auth-section__title">使用微信手机号登录</view>
+        <view class="auth-section__note">由微信提供手机号安全验证</view>
+      </view>
+
+      <button
+        class="primary-button login-button"
+        open-type="getPhoneNumber"
+        bindgetphonenumber="authorizePhone"
+        hover-class="button-hover"
+        loading="{{loading}}"
+        disabled="{{loading || privacyChecking || !privacyReady}}"
+      >
+        {{loading ? '正在登录…' : '微信手机号一键登录'}}
+      </button>
+
+      <view wx:if="{{statusText}}" class="status-line login-status login-status--{{statusType}}" role="alert">
+        <view class="login-status__dot"></view>
+        <text>{{statusText}}</text>
+      </view>
+
+      <view class="privacy-entry">
+        <view wx:if="{{privacyReady}}" class="privacy-entry__state"><view class="privacy-entry__check">✓</view><text>已同意</text></view>
+        <button wx:else class="privacy-entry__action" bindtap="showPrivacyNotice" disabled="{{privacyChecking}}">
+          {{privacyChecking ? '正在读取隐私设置' : '请先阅读并同意'}}
+        </button>
+        <button class="privacy-entry__link" bindtap="openPrivacyContract">{{privacyContractName}}</button>
+      </view>
+
+      <button class="text-button cancel-button" hover-class="text-button--pressed" bindtap="cancelLogin" disabled="{{loading}}">暂不登录，返回上一页</button>
+
+      <view class="privacy-tip">
+        <view class="privacy-tip__rule"></view>
+        <text>授权手机号仅用于识别你的服务账户及预约联系，不会默认用于模型训练。</text>
+      </view>
+    </view>
+  </view>
+</scroll-view>
+
+<view wx:if="{{showPrivacyDialog}}" class="privacy-mask" catchtouchmove="preventTouchMove">
+  <view class="privacy-dialog" role="dialog" aria-label="隐私保护说明">
+    <view class="privacy-dialog__handle"></view>
+    <view class="privacy-dialog__context">登录前确认</view>
+    <view class="privacy-dialog__title">先了解我们如何保护你的信息</view>
+    <view class="privacy-dialog__description">为完成账户识别、同步服务进度，我们需要在你同意后使用微信绑定的手机号。</view>
+
+    <view class="privacy-use-list">
+      <view class="privacy-use-item">
+        <view class="privacy-use-item__index">01</view>
+        <view><view class="privacy-use-item__title">账户识别</view><view class="privacy-use-item__note">自动建立并识别你的华业服务账户</view></view>
+      </view>
+      <view class="privacy-use-item">
+        <view class="privacy-use-item__index">02</view>
+        <view><view class="privacy-use-item__title">预约联系</view><view class="privacy-use-item__note">用于确认上门量尺时间与服务安排</view></view>
+      </view>
+    </view>
+
+    <view class="privacy-dialog__agreement">点击“同意并继续”，表示你已阅读并同意<button bindtap="openPrivacyContract">{{privacyContractName}}</button></view>
+    <button
+      id="login-privacy-agree"
+      class="primary-button privacy-dialog__agree"
+      open-type="agreePrivacyAuthorization"
+      bindagreeprivacyauthorization="agreePrivacyAuthorization"
+      hover-class="button-hover"
+    >
+      同意并继续
+    </button>
+    <button class="text-button privacy-dialog__decline" hover-class="text-button--pressed" bindtap="declinePrivacyAuthorization">暂不同意</button>
+  </view>
+</view>

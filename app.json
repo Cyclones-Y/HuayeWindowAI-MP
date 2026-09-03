@@ -9,7 +9,9 @@
     "pages/confirm/index",
     "pages/generating/index",
     "pages/result/index",
-    "pages/appointment/index"
+    "pages/appointment/index",
+    "pages/login/index",
+    "pages/privacy/index"
   ],
   "window": {
     "navigationBarBackgroundColor": "#F8F5F0",
@@ -46,5 +48,6 @@
     ]
   },
   "style": "v2",
+  "__usePrivacyCheck__": true,
   "sitemapLocation": "sitemap.json"
 }

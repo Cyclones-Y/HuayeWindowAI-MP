@@ -1,4 +1,5 @@
 import { getDraft, updateDraft } from '../../store/session'
+import { ensureSession } from '../../services/auth'
 
 Page({
   data: {
@@ -7,6 +8,16 @@ Page({
   },
 
   onLoad() {
+    void this.initialize()
+  },
+
+  async initialize() {
+    if (!(await ensureSession())) {
+      const pages = getCurrentPages()
+      if (pages.length > 1) wx.navigateBack()
+      else wx.switchTab({ url: '/pages/home/index' })
+      return
+    }
     const solution = getDraft().solution
     this.setData({ selectedSolutionName: solution?.name || '' })
   },

@@ -238,6 +238,33 @@
   background: var(--green-2);
 }
 
+.privacy-link-button {
+  display: flex;
+  width: 100%;
+  min-width: 100%;
+  min-height: 88rpx;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0;
+  border-bottom: 1px solid var(--line-soft);
+  border-radius: 0;
+  background: transparent;
+  color: var(--green);
+  font-size: 24rpx;
+  font-weight: 600;
+  text-align: left;
+}
+
+.privacy-link-button__arrow {
+  color: var(--ink-2);
+  font-size: 38rpx;
+  font-weight: 400;
+}
+
+.privacy-link-button--pressed {
+  opacity: 0.55;
+}
+
 .privacy-button {
   display: flex;
   width: 100%;

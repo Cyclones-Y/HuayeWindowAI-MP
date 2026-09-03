@@ -129,7 +129,8 @@
 
 ```json
 {
-  "code": "wx.login 返回的临时 code",
+  "code": "wx.login 返回的临时登录 code",
+  "phoneCode": "getPhoneNumber 返回的临时 code，已绑定微信身份可省略",
   "deviceId": "client_generated_device_id"
 }
 ```
@@ -157,7 +158,12 @@
 服务端要求：
 
 - 使用微信服务端接口换取 `openid`/`unionid`，不得信任客户端直接传入的身份字段。
+- 首次出现的微信身份必须同时提交 `phoneCode`；未提交时返回 HTTP `428` 和 `PHONE_AUTH_REQUIRED`，由小程序展示手机号一键登录按钮。
+- 手机号授权成功后自动建立业务用户，不提供注册页、密码、短信验证码或单独注册接口；后续同一微信身份只需新的 `wx.login` code 即可静默登录。
+- 同一手机号通过新的微信身份登录时归并到同一业务用户；已绑定身份提交了其他账号的手机号时返回 `ACCOUNT_BINDING_CONFLICT`，不得静默切换账号。
+- `accessToken` 是固定有效期 7200 秒的 Redis 随机会话令牌；同一设备重新登录轮换旧会话，其他设备会话不受影响。
 - `session_key` 不返回前端，不写普通业务日志。
+- 手机号按业务决定直接存储在 MySQL 中，并通过唯一索引完成账号归并；Redis、响应和日志中不得保存手机号。
 - 登录应可重复调用，同一微信身份不能创建重复用户。
 
 ## 5. 图片与样例接口
@@ -518,7 +524,7 @@ QUEUED -> PROCESSING -> SUCCEEDED
 - 服务端校验姓名、手机号、日期、时段和服务区域。
 - `preferredTimeCode` 使用稳定代码，不接收显示文案作为业务值。
 - `resultId` 和 `solutionId` 用于让工作人员了解用户意向；至少一个应存在，最终规则待业务确认。
-- 手机号加密存储，日志只保留脱敏值。
+- 手机号直接存储，日志只保留脱敏值，并限制仅授权服务访问该字段。
 
 ### 10.2 预约记录
 
@@ -577,14 +583,18 @@ QUEUED -> PROCESSING -> SUCCEEDED
 | 400 | `SOLUTION_OPTION_MISMATCH` | 方案、颜色、玻璃组合无效 |
 | 400 | `APPOINTMENT_TIME_INVALID` | 预约日期或时段无效 |
 | 401 | `UNAUTHORIZED` | 未登录或令牌失效 |
+| 401 | `WECHAT_CODE_INVALID` | 微信临时登录码或手机号授权码无效 |
 | 403 | `RESOURCE_FORBIDDEN` | 访问其他用户资源 |
 | 404 | `RESOURCE_NOT_FOUND` | 资源不存在或已删除 |
 | 409 | `IDEMPOTENCY_CONFLICT` | 同一幂等键对应不同请求 |
+| 409 | `ACCOUNT_BINDING_CONFLICT` | 已绑定微信身份与本次授权手机号属于不同账号 |
 | 413 | `PHOTO_TOO_LARGE` | 图片超过服务端限制 |
 | 415 | `PHOTO_UNSUPPORTED` | 图片类型或编码不支持 |
 | 422 | `PHOTO_DECODE_FAILED` | 图片无法解码 |
 | 422 | `RENDER_CONTENT_REJECTED` | 图片不符合生成要求或内容安全拒绝 |
+| 428 | `PHONE_AUTH_REQUIRED` | 首次微信身份尚未完成手机号授权 |
 | 429 | `RATE_LIMITED` | 生成频率或接口频率超限 |
+| 503 | `WECHAT_SERVICE_UNAVAILABLE` | 微信服务调用失败或响应异常 |
 | 500 | `INTERNAL_ERROR` | 未分类服务端错误 |
 | 502 | `RENDER_PROVIDER_ERROR` | 模型供应商错误 |
 | 504 | `RENDER_PROVIDER_TIMEOUT` | 模型供应商超时 |

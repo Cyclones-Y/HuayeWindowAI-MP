@@ -1,0 +1,51 @@
+<view class="privacy-page">
+  <view class="privacy-hero">
+    <view class="privacy-hero__eyebrow">HUAYE · PRIVACY</view>
+    <view class="privacy-hero__title">隐私保护指引</view>
+    <view class="privacy-hero__intro">我们重视你的住宅影像与联系信息。这里说明信息为何使用、保存多久，以及你可以如何管理它。</view>
+    <view class="privacy-meta">
+      <view><text>版本</text><text>{{version}}</text></view>
+      <view><text>发布与生效</text><text>{{publishDate}}</text></view>
+    </view>
+  </view>
+
+  <view class="privacy-summary">
+    <view class="privacy-summary__label">一眼看懂</view>
+    <view class="privacy-summary__grid">
+      <view class="privacy-summary__item"><text class="privacy-summary__number">01</text><text>照片仅在当前设备处理</text></view>
+      <view class="privacy-summary__item"><text class="privacy-summary__number">02</text><text>当前不用于模型训练</text></view>
+      <view class="privacy-summary__item"><text class="privacy-summary__number">03</text><text>手机号仅用于账户与预约</text></view>
+      <view class="privacy-summary__item"><text class="privacy-summary__number">04</text><text>本地记录可随时清除</text></view>
+    </view>
+  </view>
+
+  <view class="privacy-body">
+    <view wx:for="{{sections}}" wx:key="number" wx:for-item="section" class="privacy-section-card">
+      <view class="privacy-section-card__heading">
+        <text class="privacy-section-card__number">{{section.number}}</text>
+        <text class="privacy-section-card__title">{{section.title}}</text>
+      </view>
+      <view class="privacy-section-card__content">
+        <view wx:for="{{section.paragraphs}}" wx:key="*this" wx:for-item="paragraph" class="privacy-paragraph">{{paragraph}}</view>
+        <view wx:if="{{section.entries && section.entries.length}}" class="privacy-entry-list">
+          <view wx:for="{{section.entries}}" wx:key="title" wx:for-item="entry" class="privacy-entry">
+            <view class="privacy-entry__title">{{entry.title}}</view>
+            <view class="privacy-entry__detail">{{entry.detail}}</view>
+          </view>
+        </view>
+        <view wx:if="{{section.note}}" class="privacy-note"><text>请注意</text>{{section.note}}</view>
+      </view>
+    </view>
+
+    <view class="privacy-platform">
+      <view class="privacy-platform__title">微信平台隐私授权说明</view>
+      <view class="privacy-platform__text">你也可以查看微信公众平台备案的隐私保护指引，核对手机号、相机和相册等平台能力的授权范围。</view>
+      <button class="privacy-platform__button" hover-class="privacy-platform__button--pressed" bindtap="openWechatPrivacyContract">查看微信平台隐私指引</button>
+    </view>
+
+    <view class="privacy-footer">
+      <view>柳州市华业装饰工程有限公司</view>
+      <view>更新日期：{{publishDate}}</view>
+    </view>
+  </view>
+</view>

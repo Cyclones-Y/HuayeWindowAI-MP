@@ -1,4 +1,5 @@
 import { gateway } from '../../services/index'
+import { ensureSession } from '../../services/auth'
 import type { LeadForm } from '../../types/index'
 import { validateLead, type LeadErrors } from '../../utils/validation'
 
@@ -56,6 +57,7 @@ Page({
       wx.showToast({ title: '请检查预约信息', icon: 'none' })
       return
     }
+    if (!(await ensureSession())) return
     this.setData({ submitting: true })
     try {
       await gateway.submitLead(this.data.form)

@@ -1,4 +1,5 @@
 import { gateway } from '../../services/index'
+import { ensureSession } from '../../services/auth'
 import { resetDraft, updateDraft } from '../../store/session'
 import type { NeedType, RoomType, WindowSolution } from '../../types/index'
 
@@ -65,9 +66,10 @@ Page({
     this.setData({ filteredSolutions })
   },
 
-  onSolutionSelect(event: WechatMiniprogram.CustomEvent<{ id: string }>) {
+  async onSolutionSelect(event: WechatMiniprogram.CustomEvent<{ id: string }>) {
     const solution = this.data.solutions.find((item) => item.id === event.detail.id)
     if (!solution) return
+    if (!(await ensureSession())) return
     resetDraft()
     updateDraft({ solution })
     wx.navigateTo({ url: '/pages/upload/index' })

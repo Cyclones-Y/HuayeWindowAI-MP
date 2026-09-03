@@ -1,4 +1,5 @@
 import { WINDOW_SOLUTIONS } from '../../data/solutions'
+import { ensureSession } from '../../services/auth'
 import { gateway } from '../../services/index'
 import { getFavoriteIds, getHistory, getLeads } from '../../store/session'
 import type { LocalHistoryItem, LocalLead, WindowSolution } from '../../types/index'
@@ -39,7 +40,13 @@ Page({
     wx.switchTab({ url: '/pages/solutions/index' })
   },
 
-  clearData() {
+  /** 隐私规则不应只在首次登录时出现，用户可从个人中心随时重新查阅。 */
+  openPrivacyGuide() {
+    wx.navigateTo({ url: '/pages/privacy/index' })
+  },
+
+  async clearData() {
+    if (!(await ensureSession())) return
     wx.showModal({
       title: '清除全部记录',
       content: '将删除效果记录、收藏方案和预约信息。此操作无法撤销。',

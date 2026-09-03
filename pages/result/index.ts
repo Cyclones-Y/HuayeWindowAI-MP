@@ -1,4 +1,5 @@
 import { gateway } from '../../services/index'
+import { ensureSession } from '../../services/auth'
 import { getDraft, getHistory, isFavorite, updateDraft } from '../../store/session'
 import type { RenderResult, WindowSolution } from '../../types/index'
 
@@ -49,6 +50,7 @@ Page({
   async toggleFavorite() {
     const solution = this.data.solution
     if (!solution) return
+    if (!(await ensureSession())) return
     const favorite = await gateway.favoriteSolution(solution.id)
     this.setData({ favorite })
     wx.showToast({ title: favorite ? '已收藏方案' : '已取消收藏', icon: 'none' })
@@ -59,7 +61,8 @@ Page({
     wx.navigateTo({ url: '/pages/solution-select/index' })
   },
 
-  bookMeasure() {
+  async bookMeasure() {
+    if (!(await ensureSession())) return
     wx.navigateTo({ url: '/pages/appointment/index' })
   },
 
