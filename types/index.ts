@@ -10,6 +10,11 @@ export interface NormalizedRect {
 }
 
 export interface PhotoDraft {
+  /** 原图上传后保留服务端标识；样例只使用 sampleSceneId，不创建用户照片。 */
+  photoId?: string
+  sampleSceneId?: string
+  previewUrl?: string
+  previewUrlExpiresAt?: string
   localPath: string
   width: number
   height: number
@@ -36,6 +41,36 @@ export interface WindowSolution {
   afterImage: string
   thumbnail: string
   features: string[]
+  defaultFrameColorCode?: string
+  defaultGlassCode?: string
+}
+
+/** 公开样例使用后端提供的尺寸和选区，不能在页面里硬编码某一张场景图。 */
+export interface SampleScene {
+  id: string
+  name: string
+  sceneType: RoomType
+  thumbnailUrl: string
+  width: number
+  height: number
+  defaultSelection: NormalizedRect
+}
+
+/** 元数据属于服务端纠正方向后的 JPEG；本地框选必须使用对应处理后图像。 */
+export interface UploadedPhoto {
+  photoId: string
+  width: number
+  height: number
+  sizeBytes: number
+  mimeType: string
+  previewUrl: string
+  previewUrlExpiresAt: string
+  createdAt: string
+}
+
+export interface PhotoUploadOperation {
+  result: Promise<UploadedPhoto>
+  abort(): void
 }
 
 export interface DraftState {

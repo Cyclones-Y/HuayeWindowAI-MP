@@ -10,17 +10,20 @@
 - 生成失败重试、前后对比滑杆、收藏和预约表单。
 - 本地历史、收藏、预约记录与数据清除。
 
-当前 AI 生图、照片上传和预约提交仍为本地演示；手机号登录已接入真实 FastAPI 后端。非真实结果会固定展示“演示效果”说明。
+手机号登录、方案列表/详情、样例场景、照片上传和删除已接入真实 FastAPI 后端。AI 生图、收藏和预约仍使用本地实现；结果页明确标注“方案参考效果”，不会把住宅照片与方案图拼成真实生成结果。
 
-## 后端登录联调
+## 后端接口联调
 
-开发者工具默认请求 `http://127.0.0.1:8000`。真机、体验版和正式版联调前，必须在 `config/api.ts` 中替换对应 HTTPS 地址，并在微信公众平台配置业务域名与隐私保护指引。
+开发环境在 `config/api.ts` 配置 `origin` 和 `prefix`，当前分别为 `http://192.168.155.188:8000` 和 `/v1`。`prefix` 对应后端 `API_PREFIX`，可改为 `/api/v1` 或留空；业务调用路径不再硬编码版本号。换网络后需同步修改前端 origin 与后端 `.env.development` 的 `API_PUBLIC_BASE_URL`，然后重启后端、重新编译小程序。
+
+具体接口、照片清理边界和开发者工具配置见 [首批接口联调说明](docs/backend-integration.md)。
 
 ## 本地运行
 
 ```powershell
 npm install
 npm run typecheck
+npm test
 ```
 
 使用微信开发者工具打开本目录：
@@ -37,4 +40,4 @@ pages/generating/index?fail=1
 
 ## 后端联调入口
 
-所有后端能力统一通过 `services/gateway.ts` 的 `FrontendGateway` 暴露。当前实现为 `MockGateway`；联调时新增 HTTP 实现并在 `services/index.ts` 切换，不需要修改页面调用方式。
+业务能力统一通过 `services/gateway.ts` 的 `FrontendGateway` 暴露，当前由 `StageOneGateway` 对接首批真实接口，并将尚未开发的生成、收藏和预约委托给 `MockGateway`。认证统一在 `services/auth.ts` 处理。

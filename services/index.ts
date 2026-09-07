@@ -1,3 +1,3 @@
-import { MockGateway } from './mock-gateway'
+import { StageOneGateway } from './stage-one-gateway'
 
-export const gateway = new MockGateway()
+export const gateway = new StageOneGateway()

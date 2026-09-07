@@ -101,3 +101,9 @@
   gap: 18rpx;
   margin-top: 32rpx;
 }
+
+/* 上传状态沿用既有间距和按钮尺寸；服务端处理时保持 100%，不虚构处理进度。 */
+.upload-status { margin-top: 32rpx; }
+.upload-status__heading { display: flex; justify-content: space-between; gap: 16rpx; margin-bottom: 16rpx; font-size: 26rpx; }
+.upload-status__cancel { margin-top: 24rpx; }
+.upload-error { margin-top: 24rpx; color: #A6433B; font-size: 26rpx; line-height: 1.6; }

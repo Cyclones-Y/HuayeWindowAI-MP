@@ -1,6 +1,8 @@
-import { WINDOW_SOLUTIONS } from '../../data/solutions'
 import { ensureSession } from '../../services/auth'
+import { gateway } from '../../services/index'
+import { ApiError } from '../../services/http-client'
 import { resetDraft, updateDraft } from '../../store/session'
+import type { WindowSolution } from '../../types/index'
 
 const COMPARE_MIN_POSITION = 8
 const COMPARE_MAX_POSITION = 92
@@ -17,7 +19,11 @@ function clearCompareIntroTimers() {
 
 Page({
   data: {
-    featuredSolutions: WINDOW_SOLUTIONS,
+    featuredSolutions: [] as WindowSolution[],
+    loadingSolutions: true,
+    solutionsError: '',
+    loadingSample: false,
+    openingFlow: false,
     comparePosition: COMPARE_INITIAL_POSITION,
     compareAnimating: false,
     compareDragging: false,
@@ -55,6 +61,20 @@ Page({
   onShow() {
     wx.setNavigationBarColor({ frontColor: '#000000', backgroundColor: '#F8F5F0' })
     this.getTabBar?.()?.setData({ selected: 0 })
+    void this.loadFeatured()
+  },
+
+  /** 首页与方案页共用真实目录，下架或服务失败时不回退到内置假数据。 */
+  async loadFeatured() {
+    this.setData({ loadingSolutions: true, solutionsError: '' })
+    try {
+      const featuredSolutions = await gateway.listSolutions()
+      this.setData({ featuredSolutions })
+    } catch {
+      this.setData({ solutionsError: '方案暂时无法加载，请稍后重试。' })
+    } finally {
+      this.setData({ loadingSolutions: false })
+    }
   },
 
   onHide() {
@@ -90,24 +110,34 @@ Page({
   },
 
   async goUpload() {
-    if (!(await ensureSession())) return
-    resetDraft()
-    wx.navigateTo({ url: '/pages/upload/index' })
+    if (this.data.openingFlow || this.data.loadingSample) return
+    this.setData({ openingFlow: true })
+    try {
+      if (!(await ensureSession())) return
+      resetDraft()
+      wx.navigateTo({ url: '/pages/upload/index' })
+    } finally { this.setData({ openingFlow: false }) }
   },
 
-  trySample() {
-    resetDraft()
-    updateDraft({
-      photo: {
-        localPath: WINDOW_SOLUTIONS[0].beforeImage,
-        width: 810,
-        height: 1215,
-        size: 0,
-        isSample: true,
-      },
-      selection: { x: 0.12, y: 0.12, width: 0.76, height: 0.7 },
-    })
-    wx.navigateTo({ url: '/pages/solution-select/index' })
+  /** 样例无需登录，图像尺寸、默认框选和稳定 ID 全部来自样例接口。 */
+  async trySample() {
+    if (this.data.loadingSample || this.data.openingFlow) return
+    this.setData({ loadingSample: true })
+    try {
+      const [sample] = await gateway.listSampleScenes()
+      if (!sample) { wx.showToast({ title: '暂无可用示例照片', icon: 'none' }); return }
+      resetDraft()
+      updateDraft({
+        photo: {
+          sampleSceneId: sample.id, localPath: sample.thumbnailUrl,
+          width: sample.width, height: sample.height, size: 0, isSample: true,
+        },
+        selection: sample.defaultSelection,
+      })
+      wx.navigateTo({ url: '/pages/solution-select/index' })
+    } catch (error) {
+      wx.showToast({ title: error instanceof ApiError ? error.message : '示例照片加载失败，请重试', icon: 'none' })
+    } finally { this.setData({ loadingSample: false }) }
   },
 
   goSolutions() {
@@ -115,11 +145,16 @@ Page({
   },
 
   async onSolutionSelect(event: WechatMiniprogram.CustomEvent<{ id: string }>) {
-    const solution = WINDOW_SOLUTIONS.find((item) => item.id === event.detail.id)
-    if (!solution) return
-    if (!(await ensureSession())) return
-    resetDraft()
-    updateDraft({ solution })
-    wx.navigateTo({ url: '/pages/upload/index' })
+    if (this.data.openingFlow || this.data.loadingSample) return
+    this.setData({ openingFlow: true })
+    try {
+      if (!(await ensureSession())) return
+      const solution = await gateway.getSolution(event.detail.id)
+      resetDraft()
+      updateDraft({ solution })
+      wx.navigateTo({ url: '/pages/upload/index' })
+    } catch (error) {
+      wx.showToast({ title: error instanceof ApiError ? error.message : '方案加载失败，请重试', icon: 'none' })
+    } finally { this.setData({ openingFlow: false }) }
   },
 })

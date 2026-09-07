@@ -1,5 +1,6 @@
 import { gateway } from '../../services/index'
 import { ensureSession } from '../../services/auth'
+import { ApiError } from '../../services/http-client'
 import { resetDraft, updateDraft } from '../../store/session'
 import type { NeedType, RoomType, WindowSolution } from '../../types/index'
 
@@ -9,6 +10,7 @@ Page({
   data: {
     loading: true,
     errorText: '',
+    openingSolution: false,
     solutions: [] as WindowSolution[],
     filteredSolutions: [] as WindowSolution[],
     activeRoom: 'ALL' as FilterValue,
@@ -40,7 +42,8 @@ Page({
     this.setData({ loading: true, errorText: '' })
     try {
       const solutions = await gateway.listSolutions()
-      this.setData({ solutions, filteredSolutions: solutions, loading: false })
+      this.setData({ solutions, loading: false })
+      this.applyFilters()
     } catch {
       this.setData({ loading: false, errorText: '方案暂时没有加载成功，请稍后重试。' })
     }
@@ -67,11 +70,17 @@ Page({
   },
 
   async onSolutionSelect(event: WechatMiniprogram.CustomEvent<{ id: string }>) {
-    const solution = this.data.solutions.find((item) => item.id === event.detail.id)
-    if (!solution) return
-    if (!(await ensureSession())) return
-    resetDraft()
-    updateDraft({ solution })
-    wx.navigateTo({ url: '/pages/upload/index' })
+    if (this.data.openingSolution) return
+    this.setData({ openingSolution: true })
+    try {
+      if (!(await ensureSession())) return
+      // 点击时重新读取详情，避免目录加载后被下架的方案仍能继续进入流程。
+      const solution = await gateway.getSolution(event.detail.id)
+      resetDraft()
+      updateDraft({ solution })
+      wx.navigateTo({ url: '/pages/upload/index' })
+    } catch (error) {
+      wx.showToast({ title: error instanceof ApiError ? error.message : '方案加载失败，请重试', icon: 'none' })
+    } finally { this.setData({ openingSolution: false }) }
   },
 })

@@ -28,13 +28,20 @@
   <view class="notice upload-privacy">
     <view class="ic ic--shield"></view>
     <view>
-      <view class="notice__title">照片仅用于生成门窗效果图</view>
-      <view class="notice__text">上传前请确认画面中没有家人和隐私物品。</view>
+      <view class="notice__title">照片将上传并私密保存</view>
+      <view class="notice__text">上传后用于门窗方案预览，可在“我的”中清理本设备上传的照片。画面中请不要包含家人和隐私物品。</view>
     </view>
   </view>
 
+  <view wx:if="{{uploading}}" class="upload-status">
+    <view class="upload-status__heading"><text>{{uploadStage}}</text><text>{{uploadProgress}}%</text></view>
+    <progress percent="{{uploadProgress}}" stroke-width="4" activeColor="#244233" backgroundColor="#E8E5DC" />
+    <button class="secondary-button upload-status__cancel" bindtap="cancelUpload">取消上传</button>
+  </view>
+  <view wx:if="{{uploadError}}" class="upload-error">{{uploadError}}</view>
+
   <view class="action-bar">
     <button class="secondary-button" hover-class="button-hover" disabled="{{choosing}}" bindtap="chooseFromAlbum">从相册选择</button>
-    <button class="primary-button" hover-class="button-hover" loading="{{choosing}}" bindtap="chooseFromCamera"><view class="ic ic--sm ic--camera ic--white"></view><text>拍一张</text></button>
+    <button class="primary-button" hover-class="button-hover" loading="{{choosing}}" disabled="{{choosing}}" bindtap="chooseFromCamera"><view class="ic ic--sm ic--camera ic--white"></view><text>拍一张</text></button>
   </view>
 </view>

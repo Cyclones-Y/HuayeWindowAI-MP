@@ -27,6 +27,6 @@
   </view>
 
   <view class="action-bar">
-    <button class="primary-button" hover-class="button-hover" disabled="{{!selectedId}}" bindtap="continueFlow">{{selectedId ? '下一步，选配置' : '先选一套方案'}}</button>
+    <button class="primary-button" hover-class="button-hover" loading="{{continuing}}" disabled="{{!selectedId || loading || continuing}}" bindtap="continueFlow">{{selectedId ? '下一步，选配置' : '先选一套方案'}}</button>
   </view>
 </view>

@@ -46,7 +46,11 @@
       <view class="profile-section-heading__title">收藏的方案</view>
       <view class="profile-section-heading__detail">把想继续比较的门窗方案留在这里</view>
     </view>
-    <view wx:if="{{favorites.length === 0}}" class="profile-empty">
+    <view wx:if="{{favoritesError}}" class="profile-empty">
+      <view class="profile-empty__text">{{favoritesError}}</view>
+      <button class="secondary-button profile-empty__action" bindtap="refreshData">重新加载</button>
+    </view>
+    <view wx:elif="{{favorites.length === 0}}" class="profile-empty">
       <view class="ic ic--lg ic--bookmark"></view>
       <view class="profile-empty__title">还没有收藏方案</view>
       <view class="profile-empty__text">浏览可施工方案，收藏后方便量尺时继续沟通。</view>
@@ -87,7 +91,7 @@
       <view class="ic ic--shield"></view>
       <view>
         <view class="privacy-section__title">隐私与数据管理</view>
-        <view class="privacy-section__text">照片仅用于生成门窗效果图，预约信息仅用于联系确认上门时间。</view>
+        <view class="privacy-section__text">照片私密保存，可清理本设备记录的已上传照片。效果、收藏和预约记录仍保存在当前设备。</view>
       </view>
     </view>
     <view class="privacy-section__facts">
@@ -97,6 +101,6 @@
     <button class="privacy-link-button" hover-class="privacy-link-button--pressed" bindtap="openPrivacyGuide">
       <text>查看《隐私保护指引》</text><text class="privacy-link-button__arrow">›</text>
     </button>
-    <button class="privacy-button" hover-class="privacy-button--pressed" bindtap="clearData">清除全部记录</button>
+    <button class="privacy-button" hover-class="privacy-button--pressed" loading="{{clearing}}" disabled="{{clearing}}" bindtap="clearData">清除本设备照片与记录</button>
   </view>
 </view>

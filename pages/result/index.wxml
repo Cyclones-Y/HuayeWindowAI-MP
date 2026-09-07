@@ -1,6 +1,6 @@
 <view class="result-page">
   <view class="result-head">
-    <view class="status-line"><text class="status-line__dot"></text><text>效果已生成</text></view>
+    <view class="status-line"><text class="status-line__dot"></text><text>{{result.isDemo ? '方案参考效果' : '效果已生成'}}</text></view>
     <view class="result-title">左右拖动，查看变化</view>
     <view class="result-subtitle">拖动分隔线对比改造前后，重点看门窗区域的变化。</view>
   </view>
@@ -37,7 +37,7 @@
   </view>
 
   <view class="notice result-notice">
-    <view class="notice__text">效果图仅供参考，实际以现场量尺、选材和施工结果为准。</view>
+    <view class="notice__text">{{result.isDemo ? '当前展示方案参考图，不是根据本次上传照片生成的结果。' : ''}}效果图仅供参考，实际以现场量尺、选材和施工结果为准。</view>
   </view>
 
   <view class="result-booking">

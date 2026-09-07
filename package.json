@@ -4,7 +4,8 @@
   "private": true,
   "description": "华业门窗 AI 效果预览微信小程序前端",
   "scripts": {
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "test": "node --test tests/*.test.cjs"
   },
   "devDependencies": {
     "miniprogram-api-typings": "^4.0.8",

@@ -1,6 +1,6 @@
 import { WINDOW_SOLUTIONS } from '../data/solutions'
 import { clearLocalUserData, saveLead, toggleFavorite } from '../store/session'
-import type { CreateRenderTaskInput, FrontendGateway } from './gateway'
+import type { CreateRenderTaskInput } from './gateway'
 import type { LeadForm, LocalLead, RenderTask } from '../types/index'
 
 interface InternalTask {
@@ -8,18 +8,14 @@ interface InternalTask {
   startedAt: number
 }
 
-export class MockGateway implements FrontendGateway {
+/** 仅保留尚未开发的生成、收藏、预约能力；目录和照片由 StageOneGateway 调真实接口。 */
+export class MockGateway {
   private readonly tasks = new Map<string, InternalTask>()
 
-  async login(): Promise<{ demoUserId: string }> {
-    return { demoUserId: 'demo-user-local' }
-  }
-
-  async listSolutions() {
-    return WINDOW_SOLUTIONS
-  }
-
   async createRenderTask(input: CreateRenderTaskInput): Promise<RenderTask> {
+    if (!WINDOW_SOLUTIONS.some((solution) => solution.id === input.solution.id)) {
+      throw new Error('该方案暂未提供参考效果图')
+    }
     const id = `demo-task-${Date.now()}`
     this.tasks.set(id, { input, startedAt: Date.now() })
     return { id, status: 'QUEUED', progress: 12, stageText: '方案已确认，正在排队' }
@@ -39,6 +35,8 @@ export class MockGateway implements FrontendGateway {
     if (elapsed < 2300) return { id: taskId, status: 'PROCESSING', progress: 46, stageText: '正在保持房间结构' }
     if (elapsed < 3600) return { id: taskId, status: 'PROCESSING', progress: 78, stageText: '正在替换门窗方案' }
 
+    // 使用既有成对素材，不能把用户照片与任意目录图拼成貌似真实的 AI 结果。
+    const reference = WINDOW_SOLUTIONS.find((solution) => solution.id === task.input.solution.id)!
     const solution = task.input.solution
     return {
       id: taskId,
@@ -49,8 +47,8 @@ export class MockGateway implements FrontendGateway {
         id: `demo-result-${taskId}`,
         taskId,
         solutionId: solution.id,
-        beforeImage: solution.beforeImage,
-        afterImage: solution.afterImage,
+        beforeImage: reference.beforeImage,
+        afterImage: reference.afterImage,
         isDemo: true,
         createdAt: Date.now(),
       },

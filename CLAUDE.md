@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## What this is
 
-华业门窗 (Huaye Windows) AI 效果预览 — a **native WeChat Mini Program written in TypeScript**. Users upload a photo of their home, draw a box around the window, pick a producible window solution, view a before/after render, and book an on-site measurement. V1 is a clickable prototype: all backend behaviour (login, upload, AI render, lead submission) is mocked locally and never leaves the device.
+华业门窗 (Huaye Windows) AI 效果预览 — a **native WeChat Mini Program written in TypeScript**. Login, catalogue, sample scenes and private photo upload/deletion use the FastAPI backend. AI render, favourites, history and lead submission still use local implementations. See `docs/backend-integration.md` for the current boundary and configuration.
 
 UI copy, docs, and commit messages are in Chinese (`feat(miniprogram): ...` style). Keep new copy in plain Chinese aimed at non-expert homeowners.
 
@@ -12,7 +12,8 @@ UI copy, docs, and commit messages are in Chinese (`feat(miniprogram): ...` styl
 
 ```powershell
 npm install
-npm run typecheck        # tsc --noEmit — the only automated check; there is no lint, test, or build script
+npm run typecheck        # tsc --noEmit
+npm test                 # Node regression tests with WeChat API substitutes
 ```
 
 There is no CLI build. The WeChat DevTools compiles `.ts` directly via `useCompilerPlugins: ["typescript"]` in `project.config.json`, so `.ts` files sit beside their `.wxml/.wxss/.json` and are never transpiled into a `dist/`. Open the repo root as the project in WeChat DevTools (README shows `cli.bat open --project <path>`).
@@ -35,15 +36,15 @@ Persistent local records (history, favourites, leads) live in `wx.setStorageSync
 
 ### Backend boundary: `FrontendGateway`
 
-`services/gateway.ts` declares the `FrontendGateway` interface (login, listSolutions, createRenderTask, getRenderTask, favoriteSolution, submitLead, clearUserData). `services/index.ts` exports the single `gateway` instance, currently `MockGateway` from `services/mock-gateway.ts`. Pages import `gateway` and never touch the implementation, so a real HTTP gateway is added by implementing the interface and swapping the export in `services/index.ts`.
+`services/gateway.ts` declares `FrontendGateway`; `services/index.ts` exports `StageOneGateway`, which calls the first batch of real APIs and delegates remaining capabilities to `MockGateway`. Login and session renewal are centralized in `services/auth.ts`. All HTTP paths exclude the prefix, which is configured alongside the origin in `config/api.ts`.
 
 `MockGateway` simulates an async render task purely by elapsed time (QUEUED → PROCESSING → SUCCEEDED at ~3.6 s; `forceFailure` fails at 1.8 s). `pages/generating` polls `getRenderTask` every 650 ms. `RenderStatus.DRAFT` is a client-only state and must never be treated as a server status.
 
-`docs/backend-api.md` is the agreed contract for the future Spring Boot backend. Its section 14 (“前端联调改造清单”) lists exactly what the frontend must change during integration (e.g. send `solutionId` not the full `WindowSolution`, submit normalized `selection`, replace favourite toggle with PUT/DELETE, replace `isDemo: true` literal with `resultType`). Consult it before changing `types/index.ts` or gateway signatures.
+`docs/backend-api.md` describes the target contract. The current backend uses FastAPI; `docs/backend-integration.md` records which APIs are implemented. The contract's section 14 lists remaining integration changes such as submitting normalized selection and using real render result types.
 
 ### Data and assets
 
-- `data/solutions.ts` is the static catalogue of the three producible solutions and the only source of `WindowSolution` objects. `MockGateway.listSolutions` returns it verbatim.
+- Catalogue data comes from the backend. `data/solutions.ts` only supplies the existing paired reference images for local render tasks; do not use it as fallback when catalogue requests fail.
 - Solution and hero imagery lives in `assets/generated/` and is referenced by absolute `/assets/...` paths. `assets/cases/` and `assets/generated/prompts/` are excluded from the uploaded package via `packOptions.ignore` in `project.config.json`, so do not reference them at runtime.
 - Selection coordinates are normalized `0–1` `NormalizedRect`s relative to the image; `pages/selection` converts from the measured stage rect and rejects boxes under 8 % of the area.
 

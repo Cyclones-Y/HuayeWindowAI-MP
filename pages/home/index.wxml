@@ -38,7 +38,7 @@
       <text>用我家照片预览</text>
     </button>
     <view class="action-zone__hint">支持现场拍摄或从相册选择</view>
-    <button class="text-button sample-link" hover-class="text-button--pressed" bindtap="trySample"><text>先用示例照片试试</text><text class="sample-link__arrow"></text></button>
+    <button class="text-button sample-link" hover-class="text-button--pressed" loading="{{loadingSample}}" disabled="{{loadingSample || openingFlow}}" bindtap="trySample"><text>先用示例照片试试</text><text class="sample-link__arrow"></text></button>
   </view>
 
   <view class="process-strip">
@@ -85,7 +85,13 @@
       </view>
       <view class="section-link" bindtap="goSolutions">查看全部</view>
     </view>
-    <scroll-view class="solution-scroll" scroll-x enhanced show-scrollbar="{{false}}">
+    <view wx:if="{{loadingSolutions}}" class="empty-state"><view class="empty-state__text">正在加载方案…</view></view>
+    <view wx:elif="{{solutionsError}}" class="empty-state">
+      <view class="empty-state__text">{{solutionsError}}</view>
+      <button class="secondary-button" bindtap="loadFeatured">重新加载</button>
+    </view>
+    <view wx:elif="{{!featuredSolutions.length}}" class="empty-state"><view class="empty-state__text">暂无可用方案，请稍后再来。</view></view>
+    <scroll-view wx:else class="solution-scroll" scroll-x enhanced show-scrollbar="{{false}}">
       <view class="solution-scroll__track">
         <view wx:for="{{featuredSolutions}}" wx:key="id" wx:for-item="solution" class="solution-scroll__item"><solution-card solution="{{solution}}" compact bind:select="onSolutionSelect" /></view>
       </view>

@@ -82,7 +82,7 @@ function wxLogin(): Promise<string> {
 async function exchangeSession(phoneCode?: string): Promise<AuthSession> {
   // 手机号授权码和 wx.login code 都是短时凭据，每次提交前现取，失败后由用户重新触发。
   const code = await wxLogin()
-  const data = await apiRequest<LoginResponse>('/v1/auth/wechat/login', {
+  const data = await apiRequest<LoginResponse>('/auth/wechat/login', {
     method: 'POST',
     data: { code, phoneCode, deviceId: getDeviceId() },
   })
@@ -153,4 +153,30 @@ export function ensureSession(): Promise<boolean> {
     pendingEnsure = null
   })
   return pendingEnsure
+}
+
+/** 仅供本设备照片清理索引分账户保存使用，身份认证仍以服务器 Bearer 会话为准。 */
+export function getSessionUserId(): string | null {
+  if (!currentSession) currentSession = readStoredSession()
+  return currentSession?.user.id || null
+}
+
+/**
+ * 已登录操作在服务器明确拒绝会话时恢复一次；网络错误不重试，避免重复上传照片。
+ * 请求函数不得在这里记录令牌，登录接口自身也不经过此包装，避免循环调用。
+ */
+export async function withAccessToken<T>(operation: (token: string) => Promise<T>): Promise<T> {
+  if (!(await ensureSession())) throw new ApiError('UNAUTHORIZED', '请先登录后继续', 401)
+  const token = getAccessToken()
+  if (!token) throw new ApiError('UNAUTHORIZED', '登录状态已失效，请重新登录', 401)
+  try {
+    return await operation(token)
+  } catch (error) {
+    if (!(error instanceof ApiError) || error.code !== 'UNAUTHORIZED' || error.statusCode !== 401) throw error
+    clearSession()
+    if (!(await ensureSession())) throw error
+    const renewed = getAccessToken()
+    if (!renewed) throw error
+    return operation(renewed)
+  }
 }

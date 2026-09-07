@@ -1,4 +1,4 @@
-import type { LeadForm, LocalLead, RenderTask, WindowSolution } from '../types/index'
+import type { LeadForm, LocalLead, PhotoUploadOperation, RenderTask, SampleScene, WindowSolution } from '../types/index'
 
 export interface CreateRenderTaskInput {
   solution: WindowSolution
@@ -6,8 +6,11 @@ export interface CreateRenderTaskInput {
 }
 
 export interface FrontendGateway {
-  login(): Promise<{ demoUserId: string }>
   listSolutions(): Promise<WindowSolution[]>
+  getSolution(solutionId: string): Promise<WindowSolution>
+  listSampleScenes(): Promise<SampleScene[]>
+  uploadPhoto(localPath: string, onProgress: (progress: number) => void): PhotoUploadOperation
+  deletePhoto(photoId: string): Promise<void>
   createRenderTask(input: CreateRenderTaskInput): Promise<RenderTask>
   getRenderTask(taskId: string): Promise<RenderTask>
   favoriteSolution(solutionId: string): Promise<boolean>

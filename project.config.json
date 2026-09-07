@@ -20,6 +20,8 @@
   "simulatorPluginLibVersion": {},
   "packOptions": {
     "ignore": [
+      { "type": "folder", "value": "tests" },
+      { "type": "folder", "value": "test-results" },
       { "type": "folder", "value": ".agents" },
       { "type": "folder", "value": ".codex" },
       { "type": "folder", "value": ".impeccable" },
