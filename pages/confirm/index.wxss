@@ -144,3 +144,8 @@
 .confirm-notice {
   margin-top: 40rpx;
 }
+
+/* 告知文案与按钮纵向排列，窄屏也不能把生成按钮压成单字竖排。 */
+.confirm-page.with-action-bar { padding-bottom: calc(310rpx + env(safe-area-inset-bottom)); }
+.confirm-page .action-bar { flex-direction: column; gap: 14rpx; }
+.confirm-page .action-bar button { width: 100%; flex: none; }

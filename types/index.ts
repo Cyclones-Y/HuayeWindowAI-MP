@@ -85,10 +85,21 @@ export interface DraftState {
 export interface RenderTask {
   id: string
   status: RenderStatus
-  progress: number
+  progress: null
+  stage: RenderStage
+  pollAfterMs: number
+  resultId: string | null
+  failure: { code: string; message: string; retryable: boolean } | null
   stageText: string
   errorMessage?: string
-  result?: RenderResult
+}
+
+export type RenderStage = 'QUEUED' | 'PREPARING' | 'GENERATING' | 'SAVING' | 'COMPLETED'
+
+/** 保存当时选材配置，目录更新或方案下架不改变历史结果含义。 */
+export interface RenderSolutionSnapshot {
+  id: string; name: string; subtitle: string; features: string[]; pricingNote: string
+  frameColorCode: string; frameColorLabel: string; colorHex: string; glassCode: string; glassLabel: string
 }
 
 export interface RenderResult {
@@ -97,9 +108,15 @@ export interface RenderResult {
   solutionId: string
   beforeImage: string
   afterImage: string
-  isDemo: true
+  resultType: 'USER_GENERATED' | 'SAMPLE_DEMO'
+  width: number
+  height: number
+  imageUrlExpiresAt: string
+  solution: RenderSolutionSnapshot
   createdAt: number
 }
+
+export interface RenderResultPage { items: RenderResult[]; page: number; total: number; hasNext: boolean }
 
 export interface LeadForm {
   contactName: string

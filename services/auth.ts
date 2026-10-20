@@ -165,8 +165,13 @@ export function getSessionUserId(): string | null {
  * 已登录操作在服务器明确拒绝会话时恢复一次；网络错误不重试，避免重复上传照片。
  * 请求函数不得在这里记录令牌，登录接口自身也不经过此包装，避免循环调用。
  */
-export async function withAccessToken<T>(operation: (token: string) => Promise<T>): Promise<T> {
+export async function withAccessToken<T>(operation: (token: string) => Promise<T>, expectedUserId = getSessionUserId()): Promise<T> {
+  // 身份刷新可能得到不同账号；每次发送前校验，不能用 B 的 token 提交 A 的已保存任务。
+  const assertAccount = () => {
+    if (expectedUserId && getSessionUserId() !== expectedUserId) throw new ApiError('ACCOUNT_CHANGED', '账户已切换，请返回当前账户重新操作', 403)
+  }
   if (!(await ensureSession())) throw new ApiError('UNAUTHORIZED', '请先登录后继续', 401)
+  assertAccount()
   const token = getAccessToken()
   if (!token) throw new ApiError('UNAUTHORIZED', '登录状态已失效，请重新登录', 401)
   try {
@@ -177,6 +182,7 @@ export async function withAccessToken<T>(operation: (token: string) => Promise<T
     if (!(await ensureSession())) throw error
     const renewed = getAccessToken()
     if (!renewed) throw error
+    assertAccount()
     return operation(renewed)
   }
 }

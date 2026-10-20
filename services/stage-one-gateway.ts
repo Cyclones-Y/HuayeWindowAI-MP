@@ -1,7 +1,8 @@
-/** 第一批接口使用真实 HTTP；未开发的生成、收藏、预约继续显式交由已有演示服务处理。 */
+/** 目录、照片和生成使用真实接口；收藏、预约沿用已有本地实现。 */
 import { getApiBaseUrl } from '../config/api'
 import { forgetUploadedPhoto, getUploadedPhotoIds, rememberUploadedPhoto } from '../store/photos'
-import type { LeadForm, PhotoUploadOperation, SampleScene, UploadedPhoto, WindowSolution } from '../types/index'
+import { forgetDeviceResult, forgetSubmission, getDeviceResultIds, getSubmissions } from '../store/renders'
+import type { LeadForm, PhotoUploadOperation, RenderResult, RenderResultPage, RenderTask, SampleScene, UploadedPhoto, WindowSolution } from '../types/index'
 import { ensureSession, getSessionUserId, withAccessToken } from './auth'
 import type { CreateRenderTaskInput, FrontendGateway } from './gateway'
 import { ApiError, apiRequest, unwrapApiResponse } from './http-client'
@@ -50,6 +51,16 @@ function mapSolution(dto: SolutionDetailDto): WindowSolution {
     defaultFrameColorCode: frameColors.find((option) => option.code === dto.defaultFrameColorCode)?.code || frameColors[0]?.code || '',
     defaultGlassCode: glassOptions.find((option) => option.code === dto.defaultGlassCode)?.code || glassOptions[0]?.code || '',
   }
+}
+
+interface RenderTaskDto extends Omit<RenderTask, 'id' | 'stageText'> { taskId: string; stageLabel: string }
+interface RenderResultDto extends Omit<RenderResult, 'solutionId' | 'beforeImage' | 'afterImage' | 'createdAt'> {
+  beforeImageUrl: string; afterImageUrl: string; createdAt: string
+}
+/** 服务端终态与配置快照直接映射，绝不回退到目录封面作为生成结果。 */
+function mapTask(dto: RenderTaskDto): RenderTask { return { ...dto, id: dto.taskId, stageText: dto.stageLabel } }
+function mapResult(dto: RenderResultDto): RenderResult {
+  return { ...dto, solutionId: dto.solution.id, beforeImage: dto.beforeImageUrl, afterImage: dto.afterImageUrl, createdAt: Date.parse(dto.createdAt) }
 }
 
 export class StageOneGateway implements FrontendGateway {
@@ -142,9 +153,42 @@ export class StageOneGateway implements FrontendGateway {
     })
   }
 
-  createRenderTask(input: CreateRenderTaskInput) { return this.demo.createRenderTask(input) }
-  getRenderTask(taskId: string) { return this.demo.getRenderTask(taskId) }
+  async createRenderTask(input: CreateRenderTaskInput, key: string, expectedUserId = getSessionUserId()): Promise<RenderTask> {
+    return withAccessToken(async (accessToken) => mapTask(await apiRequest<RenderTaskDto>('/render-tasks', {
+      method: 'POST', data: input, accessToken, headers: { 'Idempotency-Key': key },
+    })), expectedUserId)
+  }
+  async getRenderTask(taskId: string): Promise<RenderTask> {
+    return withAccessToken(async (accessToken) => mapTask(await apiRequest<RenderTaskDto>(`/render-tasks/${encodeURIComponent(taskId)}`, { accessToken })))
+  }
+  async retryRenderTask(taskId: string, key: string, expectedUserId = getSessionUserId()): Promise<RenderTask> {
+    return withAccessToken(async (accessToken) => mapTask(await apiRequest<RenderTaskDto>(`/render-tasks/${encodeURIComponent(taskId)}/retry`, {
+      method: 'POST', accessToken, headers: { 'Idempotency-Key': key },
+    })), expectedUserId)
+  }
+  async getRenderResult(resultId: string): Promise<RenderResult> {
+    return withAccessToken(async (accessToken) => mapResult(await apiRequest<RenderResultDto>(`/render-results/${encodeURIComponent(resultId)}`, { accessToken })))
+  }
+  async listRenderResults(page = 1): Promise<RenderResultPage> {
+    return withAccessToken(async (accessToken) => {
+      const data = await apiRequest<Omit<RenderResultPage, 'items'> & { items: RenderResultDto[] }>(`/render-results?page=${page}&size=20`, { accessToken })
+      return { ...data, items: data.items.map(mapResult) }
+    })
+  }
+  async deleteRenderResult(resultId: string): Promise<void> {
+    await withAccessToken(async (accessToken) => {
+      try { await apiRequest<null>(`/render-results/${encodeURIComponent(resultId)}`, { method: 'DELETE', accessToken }) }
+      catch (error) { if (!(error instanceof ApiError) || error.code !== 'RESOURCE_NOT_FOUND') throw error }
+      const userId = getSessionUserId()
+      if (userId) forgetDeviceResult(userId, resultId)
+    })
+  }
   favoriteSolution(solutionId: string) { return this.demo.favoriteSolution(solutionId) }
+  async deleteRenderTaskInput(taskId: string): Promise<void> {
+    await withAccessToken(async (accessToken) => {
+      await apiRequest<null>(`/render-tasks/${encodeURIComponent(taskId)}`, { method: 'DELETE', accessToken })
+    })
+  }
   submitLead(form: LeadForm) { return this.demo.submitLead(form) }
 
   /** 仅清本设备已记录的照片；删除失败时不宣称全部清除，也不先丢掉本地索引。 */
@@ -152,6 +196,19 @@ export class StageOneGateway implements FrontendGateway {
     if (!(await ensureSession())) throw new ApiError('UNAUTHORIZED', '请先登录后继续', 401)
     const userId = getSessionUserId()
     if (!userId) throw new ApiError('UNAUTHORIZED', '请重新登录', 401)
+    // 响应不确定的提交必须先由用户恢复查询，清理动作绝不能重新发送创建/重试请求。
+    for (const record of getSubmissions(userId)) {
+      if (!record.taskId) {
+        if (!record.attempted || record.rejected) { forgetSubmission(userId, record.key); continue }
+        throw new ApiError('RENDER_SUBMISSION_UNCONFIRMED', '仍有未确认的提交，请先继续查看任务再清理', 409)
+      }
+      const task = await this.getRenderTask(record.taskId)
+      if (task.status === 'QUEUED' || task.status === 'PROCESSING') throw new ApiError('PHOTO_IN_USE', '仍有生成任务，请完成后再清理', 409)
+      if (task.resultId) await this.deleteRenderResult(task.resultId)
+      else await this.deleteRenderTaskInput(task.id)
+      forgetSubmission(userId, record.key)
+    }
+    for (const id of getDeviceResultIds(userId)) await this.deleteRenderResult(id)
     // 每个删除请求自行恢复会话一次，避免外层再重试整个批次而放大登录重试次数。
     for (const id of getUploadedPhotoIds(userId)) await this.deletePhoto(id)
     await this.demo.clearUserData()

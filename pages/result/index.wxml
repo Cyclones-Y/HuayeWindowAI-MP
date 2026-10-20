@@ -1,14 +1,17 @@
 <view class="result-page">
+  <view wx:if="{{loadError}}" class="notice"><view class="notice__text">{{loadError}}</view><button class="secondary-button" bindtap="loadResult">重新加载</button></view>
+  <view wx:if="{{loading && !result}}" class="notice">正在读取效果记录</view>
+  <block wx:if="{{result}}">
   <view class="result-head">
-    <view class="status-line"><text class="status-line__dot"></text><text>{{result.isDemo ? '方案参考效果' : '效果已生成'}}</text></view>
+    <view class="status-line"><text class="status-line__dot"></text><text>{{result.resultType === 'SAMPLE_DEMO' ? '样例 AI 生成效果' : '现场照片 AI 生成效果'}}</text></view>
     <view class="result-title">左右拖动，查看变化</view>
     <view class="result-subtitle">拖动分隔线对比改造前后，重点看门窗区域的变化。</view>
   </view>
 
-  <view class="compare-stage" catchtouchstart="onCompareTouch" catchtouchmove="onCompareTouch">
-    <image class="compare-image" src="{{result.afterImage}}" mode="aspectFill" />
+  <view class="compare-stage" style="{{stageHeight ? 'height: ' + stageHeight + 'px;' : ''}}" catchtouchstart="onCompareTouch" catchtouchmove="onCompareTouch">
+    <image class="compare-image" src="{{result.afterImage}}" mode="aspectFit" binderror="onImageError" />
     <view class="compare-before" style="width: {{comparePercent}}%;">
-      <image class="compare-image" style="width: {{stageWidth}}px;" src="{{result.beforeImage}}" mode="aspectFill" />
+      <image class="compare-image" style="width: {{stageWidth}}px;" src="{{result.beforeImage}}" mode="aspectFit" binderror="onImageError" />
     </view>
     <view class="compare-label compare-label--before">改造前</view>
     <view class="compare-label compare-label--after">改造后</view>
@@ -33,11 +36,12 @@
     <view class="result-detail__features">
       <view wx:for="{{solution.features}}" wx:key="*this" wx:for-item="feature" class="result-feature"><text class="result-feature__mark"></text>{{feature}}</view>
     </view>
-    <view class="result-price"><text>报价说明</text><text>{{solution.priceHint}}</text></view>
+    <view class="result-price"><text>生成配置</text><text>{{solution.frameColorLabel}} · {{solution.glassLabel}}</text></view>
+    <view class="result-price"><text>报价说明</text><text>{{solution.pricingNote}}</text></view>
   </view>
 
   <view class="notice result-notice">
-    <view class="notice__text">{{result.isDemo ? '当前展示方案参考图，不是根据本次上传照片生成的结果。' : ''}}效果图仅供参考，实际以现场量尺、选材和施工结果为准。</view>
+    <view class="notice__text">{{result.resultType === 'SAMPLE_DEMO' ? '本结果使用公开样例生成。' : ''}}AI 效果图仅供参考，实际以现场量尺、选材和施工结果为准。</view>
   </view>
 
   <view class="result-booking">
@@ -47,4 +51,5 @@
     </view>
     <button class="primary-button result-booking__button" hover-class="button-hover" bindtap="bookMeasure"><view class="ic ic--sm ic--ruler"></view><text>预约量尺</text></button>
   </view>
+  </block>
 </view>

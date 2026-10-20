@@ -12,8 +12,8 @@
   <view class="privacy-summary">
     <view class="privacy-summary__label">一眼看懂</view>
     <view class="privacy-summary__grid">
-      <view class="privacy-summary__item"><text class="privacy-summary__number">01</text><text>照片仅在当前设备处理</text></view>
-      <view class="privacy-summary__item"><text class="privacy-summary__number">02</text><text>当前不用于模型训练</text></view>
+      <view class="privacy-summary__item"><text class="privacy-summary__number">01</text><text>照片与效果私密保存</text></view>
+      <view class="privacy-summary__item"><text class="privacy-summary__number">02</text><text>生成时交给 Seedream 处理</text></view>
       <view class="privacy-summary__item"><text class="privacy-summary__number">03</text><text>手机号仅用于账户与预约</text></view>
       <view class="privacy-summary__item"><text class="privacy-summary__number">04</text><text>本地记录可随时清除</text></view>
     </view>

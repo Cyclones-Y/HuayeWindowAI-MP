@@ -173,15 +173,22 @@
   color: var(--stage-ink);
   font-size: 22rpx;
   line-height: 1.45;
+  gap: 12rpx;
 }
 
 .progress-step {
   flex: 1;
+  min-width: 0;
+  text-align: center;
 }
 
-.progress-step:nth-child(2) { text-align: center; }
-.progress-step:nth-child(3) { text-align: right; }
 .progress-step--done { color: #ffffff; font-weight: 600; }
+.stage-segment { height: 12rpx; margin-bottom: 16rpx; border-radius: 8rpx; background: var(--stage-line); }
+.progress-step--done .stage-segment { background: var(--stage-accent); }
+.progress-step--active { color: #ffffff; }
+.progress-step--active .stage-segment { background: var(--stage-accent); animation: state-pulse 1.6s ease-in-out infinite; }
+.progress-step--failed .stage-segment { background: #e08a80; }
+@media (prefers-reduced-motion: reduce) { .progress-step--active .stage-segment { animation: none; } }
 
 /* 失败面板 */
 .failure-panel {

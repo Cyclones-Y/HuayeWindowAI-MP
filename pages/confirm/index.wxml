@@ -42,6 +42,7 @@
   </view>
 
   <view class="action-bar">
-    <button class="primary-button" hover-class="button-hover" bindtap="startGeneration">生成门窗预览</button>
+    <view class="notice__text">照片、选区与配置将交给火山引擎 Seedream 5.0 Pro 生成。结果私密保存，可在“我的”清理。</view>
+    <button class="primary-button" loading="{{submitting}}" disabled="{{submitting}}" hover-class="button-hover" bindtap="startGeneration">生成门窗预览</button>
   </view>
 </view>

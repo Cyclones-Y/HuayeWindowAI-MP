@@ -43,9 +43,11 @@ PHOTO_PREVIEW_TTL_SECONDS=3600
 
 本设备按登录用户记录已成功返回的照片 ID。删除失败会保留 ID 供重试；照片已不存在视为清理成功。所有登记照片删除成功后才清除本地历史、收藏和预约。其他设备的照片、上传响应丢失时未记录的照片以及账户本身不在此清理范围内；清理微信缓存不会删除服务器照片。当前没有服务端全量照片列表和账户注销接口。
 
-## 尚未对接
+## 生成与结果
 
-生成任务、结果轮询、收藏写入、预约及历史仍使用本地实现。结果页展示既有参考图并明确说明不是根据上传照片生成；新增方案没有参考素材时会提示无法生成参考效果。`docs/backend-api.md` 中其余接口属于后续目标契约，不能视为已上线。
+`POST /render-tasks`、`GET /render-tasks/{id}`、`POST /render-tasks/{id}/retry`、`GET /render-results`、`GET /render-results/{id}`、`DELETE /render-results/{id}` 已对接真实生成。`DELETE /render-tasks/{id}` 用于回收失败输入快照。创建和重试携带 `Idempotency-Key`，样例生成也需要登录。后端配置及完整字段见后端 `docs/render-generation.md`。
+
+任务按账户保存在设备，隐藏暂停轮询，显示立即查询；弱网按 3/6/12/15 秒退避，状态不改成生成失败。只有服务器报告 COMPLETED/SUCCEEDED 且详情可读取才跳转对比。结果拥有独立原图和配置快照，签名过期重新读取详情。历史从服务器分页读取，收藏与预约继续本地保存。
 
 ## 验证
 

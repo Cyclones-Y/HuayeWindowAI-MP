@@ -22,6 +22,7 @@ export interface RequestOptions {
   method?: 'GET' | 'POST' | 'PUT' | 'DELETE'
   data?: string | WechatMiniprogram.IAnyObject | ArrayBuffer
   accessToken?: string
+  headers?: Record<string, string>
 }
 
 /** wx.request 返回对象，wx.uploadFile 返回 JSON 字符串；统一拒绝空响应与代理 HTML 错误页。 */
@@ -47,7 +48,7 @@ export function unwrapApiResponse<T>(payload: unknown, statusCode: number): T {
  * 统一处理后端信封格式。请求体和认证令牌不得写入 console，避免微信临时码泄漏。
  */
 export function apiRequest<T>(path: string, options: RequestOptions = {}): Promise<T> {
-  const header: Record<string, string> = { 'Content-Type': 'application/json' }
+  const header: Record<string, string> = { 'Content-Type': 'application/json', ...options.headers }
   if (options.accessToken) header.Authorization = `Bearer ${options.accessToken}`
 
   return new Promise((resolve, reject) => {

@@ -291,20 +291,15 @@ test('超限照片在发起上传前被拒绝', async () => {
   assert.equal(calls.uploads.length, 0)
 })
 
-test('收藏读取失败显式展示错误，参考结果继续使用成对内置素材', async () => {
+test('收藏读取失败显式展示错误，生成服务未启用时不能回退到静态素材', async () => {
   storage.set('huaye_demo_favorites', ['s1'])
   const profile = page('pages/profile/index.ts')
   const gateway = load('services/index.ts').gateway
   gateway.listSolutions = async () => { throw new Error('offline') }
   await profile.refreshData()
   assert.match(profile.data.favoritesError, /加载失败/)
-  const source = load('data/solutions.ts').WINDOW_SOLUTIONS[0]
-  const task = await gateway.createRenderTask({ solution: source, photo: { localPath: '/tmp/private.jpg' } })
-  // 调整私有模拟任务的起点，不等待计时器；断言的是结果与用户照片之间的业务隔离。
-  gateway.demo.tasks.get(task.id).startedAt -= 4000
-  const result = (await gateway.getRenderTask(task.id)).result
-  assert.equal(result.isDemo, true)
-  assert.equal(result.beforeImage, source.beforeImage)
-  assert.notEqual(result.beforeImage, '/tmp/private.jpg')
-  assert.equal(calls.requests.length, 0)
+  session()
+  handlers.request = (options) => fail(options, 'RENDER_NOT_ENABLED', 503)
+  await assert.rejects(gateway.createRenderTask({ clientRequestId: 'synthetic-id' }, 'stable-key'), (error) => error.code === 'RENDER_NOT_ENABLED')
+  assert.equal(calls.requests.length, 1)
 })

@@ -6,11 +6,11 @@
 
 - 首页、方案、我的三个主导航页面。
 - 相机/相册选择照片和可拖动缩放的矩形框选。
-- 真实可生产方案筛选、配置确认和演示生成任务。
+- 真实方案筛选、配置确认和 Seedream 5.0 Pro 生成任务。
 - 生成失败重试、前后对比滑杆、收藏和预约表单。
-- 本地历史、收藏、预约记录与数据清除。
+- 服务端效果历史与回看、本地收藏和预约、按设备登记的数据清除。
 
-手机号登录、方案列表/详情、样例场景、照片上传和删除已接入真实 FastAPI 后端。AI 生图、收藏和预约仍使用本地实现；结果页明确标注“方案参考效果”，不会把住宅照片与方案图拼成真实生成结果。
+登录、目录、照片、生成任务及结果历史已接入 FastAPI 后端。生成使用独立持久队列与 worker，进度仅展示真实阶段；收藏与预约沿用本地实现。后端未启用或未配置密钥时明确提示服务未启用。
 
 ## 后端接口联调
 
@@ -32,12 +32,15 @@ npm test
 D:\微信web开发者工具\cli.bat open --project D:\Projects\HuayeWindowAI\code\HuayeWindowAI-MP
 ```
 
-正常流程约 4 秒进入结果页。需要检查失败状态时，可在微信开发者工具中直接编译页面：
+生成时间由真实排队与模型调用决定。页面隐藏停止查询，后台任务继续；在“我的”点击本设备任务可恢复。同一创建响应丢失时继续使用原幂等标识，不新增任务。
 
 ```text
-pages/generating/index?fail=1
+pages/generating/index?submissionKey=本设备登记的提交标识
+pages/result/index?resultId=当前账户结果ID
 ```
 
 ## 后端联调入口
 
-业务能力统一通过 `services/gateway.ts` 的 `FrontendGateway` 暴露，当前由 `StageOneGateway` 对接首批真实接口，并将尚未开发的生成、收藏和预约委托给 `MockGateway`。认证统一在 `services/auth.ts` 处理。
+业务能力统一由 `FrontendGateway` 暴露，`StageOneGateway` 调真实接口，`MockGateway` 只保留收藏/预约本地逻辑。账户提交记录在 `store/renders.ts`，单请求轮询在 `utils/render-poller.ts`。详情每次获取刷新图片签名，结果按原始宽高完整展示。
+
+后端启动、字段和计费调用验收见后端 `docs/render-generation.md`。真实生成前需后端配置有模型权限的 `ARK_API_KEY`、开启 `RENDER_ENABLED` 并运行 worker。没有密钥时测试仍可用替身验证状态及页面，不会触发付费调用。隐私文案已更新，发布前需同步运营方备案的微信隐私指引。

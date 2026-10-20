@@ -1,8 +1,9 @@
 <view class="generating-page">
   <view class="generating-top">
-    <view class="status-line generating-state {{status === 'FAILED' ? 'generating-state--failed' : ''}}"><text class="status-line__dot"></text><text>{{status === 'FAILED' ? '任务已暂停' : '正在生成门窗预览'}}</text></view>
+    <view class="status-line generating-state {{status === 'FAILED' ? 'generating-state--failed' : ''}}"><text class="status-line__dot"></text><text>{{status === 'FAILED' ? '任务未完成' : '正在生成门窗预览'}}</text></view>
     <view class="generating-title">{{status === 'FAILED' ? '这次没有生成完成' : '正在替换你框选的门窗'}}</view>
-    <view class="generating-subtitle">{{status === 'FAILED' ? errorMessage : '保持墙面、家具和视角不变，只更换框内区域。'}}</view>
+    <view class="generating-subtitle">{{status === 'FAILED' || submissionError ? errorMessage : '只融合框内区域。退出页面后任务仍会继续。'}}</view>
+    <view wx:if="{{connectionText}}" class="generating-subtitle">{{connectionText}}</view>
   </view>
 
   <view wx:if="{{status !== 'FAILED'}}" class="generation-stage" style="{{stageStyle}}">
@@ -10,7 +11,7 @@
     <view wx:if="{{overlayStyle}}" class="generation-stage__box" style="{{overlayStyle}}">
       <view class="generation-stage__scan"></view>
     </view>
-    <view class="generation-stage__solution">
+    <view wx:if="{{solution}}" class="generation-stage__solution">
       <image class="generation-stage__thumb" src="{{solution.thumbnail}}" mode="aspectFill" />
       <view class="generation-stage__solution-copy">
         <text class="generation-stage__solution-label">替换为</text>
@@ -21,25 +22,25 @@
 
   <view wx:else class="failure-panel">
     <view class="failure-panel__mark"><view class="ic ic--alert ic--white"></view></view>
-    <view class="failure-panel__title">可以重新生成</view>
-    <view class="failure-panel__text">本次失败不会产生预约记录，照片和已选配置都还在。</view>
+    <view class="failure-panel__title">{{retryable ? '可以重新生成' : '请返回调整输入'}}</view>
+    <view class="failure-panel__text">重试将创建新任务，可能产生新的模型调用费用。</view>
   </view>
 
   <view class="progress-block">
     <view class="progress-block__top">
       <text>{{stageText}}</text>
-      <text class="progress-block__percent">{{progress}}%</text>
+      <text class="progress-block__percent">阶段进度</text>
     </view>
-    <view class="progress-track"><view class="progress-value {{status === 'FAILED' ? 'progress-value--failed' : ''}}" style="transform: scaleX({{progress / 100}});"></view></view>
     <view class="progress-steps">
-      <view class="progress-step {{progress >= 18 ? 'progress-step--done' : ''}}">校验方案</view>
-      <view class="progress-step {{progress >= 46 ? 'progress-step--done' : ''}}">保持结构</view>
-      <view class="progress-step {{progress >= 78 ? 'progress-step--done' : ''}}">替换门窗</view>
+      <view wx:for="{{steps}}" wx:key="value" class="progress-step progress-step--{{item.state}}">
+        <view class="stage-segment"></view><text>{{item.label}}</text>
+      </view>
     </view>
   </view>
 
   <view wx:if="{{status === 'FAILED'}}" class="failure-actions">
     <button class="quiet-button" hover-class="button-hover" bindtap="goBack">返回修改</button>
-    <button class="primary-button" hover-class="button-hover" bindtap="retryTask">再试一次</button>
+    <button wx:if="{{retryable}}" class="primary-button" loading="{{submitting}}" disabled="{{submitting}}" hover-class="button-hover" bindtap="retryTask">再试一次</button>
   </view>
+  <view wx:if="{{submissionError}}" class="failure-actions"><button class="quiet-button" bindtap="goBack">返回</button><button class="primary-button" bindtap="reconnect">重新连接</button></view>
 </view>

@@ -1,12 +1,12 @@
 # 门窗 AI 效果预览小程序后端接口文档
 
-> 状态：目标接口契约，已完成首批接口联调
+> 状态：登录、目录、照片、真实生成与结果历史已对接；收藏、预约和聚合清理接口仍为目标契约
 >
-> 版本：v1.0
+> 版本：v1.2（2026-10-08）
 >
 > 适用前端：微信小程序
 >
-> 说明：当前通过 `StageOneGateway` 接入登录、方案、样例和照片接口，其余能力仍使用本地实现。本文中的 `/v1` 为默认前缀，可通过后端 `API_PREFIX` 与前端 `config/api.ts` 同步调整。实际接入范围见 [首批接口联调说明](backend-integration.md)，不能将全文视为已实现接口。
+> 说明：`StageOneGateway` 已接入登录、方案、样例、照片、生成任务及结果接口。收藏与预约沿用本地实现；清理逐项删除本设备登记的资源，不调用尚未实现的 `/me/data`。本文中的 `/v1` 为可配置默认前缀。实际接入范围见 [接口联调说明](backend-integration.md)；生成部署与队列约束见后端 [真实生成文档](../../HuayeWindowAI-Backend/docs/render-generation.md)。第 9—13 节中未对接接口与 Spring Boot 建议保留作未来规划，当前后端为 FastAPI/MySQL 持久队列。
 
 ## 1. 范围
 
@@ -20,7 +20,7 @@
 6. 管理效果历史、收藏和预约量尺记录。
 7. 查询个人中心概览并清除用户数据。
 
-样例数据、效果图生成结果、收藏和预约不能继续只保存在小程序本地缓存中。
+效果图和配置快照保存于服务端；本地保存任务恢复标识与本设备清理索引。收藏和预约本轮保留原有本地实现。
 
 ## 2. 通用约定
 
@@ -33,7 +33,7 @@
 - 幂等请求头：`Idempotency-Key: <uuid>`
 - 链路标识：服务端响应 `requestId`，日志中必须可检索。
 
-除登录、公开样例和公开方案查询外，其余接口默认要求登录。生产环境是否允许游客生成，应在开发前确认。
+除登录、公开样例和公开方案查询外，其余接口要求登录，包括使用样例进行真实生成。
 
 ### 2.2 统一响应
 
@@ -111,6 +111,8 @@
 | 生成 | POST | `/v1/render-tasks/{taskId}/retry` | 重试失败任务 |
 | 结果 | GET | `/v1/render-results` | 获取效果历史 |
 | 结果 | GET | `/v1/render-results/{resultId}` | 获取效果详情 |
+| 结果 | DELETE | `/v1/render-results/{resultId}` | 幂等清理本人结果及图片 |
+| 生成 | DELETE | `/v1/render-tasks/{taskId}` | 清理终态任务输入，保留幂等记录 |
 | 收藏 | GET | `/v1/favorites` | 获取收藏列表 |
 | 收藏 | PUT | `/v1/favorites/{solutionId}` | 收藏方案 |
 | 收藏 | DELETE | `/v1/favorites/{solutionId}` | 取消收藏 |
@@ -353,8 +355,12 @@
   "data": {
     "taskId": "task_01K...",
     "status": "QUEUED",
-    "progress": 0,
-    "pollAfterMs": 1500,
+    "progress": null,
+    "stage": "QUEUED",
+    "stageLabel": "等待生成",
+    "pollAfterMs": 3000,
+    "resultId": null,
+    "failure": null,
     "createdAt": "2026-09-01T14:20:30+08:00"
   },
   "requestId": "req_01K..."
@@ -374,16 +380,18 @@ QUEUED -> PROCESSING -> SUCCEEDED
 
 前端类型中的 `DRAFT` 只表示尚未提交的本地草稿，不是服务端任务状态，也不能写入 `render_task.status`。
 
+阶段为 `QUEUED → PREPARING → GENERATING → SAVING → COMPLETED`。阶段进度条只依据服务端阶段，`progress` 始终为 `null`；排队和 AI 生成轮询 3000ms，准备与保存 1500ms。失败保留发生阶段，不标记完成。网络查询失败不改写任务状态。
+
 响应 `data`：
 
 ```json
 {
   "taskId": "task_01K...",
   "status": "PROCESSING",
-  "progress": 55,
+  "progress": null,
   "stage": "GENERATING",
   "stageLabel": "正在生成效果图",
-  "pollAfterMs": 2000,
+  "pollAfterMs": 3000,
   "resultId": null,
   "failure": null,
   "createdAt": "2026-09-01T14:20:30+08:00",
@@ -396,11 +404,13 @@ QUEUED -> PROCESSING -> SUCCEEDED
 ```json
 {
   "status": "FAILED",
-  "progress": 100,
+  "progress": null,
+  "stage": "GENERATING",
   "failure": {
     "code": "RENDER_PROVIDER_TIMEOUT",
     "message": "生成超时，请重试",
-    "retryable": true
+    "retryable": true,
+    "stage": "GENERATING"
   }
 }
 ```
@@ -414,6 +424,7 @@ QUEUED -> PROCESSING -> SUCCEEDED
 - 仅允许重试当前用户的 `FAILED` 且 `retryable=true` 的任务。
 - 请求头必须包含新的 `Idempotency-Key`。
 - 返回新的 `taskId`，旧任务保留用于审计。
+- 重试复制原任务图片、配置和模型版本；同 key 恢复原重试任务。模型请求发出后的超时或中断不自动重发，主动重试可能产生新的模型费用。
 
 ## 8. 效果结果接口
 
@@ -421,22 +432,27 @@ QUEUED -> PROCESSING -> SUCCEEDED
 
 `GET /v1/render-results?page=1&size=20`
 
-条目：
+条目使用效果详情字段，图片地址每次查询重新签发：
 
 ```json
 {
   "id": "result_01K...",
   "taskId": "task_01K...",
   "resultType": "USER_GENERATED",
-  "solutionId": "solution_living_panorama",
-  "solutionName": "全景推拉窗",
-  "beforeThumbnailUrl": "https://cdn.example.com/signed/before-thumb.jpg",
-  "afterThumbnailUrl": "https://cdn.example.com/signed/after-thumb.jpg",
+  "width": 1280,
+  "height": 1706,
+  "solution": {"id": "solution_living_panorama", "name": "全景推拉窗", "frameColorCode": "SPACE_GRAY", "frameColorLabel": "太空灰", "glassCode": "DOUBLE_HOLLOW", "glassLabel": "双层中空玻璃"},
+  "beforeImageUrl": "https://cdn.example.com/signed/before.png",
+  "afterImageUrl": "https://cdn.example.com/signed/after.png",
+  "imageUrlExpiresAt": "2026-10-08T15:22:10+08:00",
+  "disclaimer": "AI 生成效果仅供方案预览，实际效果以现场测量和施工为准",
   "createdAt": "2026-09-01T14:22:10+08:00"
 }
 ```
 
 `resultType`：`USER_GENERATED` 或 `SAMPLE_DEMO`。不要使用类型定义为字面量 `true` 的 `isDemo`。
+
+两种类型均为真实模型生成，区别是上传照片或公开样例来源。详情额外返回原图 `width/height`，前后图同尺寸，`solution` 为配置快照。
 
 ### 8.2 效果详情
 
@@ -467,6 +483,8 @@ QUEUED -> PROCESSING -> SUCCEEDED
 
 ## 9. 收藏接口
 
+以下收藏接口仍为未来目标，本轮继续使用原有本地收藏。
+
 ### 9.1 收藏列表
 
 `GET /v1/favorites?page=1&size=20`
@@ -481,6 +499,8 @@ QUEUED -> PROCESSING -> SUCCEEDED
 两者均为幂等接口。收藏已收藏的方案或取消未收藏的方案都返回成功，不能使用服务端 toggle，以避免并发或重试导致状态反转。
 
 ## 10. 预约接口
+
+以下预约接口仍为未来目标，本轮继续使用原有本地预约。
 
 ### 10.1 提交预约量尺
 
@@ -533,6 +553,8 @@ QUEUED -> PROCESSING -> SUCCEEDED
 返回分页预约摘要，状态建议包括：`SUBMITTED`、`CONTACTED`、`SCHEDULED`、`COMPLETED`、`CANCELLED`。本版本仅提供查询，不包含用户取消或改期接口。
 
 ## 11. 个人中心与数据清除
+
+本轮历史通过 `/render-results` 查询；以下聚合接口尚未实现。清理只处理本设备登记的照片、结果与终态任务输入，部分失败保留索引以供再次清理。
 
 ### 11.1 个人概览
 
